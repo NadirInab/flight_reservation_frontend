@@ -50,13 +50,11 @@ export default {
 
 <style>
 .flight-reservation {
-  /* position: absolute; */
+  background-color: transparent;
   width: 90%;
   height: 50vh;
   margin: 70px auto;
   top: 50%;
-  /* border: 2px solid red; */
-  /* padding: auto 0; */
 }
 .myForm {
   display: flex;

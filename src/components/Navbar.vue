@@ -25,17 +25,19 @@
         </li>
       </ul>
     </nav>
-    <Hero />
+    <Hero class="hero-section" :style="{ backgroundImage: 'url(' + heroBackgroundImage + ')' }" />
   </header>
 </template>
 
 <script>
+import heroBackgroundImage from "../assets/images/myairplane.avif";
 import Hero from "./Hero.vue";
 
 export default {
   data() {
     return {
-      isNavOpen: false
+      isNavOpen: false,
+      heroBackgroundImage: heroBackgroundImage
     };
   },
   methods: {
@@ -50,6 +52,11 @@ export default {
 </script>
 
 <style>
+
+header {
+  padding : 0 ;
+
+}
 .navbar {
   display: flex;
   flex-direction: row;
@@ -57,8 +64,18 @@ export default {
   justify-content: space-between;
   padding: 1rem;
   background-color: transparent;
-}
 
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+.hero-section {
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+}
 .navbar__brand a {
   font-size: 1.5rem;
   font-weight: bold;
@@ -79,23 +96,24 @@ export default {
 .navbar__menu li {
   margin: rgb(1, 94, 77);
   padding: 10px;
-  transition: transform 0.5s ease
+  transition: transform 0.5s ease;
 }
 
 .navbar__menu li a {
   font-size: 1.2rem;
   text-decoration: none;
-  color: #333;
+  color: white;
+  font-style: italic;
 }
 .navbar__menu li:hover {
   background-color: #2082f3;
   font-weight: bold;
   border-radius: 5px;
-   transform: translateX(10px)
+  transform: translateX(20px);
 }
-.navbar__menu li a:hover{
+/* .navbar__menu li a:hover {
   color: white;
-}
+} */
 
 .navbar__toggle {
   position: relative;

@@ -2,10 +2,13 @@
   <header>
     <Navbar />
     <Reservations />
+
+
     <div class="container">
-        <!-- <h3>Popular Destinations :</h3> -->
       <Card  v-for="index in 5" :key="index" title="Rabat" :price="index" imageUrl="../assets/images/rabat.jpg" />
     </div>
+
+
   </header>
 </template>
 
@@ -38,9 +41,11 @@ export default {
   border: 2px solid red;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  max-width: 1200px;
+  justify-content: space-between;
+  width: 100%;
   margin: 0 auto;
+  background-color: #f2f2f2;
+
 }
 .card {
   width: 20rem;
@@ -48,7 +53,7 @@ export default {
   margin: 20px;
   border-radius: 10px;
   background-color: #f2f2f2;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
   transition: transform 0.3s ease-in-out;
 }
 
