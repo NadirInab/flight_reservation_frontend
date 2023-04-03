@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar" :class="{ 'navbar--open': isNavOpen }">
+    <nav class="navbar" :class="{ 'navbar--open': isNavOpen, 'fixed-navbar': isFixed  }">
       <div class="navbar__brand">
         <a href="#">Flights</a>
       </div>
@@ -37,27 +37,40 @@ export default {
   data() {
     return {
       isNavOpen: false,
+      isFixed: false,
       heroBackgroundImage: heroBackgroundImage
     };
   },
   methods: {
     toggleNav() {
       this.isNavOpen = !this.isNavOpen;
+    },
+    handleScroll() {
+      this.isFixed = window.pageYOffset > 0;
     }
   },
   components: {
     Hero
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 };
 </script>
 
 <style>
-
 header {
-  padding : 0 ;
-
+  padding: 0;
 }
 .navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /* height: 5rem; */
+  /* height: 10px; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,11 +78,22 @@ header {
   padding: 1rem;
   background-color: transparent;
 
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  right: 0; */
   z-index: 1;
+}
+.fixed-navbar {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.fixed-navbar ul li a {
+  color: #f3bb20;
 }
 .hero-section {
   height: 100vh;
@@ -80,7 +104,7 @@ header {
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
-  color: #333;
+  color: #449eff;
 }
 
 .navbar__menu {
@@ -106,7 +130,7 @@ header {
   font-style: italic;
 }
 .navbar__menu li:hover {
-  background-color: #2082f3;
+  background-color: rgba(47, 79, 79, 0.634);
   font-weight: bold;
   border-radius: 5px;
   transform: translateX(20px);
@@ -162,6 +186,7 @@ header {
   .navbar {
     flex-direction: row;
     justify-content: space-between;
+    height: fit-content;
   }
 
   .navbar__menu {

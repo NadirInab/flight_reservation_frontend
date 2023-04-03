@@ -27,7 +27,7 @@ export default {
 <style>
 .hero {
   width: 100%;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   background-image: url("../assets/images/myairplane.avif");
   position: relative;
   height: 100vh;
@@ -53,7 +53,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 .hero-content {

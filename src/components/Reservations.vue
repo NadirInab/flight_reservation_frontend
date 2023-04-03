@@ -51,14 +51,18 @@ export default {
 <style>
 .flight-reservation {
   background-color: transparent;
-  width: 90%;
+  /* width: 90%; */
   height: 50vh;
   margin: 70px auto;
   top: 50%;
 }
 .myForm {
-  display: flex;
-  justify-content: space-around;
+  width: 100%;
+  border: 2px solid red;
+  /* display: flex;
+  justify-content: space-around; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 .form-group {
   display: flex;
@@ -68,8 +72,9 @@ export default {
   text-align: center;
   background-color: rgb(5, 168, 222);
   border-radius: 10px;
-  max-width: 15rem;
-  min-width: 15rem;
+  margin: 1rem 1rem  ;
+  /* max-width: 1rem;
+  min-width: 15rem; */
   /* border: 2px solid lightcoral; */
 }
 
@@ -120,5 +125,31 @@ button::after {
 
 button:hover::after {
   transform: translate(-50%, -50%) scale(3);
+}
+
+@media only screen and (max-width: 800px) {
+  .flight-reservation {
+  background-color: transparent;
+  width: 90%;
+  height: 100vh;
+  margin: 70px auto;
+  top: 50%;
+}
+  .myForm {
+    display: flex;
+    flex-direction: column;
+    
+    /* flex-direction: row;
+    justify-content: space-between;
+    height: fit-content; */
+  }
+
+  /* .navbar__menu {
+    flex-direction: row;
+  }
+
+  .navbar__menu li {
+    margin: 0 1rem;
+  } */
 }
 </style>
