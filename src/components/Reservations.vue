@@ -50,9 +50,8 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .flight-reservation {
-  /* border: 2px solid red; */
   background-color: transparent;
   height: 50vh;
   margin: 70px auto;

@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .hero {
   width: 100%;
   /* border: 2px solid red; */

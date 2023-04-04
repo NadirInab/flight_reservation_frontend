@@ -6,7 +6,7 @@
       </div>
       <!-- <button class="navbar__toggle" @click="toggleNav">
       <span class="navbar__toggle-icon"></span>
-      </button> -->
+      </button>-->
       <ul class="navbar__menu">
         <li>
           <router-link to="/">Home</router-link>
@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 header {
   padding: 0;
 }
@@ -75,7 +75,7 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: transparent;
   z-index: 1;
   border-bottom: 1px solid lightblue;
@@ -98,7 +98,7 @@ header {
 }
 .navbar__brand a {
   margin-left: 2rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
   color: #449eff;
@@ -115,13 +115,16 @@ header {
 }
 
 .navbar__menu li {
+  /* color: #ff6e31; */
+  box-shadow: 1.5px 1px 1px 0px;
+  padding: 5px;
   margin: rgb(1, 94, 77);
   padding: 10px;
   transition: transform 0.5s ease;
 }
 
 .navbar__menu li a {
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-decoration: none;
   color: white;
   font-style: italic;

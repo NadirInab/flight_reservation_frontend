@@ -35,7 +35,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   /* border: 2px solid red; */
   display: flex;
