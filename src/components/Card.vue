@@ -1,12 +1,12 @@
 <template>
   <div class="card">
-    <transition name="fade">
+    <!-- <transition name="fade"> -->
       <div class="card-content">
         <img class="card-image" src="../assets/images/rabat.jpg" alt="Card image">
         <h2 class="card-title">{{ title }}</h2>
         <p class="card-price">{{ price }}</p>
       </div>
-    </transition>
+    <!-- </transition> -->
   </div>
 </template>
 
