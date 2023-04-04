@@ -1,7 +1,12 @@
 <template>
-  <div class="container">
-    <SignUp />
-  </div>
+  <main>
+    <div v-if="show">
+      <SignUp />
+    </div>
+    <div v-else>
+      <SignIn />
+    </div>
+  </main>
 </template>
 
 <script>
@@ -9,7 +14,9 @@ import SignUp from "../components/SignUp.vue";
 import SignIn from "../components/SignIn.vue";
 export default {
   data() {
-    return {};
+    return {
+      show: true
+    };
   },
   components: {
     SignUp,
@@ -19,10 +26,14 @@ export default {
 </script>
 
 <style scoped>
-.container {
+/* .container {
     border: 2px dashed lightgreen;
     margin-top: 5rem;
     background-color: darkcyan;
-    /* width: 60vh; */
+  
+} */
+
+main {
+  width: 100vw;
 }
 </style>
