@@ -1,22 +1,11 @@
 <template>
   <header>
     <Navbar />
-    <Reservations />
-
-
-    <div class="container">
-      <Card  v-for="index in 5" :key="index" title="Rabat" :price="index" imageUrl="../assets/images/rabat.jpg" />
-    </div>
-
-
   </header>
 </template>
 
 <script >
-import Reservations from "./components/Reservations.vue";
 import Navbar from "./components/Navbar.vue";
-import Card from "./components/Card.vue";
-// import Hero from "./components/Hero.vue" ;
 export default {
   data() {
     return {
@@ -26,11 +15,6 @@ export default {
   },
   components: {
     Navbar,
-    Card,
-    // Loader,
-    // Flight,
-    // Hero,
-    Reservations
   }
 };
 </script>
