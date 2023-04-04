@@ -6,39 +6,41 @@
       </div>
       <!-- <button class="navbar__toggle" @click="toggleNav">
       <span class="navbar__toggle-icon"></span>
-      </button>-->
+      </button> -->
       <ul class="navbar__menu">
         <li>
-          <a href="#">Home</a>
+          <router-link to="/">Home</router-link>
         </li>
         <li>
-          <a href="#">Flights</a>
+          <router-link to="/Flights">Flights</router-link>
         </li>
         <li>
-          <a href="#">About</a>
+          <router-link to="/About">About</router-link>
         </li>
         <li>
-          <a href="#">Sign In</a>
+          <router-link to="/About">Destinations</router-link>
         </li>
         <li>
-          <a href="#">Join</a>
+          <router-link to="/Sign">Sign In</router-link>
         </li>
       </ul>
     </nav>
-    <Hero class="hero-section" :style="{ backgroundImage: 'url(' + heroBackgroundImage + ')' }" />
+    <router-view />
+
+    <!-- <Hero class="hero-section" :style="{ backgroundImage: 'url(' + heroBackgroundImage + ')' }" /> -->
   </header>
 </template>
 
 <script>
-import heroBackgroundImage from "../assets/images/myairplane.avif";
-import Hero from "./Hero.vue";
+// import heroBackgroundImage from "../assets/images/myairplane.avif";
+// import Hero from "./Hero.vue";
 
 export default {
   data() {
     return {
       isNavOpen: false,
-      isFixed: false,
-      heroBackgroundImage: heroBackgroundImage
+      isFixed: false
+      // heroBackgroundImage: heroBackgroundImage
     };
   },
   methods: {
@@ -50,7 +52,7 @@ export default {
     }
   },
   components: {
-    Hero
+    // Hero
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -69,20 +71,14 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  /* height: 5rem; */
-  /* height: 10px; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   background-color: transparent;
-
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  right: 0; */
   z-index: 1;
+  border-bottom: 1px solid lightblue;
 }
 .fixed-navbar {
   background: rgba(255, 255, 255, 0.25);
@@ -101,6 +97,7 @@ header {
   background-size: cover;
 }
 .navbar__brand a {
+  margin-left: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;

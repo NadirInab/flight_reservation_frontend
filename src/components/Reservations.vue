@@ -4,7 +4,9 @@
     <form @submit.prevent="submitForm">
       <div class="myForm">
         <div class="form-group">
-          <label for="from">From</label>
+          <label for="from">
+            <i class="fa-solid fa-plane-circle-check"></i> From
+          </label>
           <!-- <input type="text" id="from" v-model="from" required> -->
           <select id="from" v-model="from" name>
             <option value="Rabat">Rabat</option>
@@ -24,7 +26,7 @@
           <input type="number" id="seats" v-model.number="seats" min="1" max="10" required />
         </div>
       </div>
-      <button type="submit">Search Flights</button>
+      <button class="booking-button" type="submit">Search Flights</button>
     </form>
   </div>
 </template>
@@ -50,17 +52,15 @@ export default {
 
 <style>
 .flight-reservation {
+  /* border: 2px solid red; */
   background-color: transparent;
-  /* width: 90%; */
   height: 50vh;
   margin: 70px auto;
   top: 50%;
 }
 .myForm {
   width: 100%;
-  border: 2px solid red;
-  /* display: flex;
-  justify-content: space-around; */
+  /* border: 2px solid red; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -70,12 +70,14 @@ export default {
   margin-bottom: 1rem;
   padding: 1rem;
   text-align: center;
-  background-color: rgb(5, 168, 222);
+  background: rgba(216, 249, 254, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
   border-radius: 10px;
-  margin: 1rem 1rem  ;
-  /* max-width: 1rem;
-  min-width: 15rem; */
-  /* border: 2px solid lightcoral; */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  margin: 1rem 1rem;
 }
 
 label {
@@ -97,23 +99,22 @@ input[type="number"] {
 }
 
 button[type="submit"] {
+  background-color: Teal;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
   padding: 1rem 1rem;
   font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  background-color: #007bff;
-  color: #fff;
   cursor: pointer;
   display: block;
   margin: auto;
-  width: 40%;
+  width: 20%;
   transition: all 0.3s ease-in-out;
 }
 button:hover {
   transform: translateY(-5px);
-  /* background-color: light; */
   background-color: #0056b3;
-
 }
 button::after {
   position: absolute;
@@ -129,16 +130,16 @@ button:hover::after {
 
 @media only screen and (max-width: 800px) {
   .flight-reservation {
-  background-color: transparent;
-  width: 90%;
-  height: 100vh;
-  margin: 70px auto;
-  top: 50%;
-}
+    background-color: transparent;
+    width: 90%;
+    height: 100vh;
+    margin: 70px auto;
+    top: 50%;
+  }
   .myForm {
     display: flex;
     flex-direction: column;
-    
+
     /* flex-direction: row;
     justify-content: space-between;
     height: fit-content; */

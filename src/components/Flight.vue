@@ -1,14 +1,15 @@
 <template>
   <header>
-    <h1>Flights</h1>
+    <!-- <h1>Flights</h1> -->
     <div>
-      <ul :key="datum.id" :v-for="data in datum">
+      <!-- <ul  :v-for="datum in data">
         <li>
-          {{datum.date}},
-          <b>{{datum.from}}</b> To
+          {{datum.flight_name}},
+          <b>{{datum.date}}</b> To
           <i>{{datum.to}}</i>
+          <i>{{datum.from}}</i>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </header>
 </template>
@@ -28,16 +29,23 @@ export default {
       this.name = "Nadir api";
     }
   },
-  async created() {
-    try {
-      const res = await axios.get("http://localhost:3000/flights");
-      this.data = res.data;
-      console.log(toRaw(this.data));
-    } catch (e) {
-      console.log("err " + e);
-    }
-  },
-  mounted() {}
+  // async created() {
+  //   try {
+  //     await axios.get("http://127.0.0.1:8000/api/flights")
+  //     .then(res =>{
+  //       this.data = res.data[0] ;
+  //       if(isProxy(this.data)){
+  //         this.data = toRaw(this.data) ;
+  //       }
+  //       console.log(this.data) ;
+  //     } )
+  //   } catch (e) {
+  //     console.log("err " + e);
+  //   }
+  // },
+  // mounted() {
+  //   console.log(this.data);
+  // }
 };
 </script>
 
