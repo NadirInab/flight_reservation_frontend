@@ -13,8 +13,6 @@
 </template>
 
 <script>
-// import airplane from '/assets/images/myairplane.avif' ;
-// import airplane from "../assets/images/myairplane.avif" ;
 export default {
   data() {
     return {
@@ -27,8 +25,7 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  /* border: 2px solid red; */
-  background-image: url("../assets/images/myairplane.avif");
+  background-image: url("../assets/images/theflight.jpg");
   position: relative;
   height: 100vh;
   padding-top: 0px;
@@ -53,7 +50,6 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.5); */
 }
 
 .hero-content {

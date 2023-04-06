@@ -1,32 +1,40 @@
 <template>
   <div class="flight-reservation">
-    <!-- <h2>Flight Reservation</h2> -->
+    <h2>Quickly scan all your favourite travel sites</h2>
     <form @submit.prevent="submitForm">
       <div class="myForm">
         <div class="form-group">
           <label for="from">
-            <i class="fa-solid fa-plane-circle-check"></i> From
+            <i class="fa-solid fa-plane-departure"></i> From
           </label>
-          <!-- <input type="text" id="from" v-model="from" required> -->
           <select id="from" v-model="from" name>
             <option value="Rabat">Rabat</option>
             <option value="Tanger">Tanger</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="to">To</label>
+          <label for="to">
+            <i class="fa-solid fa-plane-arrival"></i> To
+          </label>
           <input type="text" id="to" v-model="to" required />
         </div>
         <div class="form-group">
-          <label for="date">Date</label>
+          <label for="date">
+            <i class="fa-solid fa-calendar-days"></i> Date
+          </label>
           <input type="date" id="date" v-model="date" required />
         </div>
         <div class="form-group">
-          <label for="seats">Number of Seats</label>
+          <label for="seats">
+            <i class="fa-duotone fa-person-seat"></i> Number of Seats
+          </label>
           <input type="number" id="seats" v-model.number="seats" min="1" max="10" required />
         </div>
       </div>
-      <button class="booking-button" type="submit">Search Flights</button>
+      <button class="booking-button" type="submit">
+        Search Flights
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </form>
   </div>
 </template>
@@ -52,14 +60,16 @@ export default {
 
 <style >
 .flight-reservation {
-  background-color: transparent;
-  height: 50vh;
-  margin: 70px auto;
+  border: 2px solid red;
+  background-color: lightblue;
+  height: auto;
   top: 50%;
+}
+.flight-reservation h2 {
+  margin: 15px 0 0 20px;
 }
 .myForm {
   width: 100%;
-  /* border: 2px solid red; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }

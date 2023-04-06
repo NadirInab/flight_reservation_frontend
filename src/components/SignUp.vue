@@ -1,50 +1,54 @@
 <template>
-  <!-- <div class="container"> -->
-  <div class="row justify-content-center mt-5">
-    <div class="col-lg-6 col-md-8 col-sm-12 mx-auto my-auto">
-      <div class="card border border-danger w-75 m-auto">
-        <div class="card-header">{{ formTitle }}</div>
-        <div class="card-body">
-          <form @submit.prevent="register">
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" class="form-control" id="name" v-model.trim="name" />
-              <span v-if="nameError" class="invalid-feedback">{{ nameError }}</span>
-            </div>
-            <div class="form-group">
-              <label for="email">Email :</label>
-              <input type="email" class="form-control" id="email" v-model.trim="email" />
-              <span v-if="emailError" class="invalid-feedback">{{ emailError }}</span>
-            </div>
-            <div class="form-group">
-              <label for="password">Password:</label>
-              <input type="password" class="form-control" id="password" v-model.trim="password" />
-              <span v-if="passwordError" class="invalid-feedback">{{ passwordError }}</span>
-            </div>
-            <div class="form-group">
-              <label for="password_confirmation">Confirm Password:</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password_confirmation"
-                v-model.trim="password_confirmation"
-              />
-              <span
-                v-if="passwordConfirmationError"
-                class="invalid-feedback"
-              >{{ passwordConfirmationError }}</span>
-            </div>
-            <button
-              type="submit"
-              class="btn btn-primary w-75 m-auto"
-              :class="{'btn-loading': isLoading}"
-            >{{ buttonTitle }}</button>
-          </form>
+  <div class="signup row justify-content-center">
+    <form @submit.prevent="register">
+      <div>
+        <div>
+          <label for="name">
+            <i class="fa-sharp fa-solid fa-user"></i> Full Name :
+          </label>
+          <input type="text" class id="name" v-model.trim="name" />
+          <span v-if="nameError" class="invalid-feedback">{{ nameError }}</span>
+        </div>
+
+        <div>
+          <label for="password">
+            <i class="fa-solid fa-lock mx-1"></i> Password :
+          </label>
+          <input type="password" class id="password" v-model.trim="password" />
+          <span v-if="passwordError" class="invalid-feedback">{{ passwordError }}</span>
         </div>
       </div>
-    </div>
+      <div>
+        <div>
+          <label for="email">
+            <i class="fa-solid fa-envelope mx-1"></i> Email :
+          </label>
+          <input type="email" class id="email" v-model.trim="email" />
+          <span v-if="emailError" class="invalid-feedback">{{ emailError }}</span>
+        </div>
+
+        <div>
+          <label for="password_confirmation">
+            <i class="fa-solid fa-lock mx-1"></i> Confirm Password :
+          </label>
+          <input type="password" id="password_confirmation" v-model.trim="password_confirmation" />
+          <span
+            v-if="passwordConfirmationError"
+            class="invalid-feedback"
+          >{{ passwordConfirmationError }}</span>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary w-50"
+        :class="{'btn-loading': isLoading}"
+      >{{ buttonTitle }}</button>
+      <span class="text-muted">
+        Already Have an account
+        <b class="text-primary">Sign In</b>
+      </span>
+    </form>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -80,42 +84,40 @@ export default {
     }
   },
   methods: {
-    // validateForm() {
-    //   let isValid = true;
-    //   if (!this.name) {
-    //     this.nameError = "Name is required";
-    //     isValid = false;
-    //   }
-    //   if (!this.email) {
-    //     this.emailError = "Email is required";
-    //     isValid = false;
-    //   }
-    //   if (!this.password) {
-    //     this.passwordError = "Password is required";
-    //     isValid = false;
-    //   } else if (this.password.length < 8) {
-    //     this.passwordError = "Password must be at least 8 characters long";
-    //     isValid = false;
-    //   }
-    //   if (!this.password_confirmation) {
-    //     this.passwordConfirmationError = "Password confirmation is required";
-    //     isValid = false;
-    //   } else if (this.password_confirmation !== this.password) {
-    //     this.passwordConfirmationError = "Passwords do not match";
-    //     isValid = false;
-    //   }
-    //   return isValid;
-    // },
+    validateForm() {
+      let isValid = true;
+      if (!this.name) {
+        this.nameError = "Name is required";
+        isValid = false;
+      }
+      if (!this.email) {
+        this.emailError = "Email is required";
+        isValid = false;
+      }
+      if (!this.password) {
+        this.passwordError = "Password is required";
+        isValid = false;
+      } else if (this.password.length < 8) {
+        this.passwordError = "Password must be at least 8 characters long";
+        isValid = false;
+      }
+      if (!this.password_confirmation) {
+        this.passwordConfirmationError = "Password confirmation is required";
+        isValid = false;
+      } else if (this.password_confirmation !== this.password) {
+        this.passwordConfirmationError = "Passwords do not match";
+        isValid = false;
+      }
+      return isValid;
+    },
     register() {
       this.isLoading = true;
-
       this.data = {
         name: this.name,
         email: this.email,
         password: this.password,
         password_confirmation: this.password_confirmation
       };
-      // console.log(toRaw(this.data));
       axios
         .post("http://127.0.0.1:8000/api/register", {
           name: this.name,
@@ -124,9 +126,9 @@ export default {
           password_confirmation: this.password_confirmation
         })
         .then(response => {
-          this.$router.push("/Home");
+          console.log(response);
+          this.$router.push("/");
           localStorage.setItem("auth_token", response.data.token);
-          // redirect to the home page or dashboard
         })
         .catch(error => {
           console.log(error.response.data);
@@ -137,9 +139,77 @@ export default {
 </script>
 
 <style scoped>
-.card-body {
-  /* margin-top: 3rem; */
-  max-height: 400px;
-  overflow-y: auto;
+.card {
+  background-color: transparent;
+}
+.signup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+button {
+  grid-column: 1 / -1;
+  justify-self: center;
+  align-self: center;
+}
+
+form {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: fadein 1s ease-out;
+
+  width: 50% !important;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-gap: 20px;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+input[type="submit"] {
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-out;
+}
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+b {
+  cursor: pointer;
+  text-decoration: underline ;
 }
 </style>>

@@ -1,8 +1,19 @@
 <template>
   <header>
+    <h3>Popular Destinations :</h3>
     <div class="container">
       <Card
-        v-for="index in 5"
+        v-for="index in 9"
+        :key="index"
+        title="Rabat"
+        :price="index"
+        imageUrl="../assets/images/rabat.jpg"
+      />
+    </div>
+    <h3>Popular Destinations :</h3>
+    <div class="container">
+      <Card
+        v-for="index in 9"
         :key="index"
         title="Rabat"
         :price="index"
@@ -13,7 +24,7 @@
 </template>
 
 <script>
-import axios from "axios" ;
+import axios from "axios";
 import Card from "./Card.vue";
 export default {
   data() {
@@ -37,13 +48,15 @@ export default {
 
 <style scoped>
 .container {
-  /* border: 2px solid red; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   margin: 0 auto;
   background-color: #f2f2f2;
+}
+h3 {
+  margin: 20px 30px;
 }
 .card {
   width: 20rem;

@@ -1,54 +1,58 @@
 <template>
   <div class="form-container">
     <form @submit.prevent="submitForm">
-      <div class="form-group">
-        <label class="form-label" for="flight_name">Flight Name</label>
-        <input class="form-input" type="text" id="flight_name" v-model="flight_name" />
+      <div>
+        <div class="form-group">
+          <label class="form-label" for="flight_name">Flight Name</label>
+          <input class="form-input" type="text" id="flight_name" v-model="flight_name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="from">From</label>
+          <input class="form-input" type="text" id="from" v-model="from" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="price">Price</label>
+          <input class="form-input" type="number" id="price" v-model="price" />
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="airport">Airport</label>
-        <input class="form-input" type="text" id="airport" v-model="airport" />
+      <div>
+        <div class="form-group">
+          <label class="form-label" for="airport">Airport</label>
+          <input class="form-input" type="text" id="airport" v-model="airport" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="to">To</label>
+          <input class="form-input" type="text" id="to" v-model="to" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="aircraft">Aircraft</label>
+          <input class="form-input" type="text" id="aircraft" v-model="aircraft" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="airline">Airline</label>
+          <input class="form-input" type="text" id="airline" v-model="airline" />
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label" for="from">From</label>
-        <input class="form-input" type="text" id="from" v-model="from" />
-      </div>
+      <div>
+        <div class="form-group">
+          <label class="form-label" for="image">Image</label>
+          <input class="form-input" type="text" id="image" v-model="image" />
+        </div>
 
-      <div class="form-group">
-        <label class="form-label" for="to">To</label>
-        <input class="form-input" type="text" id="to" v-model="to" />
-      </div>
+        <div class="form-group">
+          <label class="form-label" for="date">Date</label>
+          <input class="form-input" type="date" id="date" v-model="date" />
+        </div>
 
-      <div class="form-group">
-        <label class="form-label" for="date">Date</label>
-        <input class="form-input" type="date" id="date" v-model="date" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="airline">Airline</label>
-        <input class="form-input" type="text" id="airline" v-model="airline" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="aircraft">Aircraft</label>
-        <input class="form-input" type="text" id="aircraft" v-model="aircraft" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="image">Image</label>
-        <input class="form-input" type="text" id="image" v-model="image" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="price">Price</label>
-        <input class="form-input" type="number" id="price" v-model="price" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="number_of_seats">Number of Seats</label>
-        <input class="form-input" type="number" id="number_of_seats" v-model="number_of_seats" />
+        <div class="form-group">
+          <label class="form-label" for="number_of_seats">Number of Seats</label>
+          <input class="form-input" type="number" id="number_of_seats" v-model="number_of_seats" />
+        </div>
       </div>
 
       <button class="form-button" type="submit">Submit</button>
@@ -100,27 +104,27 @@ export default {
 };
 </script>
 <style scoped>
-.form-container {
-  margin-top: 4rem;
-  border: 2px solid red;
-  max-width: 600px;
-  /* margin: 0 auto; */
-  padding: 20px;
+form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 50%;
+  margin: 100px 0 0 200px;
 }
-
-.form-group {
-  margin-bottom: 20px;
+.form-container {
+  border: 2px solid red;
+  padding: 1px;
 }
 
 .form-label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 .form-input {
   display: block;
-  width: 100%;
+  margin: auto;
+  /* width: 75%; */
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -140,5 +144,10 @@ export default {
 
 .form-button:hover {
   background-color: #0069d9;
+}
+button {
+  grid-column: 1 / -1; /* Make button span both columns */
+  justify-self: center; /* Center button horizontally */
+  align-self: center; /* Center button vertically */
 }
 </style>

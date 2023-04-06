@@ -15,38 +15,38 @@
 </template>
 
 <script>
-import axios from "axios";
-import { toRaw, isProxy } from "vue";
-export default {
-  data() {
-    return {
-      name: "airline",
-      data: []
-    };
-  },
-  methods: {
-    handleChange() {
-      this.name = "Nadir api";
-    }
-  },
-  // async created() {
-  //   try {
-  //     await axios.get("http://127.0.0.1:8000/api/flights")
-  //     .then(res =>{
-  //       this.data = res.data[0] ;
-  //       if(isProxy(this.data)){
-  //         this.data = toRaw(this.data) ;
-  //       }
-  //       console.log(this.data) ;
-  //     } )
-  //   } catch (e) {
-  //     console.log("err " + e);
-  //   }
-  // },
-  // mounted() {
-  //   console.log(this.data);
-  // }
-};
+// import axios from "axios";
+// import { toRaw, isProxy } from "vue";
+// export default {
+//   data() {
+//     return {
+//       name: "airline",
+//       data: []
+//     };
+//   },
+//   methods: {
+//     handleChange() {
+//       this.name = "Nadir api";
+//     }
+//   },
+//   async created() {
+//     try {
+//       await axios.get("http://127.0.0.1:8000/api/flights")
+//       .then(res =>{
+//         this.data = res.data[0] ;
+//         // if(isProxy(this.data)){
+//         //   this.data = toRaw(this.data) ;
+//         // }
+//         console.log(this.data) ;
+//       } )
+//     } catch (e) {
+//       console.log("err " + e);
+//     }
+//   },
+//   mounted() {
+//     console.log(this.data);
+//   }
+// };
 </script>
 
 <style scoped>

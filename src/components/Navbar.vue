@@ -8,11 +8,18 @@
       <span class="navbar__toggle-icon"></span>
       </button>-->
       <ul class="navbar__menu">
+        <!-- <li>
+          <router-link to="/admin">Admin</router-link>
+        </li>-->
         <li>
-          <router-link to="/">Home</router-link>
+          <router-link to="/">
+            <i class="fa-sharp fa-solid fa-house"></i> Home
+          </router-link>
         </li>
         <li>
-          <router-link to="/Flights">Flights</router-link>
+          <router-link to="/Flights">
+            <i class="fa-sharp fa-solid fa-plane-circle-check"></i> Flights
+          </router-link>
         </li>
         <li>
           <router-link to="/About">About</router-link>
@@ -21,7 +28,9 @@
           <router-link to="/About">Destinations</router-link>
         </li>
         <li>
-          <router-link to="/Sign">Sign In</router-link>
+          <router-link to="/Sign">
+            <i class="fa-sharp fa-solid fa-user"></i> Sign In
+          </router-link>
         </li>
       </ul>
     </nav>
