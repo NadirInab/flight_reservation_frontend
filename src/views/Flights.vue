@@ -1,7 +1,6 @@
 <template>
   <section>
-    <div class="hero">
-    </div>
+    <div class="hero"></div>
     <FlightData />
     <!-- <FlightForm /> -->
   </section>
@@ -28,19 +27,17 @@ export default {
 
 <style>
 .hero {
-    width: 100%;
-    background-image: url("../assets/images/theflight.jpg");
-    position: relative;
-    height: 100vh;
-    padding-top: 0px;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+  width: 100%;
+  background-image: url("../assets/images/theflight.jpg");
+  position: relative;
+  height: 100vh;
+  padding-top: 0px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 section {
-  /* height: 100vh; */
-  /* background-image: url("../assets/images/theflight.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;

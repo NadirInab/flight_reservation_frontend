@@ -1,11 +1,13 @@
 <template>
   <header>
     <Navbar />
+    <Footer />
   </header>
 </template>
 
 <script >
 import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 export default {
   data() {
     return {
@@ -15,6 +17,7 @@ export default {
   },
   components: {
     Navbar,
+    Footer
   }
 };
 </script>
@@ -22,7 +25,7 @@ export default {
 <style >
 
 .container {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
