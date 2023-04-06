@@ -1,20 +1,20 @@
-import { createStore } from "vue" ;
+import { createStore } from "vue";
 
 
 export default createStore({
-    state : {
+    state: {
+        showSignUp: true
+    },
+    getters: {
+        showSignUp: state => state.showSignUp
+    },
+    mutations: {
 
-    }, 
-    getters : {
+    },
+    actions: {
 
-    }, 
-    mutations : {
+    },
+    modules: {
 
-    }, 
-    actions : {
-
-    }, 
-    modules : {
-        
     }
 })
