@@ -38,11 +38,11 @@ export default {
   components: {
     Card
   },
-  async created() {
-    axios("http://127.0.0.1:8000/api/flights").then(res => {
-      console.log(res);
-    });
-  }
+  // async created() {
+  //   axios("http://127.0.0.1:8000/api/flights").then(res => {
+  //     console.log(res);
+  //   });
+  // }
 };
 </script>
 

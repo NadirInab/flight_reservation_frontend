@@ -22,10 +22,10 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/About">About</router-link>
+          <router-link to="/About">Destinations</router-link>
         </li>
         <li>
-          <router-link to="/About">Destinations</router-link>
+          <router-link to="/About">Stories</router-link>
         </li>
         <li>
           <router-link to="/Sign">
@@ -35,21 +35,15 @@
       </ul>
     </nav>
     <router-view />
-
-    <!-- <Hero class="hero-section" :style="{ backgroundImage: 'url(' + heroBackgroundImage + ')' }" /> -->
   </header>
 </template>
 
 <script>
-// import heroBackgroundImage from "../assets/images/myairplane.avif";
-// import Hero from "./Hero.vue";
-
 export default {
   data() {
     return {
       isNavOpen: false,
       isFixed: false
-      // heroBackgroundImage: heroBackgroundImage
     };
   },
   methods: {
@@ -60,9 +54,7 @@ export default {
       this.isFixed = window.pageYOffset > 0;
     }
   },
-  components: {
-    // Hero
-  },
+  components: {},
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },

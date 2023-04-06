@@ -1,22 +1,27 @@
 <template>
   <div class="flight-reservation">
     <h2>Quickly scan all your favourite travel sites</h2>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="searchFlights">
       <div class="myForm">
         <div class="form-group">
           <label for="from">
             <i class="fa-solid fa-plane-departure"></i> From
           </label>
           <select id="from" v-model="from" name>
-            <option value="Rabat">Rabat</option>
-            <option value="Tanger">Tanger</option>
+            <option
+              v-for="flight in flights"
+              :key="flight.id"
+              :value="flight.from "
+            >{{ flight.from }}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="to">
             <i class="fa-solid fa-plane-arrival"></i> To
           </label>
-          <input type="text" id="to" v-model="to" required />
+          <select id="from" v-model="to" name>
+            <option v-for="flight in flights" :key="flight.id" :value="flight.to">{{ flight.to }}</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="date">
@@ -40,6 +45,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -50,10 +57,30 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      // Here you can add your form submission logic
-      console.log("Form submitted:", this.from, this.to, this.date, this.seats);
+    ...mapActions(["flightData"]),
+    searchFlights() {
+      const data = {
+        from: this.from,
+        to: this.to,
+        date: this.date,
+        seats: this.seats
+      };
+      this.$store.dispatch("getFlightDataFromTo", data);
+      // console.log(data) ;
+      // .then(response => {
+      //   // this.flights = response;
+      //   // this.searched = true;
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // });
     }
+  },
+  computed: {
+    ...mapState(["flights"])
+  },
+  mounted() {
+    this.$store.dispatch("flightData");
   }
 };
 </script>
