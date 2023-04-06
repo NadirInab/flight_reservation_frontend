@@ -12,28 +12,36 @@
 <script>
 import SignUp from "../components/SignUp.vue";
 import SignIn from "../components/SignIn.vue";
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      show: true
+      show : true
     };
   },
   components: {
     SignUp,
     SignIn
+  },
+  computed: {
+    ...mapGetters(["show"])
+  },
+  methods: {
+    handleClick() {
+      this.show = !this.show;
+    }
   }
 };
 </script>
 
 <style scoped>
-/* .container {
-    border: 2px dashed lightgreen;
-    margin-top: 5rem;
-    background-color: darkcyan;
-  
-} */
-
 main {
   width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/images/theflight.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 </style>

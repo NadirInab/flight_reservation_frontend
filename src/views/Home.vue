@@ -1,7 +1,7 @@
 <template>
   <header>
     <Hero />
-  <Reservations />
+    <Reservations />
   </header>
 </template>
 
