@@ -7,7 +7,7 @@
     <div class="hero-content">
       <h1 class="hero-title">Fly with us</h1>
       <p class="hero-subtitle">Book your next flight today</p>
-      <button class="hero-button">Book Now</button>
+      <button @click="scrollDown" class="hero-button">Book Now</button>
     </div>
   </div>
 </template>
@@ -16,8 +16,13 @@
 export default {
   data() {
     return {
-      image: "airplane"
+      image: "airplane", 
     };
+  }, 
+  methods : {
+    scrollDown(){
+      window.scrollBy(0, 300) ;
+    }
   }
 };
 </script>

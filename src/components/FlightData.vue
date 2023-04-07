@@ -1,6 +1,9 @@
 <template>
   <div class="tableContainer">
-    <h3>Where do you want to go? <i class="fa-solid fa-earth-americas fa-bounce"></i></h3>
+    <h3>
+      Where do you want to go?
+      <i class="fa-solid fa-earth-americas fa-bounce"></i>
+    </h3>
     <table>
       <thead>
         <tr>
@@ -26,9 +29,11 @@
           <td class="price">
             <b>{{flight.price}}</b>
           </td>
-          <td class="seats">{{ flight.number_of_seats }}</td>
+          <td class="seats">{{flight.number_of_seats }}</td>
           <td class="seats">
-            <i class="fa-sharp fa-solid fa-badge-check fa-beat"></i>
+            <i @click="deleteFlight(flight.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
+            <i class="fa-sharp fa-solid fa-circle-plus text-success"></i>
+            <i @click="upDateFlight(flight.id)" class="fa-solid fa-pen-to-square mx-1 text-primary"></i>
           </td>
         </tr>
       </tbody>
@@ -47,19 +52,24 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["flightData"])
+    ...mapActions(["flightData", "removeFlightFromDb", "editFlightData"]), 
+    deleteFlight(id){
+      this.removeFlightFromDb(id) ;
+    } , 
+    upDateFlight(id){
+        this.editFlightData(id) ;
+    }
   },
   computed: {
     ...mapState(["flights"])
   },
   mounted() {
     this.$store.dispatch("flightData");
-    // console.log(toRaw(this.$store.state.flights)) ;
   }
 };
 </script>
 
-<style>
+<style scoped>
 .tableContainer {
   border: 2px solid red;
   /* max-height: 80vh; */
@@ -114,6 +124,9 @@ td:hover,
 tr:hover {
   background-color: rgba(153, 223, 247, 0.732);
   color: darkblue;
+}
+i{
+  cursor: pointer;
 }
 </style>
 

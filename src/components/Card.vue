@@ -1,18 +1,15 @@
 <template>
   <div class="card1">
     <div class="card-image">
-      <!-- <img :src="imageUrl" alt="Card Image"> -->
-      <img src="../assets/images/rabat.jpg" alt />
+      <img src="../assets/images/roma.jpg" alt />
     </div>
     <div class="card-content">
       <h3 class="card-title">{{ title }}</h3>
-      <p class="card-date">2013-12-13</p>
     </div>
   </div>
 </template>
 
 <script>
-// import tes from "../assets/images/rabat.jpg"
 export default {
   props: {
     imageUrl: {
@@ -40,6 +37,9 @@ export default {
   border-radius: 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.card1:hover {
+  scale: 1.01;
 }
 .card-image {
   width: 200px;

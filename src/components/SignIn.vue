@@ -1,6 +1,6 @@
 <template>
   <div class="signIn border border-2 pt-5">
-    <h2>Sign In</h2>
+    <!-- <h2>Sign In</h2> -->
     <form @submit.prevent="login">
       <div>
         <label>
@@ -15,6 +15,10 @@
         <input type="password" v-model="password" required />
       </div>
       <button class="w-50" type="submit">Login</button>
+      <span class="text-muted">
+        Already Have an account
+        <b @click="handleClick" class="goSignUp text-primary">Sign In</b>
+      </span>
     </form>
   </div>
 </template>
@@ -25,6 +29,10 @@ export default {
     return {};
   },
   methods: {
+    handleClick() {
+      this.$store.commit("showSignUp");
+    },
+
     login() {
       axios
         .post("http://127.0.0.1:8000/api/login", {
@@ -55,6 +63,9 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+.goSignUp{
+  cursor: pointer;
 }
 form {
   max-width: 400px;

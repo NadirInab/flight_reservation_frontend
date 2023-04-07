@@ -36,7 +36,7 @@
           <input type="number" id="seats" v-model.number="seats" min="1" max="10" required />
         </div>
       </div>
-      <button class="booking-button" type="submit">
+      <button @click="showTicket" class="booking-button" type="submit">
         Search Flights
         <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -45,8 +45,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import axios from "axios";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -56,8 +55,12 @@ export default {
       seats: 1
     };
   },
+  computed: {
+    ...mapState(["searchedFlights"]),
+    ...mapGetters(["getSearchedFlight"])
+  },
   methods: {
-    ...mapActions(["flightData"]),
+    ...mapActions(["flightData", "getFlightDataFromTo"]),
     searchFlights() {
       const data = {
         from: this.from,
@@ -65,21 +68,15 @@ export default {
         date: this.date,
         seats: this.seats
       };
-      this.$store.dispatch("getFlightDataFromTo", data);
-      // console.log(data) ;
-      // .then(response => {
-      //   // this.flights = response;
-      //   // this.searched = true;
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // });
+      this.getFlightDataFromTo(data);
+      // this.$store.dispatch("getFlightDataFromTo", data);
     }
   },
   computed: {
     ...mapState(["flights"])
   },
   mounted() {
+    // ...mapActions(["flightData']) ;
     this.$store.dispatch("flightData");
   }
 };
@@ -87,7 +84,7 @@ export default {
 
 <style >
 .flight-reservation {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   background-color: lightblue;
   height: auto;
   top: 50%;

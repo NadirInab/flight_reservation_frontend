@@ -41,11 +41,10 @@
       <button
         type="submit"
         class="btn btn-primary w-50"
-        :class="{'btn-loading': isLoading}"
-      >{{ buttonTitle }}</button>
+      >Register</button>
       <span class="text-muted">
         Already Have an account
-        <b class="text-primary">Sign In</b>
+        <b @click="handleClick" class="text-primary">Sign In</b>
       </span>
     </form>
   </div>
@@ -53,7 +52,6 @@
 
 <script>
 import axios from "axios";
-import { toRaw, isProxy } from "vue";
 
 export default {
   data() {
@@ -67,23 +65,16 @@ export default {
       emailError: "",
       passwordError: "",
       passwordConfirmationError: "",
-      formType: "register",
-      isLoading: false
     };
   },
   computed: {
-    formTitle() {
-      return this.formType === "register" ? "Register" : "Login";
-    },
-    buttonTitle() {
-      return this.isLoading
-        ? "Loading..."
-        : this.formType === "register"
-        ? "Register"
-        : "Login";
-    }
+
   },
   methods: {
+    handleClick() {
+      this.$store.commit("showSignUp");
+    },
+
     validateForm() {
       let isValid = true;
       if (!this.name) {
@@ -110,6 +101,8 @@ export default {
       }
       return isValid;
     },
+
+
     register() {
       this.isLoading = true;
       this.data = {
@@ -210,6 +203,6 @@ input[type="submit"]:hover {
 }
 b {
   cursor: pointer;
-  text-decoration: underline ;
+  text-decoration: underline;
 }
 </style>>

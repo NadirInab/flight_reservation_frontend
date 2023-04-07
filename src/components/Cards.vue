@@ -2,13 +2,7 @@
   <header>
     <h3>Popular Destinations :</h3>
     <div class="container">
-      <Card
-        v-for="index in 9"
-        :key="index"
-        title="Rabat"
-        :price="index"
-        imageUrl="../assets/images/rabat.jpg"
-      />
+      <Popular v-for="(image, index) in images" :key="index" :image-src="image.src" />
     </div>
     <h3>Popular Destinations :</h3>
     <div class="container">
@@ -17,32 +11,38 @@
         :key="index"
         title="Rabat"
         :price="index"
-        imageUrl="../assets/images/rabat.jpg"
+        imageUrl="../assets/images/roma.jpg"
       />
     </div>
   </header>
 </template>
 
 <script>
-import axios from "axios";
+import rabat from "../assets/images/rabat.jpg";
+import Agadir from "../assets/images/Agadir.jpg";
+import Tanger from "../assets/images/Tanger.jpg";
+import Popular from "./Popular.vue";
 import Card from "./Card.vue";
 export default {
   data() {
-    return {};
-  },
-  props: {
-    title: String,
-    price: String,
-    imageUrl: String
+    return {
+      images: [
+        {
+          src: rabat
+        },
+        {
+          src: Tanger
+        },
+        {
+          src: Agadir
+        }
+      ]
+    };
   },
   components: {
-    Card
-  },
-  // async created() {
-  //   axios("http://127.0.0.1:8000/api/flights").then(res => {
-  //     console.log(res);
-  //   });
-  // }
+    Card,
+    Popular
+  }
 };
 </script>
 
@@ -53,7 +53,7 @@ export default {
   justify-content: space-around;
   width: 100%;
   margin: 0 auto;
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
 }
 h3 {
   margin: 20px 30px;
