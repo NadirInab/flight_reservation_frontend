@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div v-if="show">
+    <div v-if="showSignUp">
       <SignUp />
     </div>
     <div v-else>
@@ -17,7 +17,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      show : true
+      // show : true
     };
   },
   components: {
@@ -25,12 +25,9 @@ export default {
     SignIn
   },
   computed: {
-    ...mapGetters(["show"])
+    ...mapGetters(["showSignUp"])
   },
   methods: {
-    handleClick() {
-      this.show = !this.show;
-    }
   }
 };
 </script>
