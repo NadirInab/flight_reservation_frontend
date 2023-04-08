@@ -9,7 +9,6 @@
 <script>
 import FlightData from "../components/FlightData.vue";
 import FlightForm from "../components/admin/FlightForm.vue";
-// import Flight from "../../components/Flight.vue";
 
 export default {
   data() {
@@ -20,7 +19,6 @@ export default {
   components: {
     FlightData,
     FlightForm,
-    // Flight
   }
 };
 </script>

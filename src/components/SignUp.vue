@@ -1,12 +1,15 @@
 <template>
   <div class="signup row justify-content-center">
+    <div class="h3">
+      <h3>Sign Up</h3>
+    </div>
     <form @submit.prevent="register">
       <div>
         <div>
           <label for="name">
             <i class="fa-sharp fa-solid fa-user"></i> Full Name :
           </label>
-          <input type="text" class id="name" v-model.trim="name" />
+          <input type="text" class id="name" placeholder="John Doe" v-model.trim="name" />
           <span v-if="nameError" class="invalid-feedback">{{ nameError }}</span>
         </div>
 
@@ -14,7 +17,13 @@
           <label for="password">
             <i class="fa-solid fa-lock mx-1"></i> Password :
           </label>
-          <input type="password" class id="password" v-model.trim="password" />
+          <input
+            type="password"
+            class
+            id="password"
+            placeholder="**********"
+            v-model.trim="password"
+          />
           <span v-if="passwordError" class="invalid-feedback">{{ passwordError }}</span>
         </div>
       </div>
@@ -23,7 +32,7 @@
           <label for="email">
             <i class="fa-solid fa-envelope mx-1"></i> Email :
           </label>
-          <input type="email" class id="email" v-model.trim="email" />
+          <input type="email" class id="email" placeholder="JohnDoe@gmail.com" v-model.trim="email" />
           <span v-if="emailError" class="invalid-feedback">{{ emailError }}</span>
         </div>
 
@@ -31,20 +40,22 @@
           <label for="password_confirmation">
             <i class="fa-solid fa-lock mx-1"></i> Confirm Password :
           </label>
-          <input type="password" id="password_confirmation" v-model.trim="password_confirmation" />
+          <input
+            type="password"
+            id="password_confirmation"
+            placeholder="**********"
+            v-model.trim="password_confirmation"
+          />
           <span
             v-if="passwordConfirmationError"
             class="invalid-feedback"
           >{{ passwordConfirmationError }}</span>
         </div>
       </div>
-      <button
-        type="submit"
-        class="btn btn-primary w-50"
-      >Register</button>
+      <button type="submit" class="btn btn-primary w-50">Register</button>
       <span class="text-muted">
         Already Have an account
-        <b @click="handleClick" class="text-primary">Sign In</b>
+        <span @click="handleClick" class="text-primary">Sign In</span>
       </span>
     </form>
   </div>
@@ -64,12 +75,10 @@ export default {
       nameError: "",
       emailError: "",
       passwordError: "",
-      passwordConfirmationError: "",
+      passwordConfirmationError: ""
     };
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
     handleClick() {
       this.$store.commit("showSignUp");
@@ -101,7 +110,6 @@ export default {
       }
       return isValid;
     },
-
 
     register() {
       this.isLoading = true;
@@ -144,6 +152,24 @@ export default {
   margin: 0 auto;
   overflow: hidden;
 }
+.h3 {
+  /* border: 2px solid red; */
+  margin-bottom: -15px;
+  z-index: 23;
+}
+.h3 h3 {
+  /* border: 2px solid red; */
+  text-align: center;
+  width: 20%;
+  height: 60px;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 10px;
+  top: -10px;
+  right: -10px;
+  background-color: white;
+  color: darkblue;
+}
 button {
   grid-column: 1 / -1;
   justify-self: center;
@@ -152,7 +178,7 @@ button {
 
 form {
   margin: 0 auto;
-  padding: 20px;
+  padding: 60px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -176,7 +202,7 @@ form {
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: initial;
 }
 input {
   display: block;
@@ -185,7 +211,7 @@ input {
   margin-bottom: 10px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   font-size: 16px;
 }
 input[type="submit"] {
@@ -201,7 +227,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: #3e8e41;
 }
-b {
+span {
   cursor: pointer;
   text-decoration: underline;
 }

@@ -7,14 +7,14 @@
     <table>
       <thead>
         <tr>
-          <th>Flight Name</th>
-          <th>Date</th>
-          <th>From</th>
-          <th>To</th>
-          <th>Airport</th>
-          <th>Airline</th>
-          <th>Price (MAD)</th>
-          <th>Number of Seats</th>
+          <th><i class="fa-duotone fa-passport"></i> Flight Name</th>
+          <th><i class="fa-sharp fa-solid fa-calendar-days"></i> Date</th>
+          <th><i class="fa-sharp fa-solid fa-plane-departure"></i> From</th>
+          <th><i class="fa-sharp fa-solid fa-plane-arrival"></i> To</th>
+          <th><i class="fa-sharp fa-solid fa-plane-circle-check"></i> Airport</th>
+          <th><i class="fa-brands fa-bandcamp"></i> Airline</th>
+          <th><i class="fa-sharp fa-solid fa-money-check-dollar"></i> Price (MAD)</th>
+          <th><i class="fa-regular fa-seat-airline"></i> Seats</th>
           <th>Book it</th>
         </tr>
       </thead>
@@ -32,7 +32,7 @@
           <td class="seats">{{flight.number_of_seats }}</td>
           <td class="seats">
             <i @click="deleteFlight(flight.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
-            <i class="fa-sharp fa-solid fa-circle-plus text-success"></i>
+            <!-- <i class="fa-sharp fa-solid fa-circle-plus text-success"></i> -->
             <i @click="upDateFlight(flight.id)" class="fa-solid fa-pen-to-square mx-1 text-primary"></i>
           </td>
         </tr>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex"; 
 import { toRaw } from "vue";
 
 export default {
@@ -96,17 +96,16 @@ table {
   }
 }
 th {
-  color: rgb(67, 65, 65);
+  color: rgb(36, 17, 17);
   padding: 8px;
   text-align: center;
   font-weight: bold;
-  color: cadetblue;
-  background-color: darkgray;
+  background-color: rgba(85, 201, 255, 0.63);
 }
 
 td {
   padding: 8px;
-  border-bottom: 1px solid #2c0a0a;
+  border-bottom: 1px dashed #000b5c;
   text-align: center;
   transition: background-color 0.3s ease;
 }

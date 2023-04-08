@@ -16,12 +16,12 @@
 export default {
   data() {
     return {
-      image: "airplane", 
+      image: "airplane"
     };
-  }, 
-  methods : {
-    scrollDown(){
-      window.scrollBy(0, 300) ;
+  },
+  methods: {
+    scrollDown() {
+      window.scrollBy(0, 300);
     }
   }
 };
@@ -88,8 +88,8 @@ export default {
   border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(241, 183, 75, 0.661) 0px 6px 6px;
 }
-
 .hero-button:hover {
   background-color: #0056b3;
 }

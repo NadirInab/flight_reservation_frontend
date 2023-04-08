@@ -8,9 +8,9 @@
       <span class="navbar__toggle-icon"></span>
       </button>-->
       <ul class="navbar__menu">
-        <!-- <li>
+        <li>
           <router-link to="/admin">Admin</router-link>
-        </li>-->
+        </li>
         <li>
           <router-link to="/">
             <i class="fa-sharp fa-solid fa-house"></i> Home

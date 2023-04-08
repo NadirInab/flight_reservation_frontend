@@ -1,23 +1,23 @@
 <template>
-  <div class="signIn border border-2 pt-5">
-    <!-- <h2>Sign In</h2> -->
+  <div class="signIn pt-5">
     <form @submit.prevent="login">
       <div>
         <label>
           <i class="fa-solid fa-envelope mx-1"></i> Email:
         </label>
-        <input type="email" v-model="email" required />
+        <input type="email" v-model="email" placeholder="JohnDoe@gmail.com" required />
       </div>
       <div>
         <label>
           <i class="fa-solid fa-lock mx-1"></i> Password:
         </label>
-        <input type="password" v-model="password" required />
+        <input type="password" v-model="password" placeholder="************" required />
       </div>
       <button class="w-50" type="submit">Login</button>
       <span class="text-muted">
-        Already Have an account
-        <b @click="handleClick" class="goSignUp text-primary">Sign In</b>
+        Don't Have an account ?
+        <span @click="handleClick" class="goSignUp text-primary">Sign Up
+        </span>
       </span>
     </form>
   </div>
@@ -64,12 +64,13 @@ export default {
   background-size: cover;
   background-position: center center;
 }
-.goSignUp{
+.goSignUp {
   cursor: pointer;
 }
 form {
-  max-width: 400px;
-  margin: 0 auto;
+  max-width: 450px;
+  /* width: 100%; */
+  margin: 100px auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
@@ -89,7 +90,7 @@ form {
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: initial;
 }
 input {
   display: block;
@@ -98,7 +99,7 @@ input {
   margin-bottom: 10px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   font-size: 16px;
 }
 input[type="submit"] {
