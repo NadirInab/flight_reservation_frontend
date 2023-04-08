@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 
 const routes = [
   {
@@ -26,6 +25,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../components/admin/dashboard.vue')
+  },
+  {
+    path: '/Payement',
+    name: 'Payement',
+    component: () => import('../components/Payement.vue')
   }
 
 ]

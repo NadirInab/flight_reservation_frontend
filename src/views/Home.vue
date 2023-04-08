@@ -2,9 +2,9 @@
   <header>
     <Hero />
     <Reservations />
-    <!-- <div  v-show="showTicket">
+    <div  v-show="showTicket">
       <Ticket />
-    </div> -->
+    </div>
   </header>
 </template>
 

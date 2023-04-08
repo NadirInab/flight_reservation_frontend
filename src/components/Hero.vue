@@ -45,7 +45,6 @@ h1 {
   font-weight: 900;
   border-left: 15px solid #fec500;
   padding-left: 10px;
-  /* margin-bottom: 30px; */
 }
 .hero-video {
   position: absolute;

@@ -13,7 +13,13 @@ const store = createStore({
     getters: {
         showSignUp: state => state.showSignUp,
         getSearchedFlight(state) {
-            localStorage.setItem("data", JSON.stringify(state.searchedFlights));
+            return state.searchedFlights;
+        },
+        formattedDate: state => {
+            const date = new Date(state.searchedFlights[0].date);
+            const month = date.toLocaleString("default", { month: "long" });
+            const day = date.getDate();
+            return `${month} ${day}`;
         },
         showTicket: state => state.showTicket
 
@@ -79,8 +85,6 @@ const store = createStore({
                 });
         },
         removeFlightFromDb({ commit }, id) {
-            // axios
-            //     .delete(`http://127.0.0.1:8000/api/flights/${id}`)
             Flights.remove(id)
                 .then(response => {
                     commit('removeFlightTable', response.data[0].id);

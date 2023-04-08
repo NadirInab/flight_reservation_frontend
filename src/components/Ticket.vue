@@ -1,30 +1,47 @@
 <template>
   <section class="ticketContainer">
-    <h1>Events</h1>
+    <h1>Your Flight</h1>
     <div class="row">
-      <article class="card fl-left">
-        <h1>herere {{getSearchedFlight}}</h1>
+      <article v-if="getSearchedFlight[0]" class="card fl-left">
+        <h4 class="text-center">{{getSearchedFlight[0].flight_name}} </h4>
         <section class="date">
-          <time datetime="23th feb">
-            <span>23</span>
-            <span>feb</span>
+          <time>
+            <span>{{formattedDate.split(" ")[0]}}</span>
+            <span>{{formattedDate.split(" ")[1]}}</span>
           </time>
+            <h5 class="text-danger text-decoration-underline">{{getSearchedFlight[0].price}} MAD</h5>
         </section>
+
         <section class="card-cont">
-          <small>dj khaled</small>
-          <h3>{{data[0].flight_name}}</h3>
           <div class="even-date">
-            <i class="fa fa-calendar"></i>
+            <i class="fa fa-map-marker text-danger"></i>
+            <b class="mx-4 p-2">Departure : {{getSearchedFlight[0].from}}</b>
+            <h3>{{getSearchedFlight.flight_name}}</h3>
+          </div>
+
+          <div class="even-date">
+            <i class="fa-sharp fa-solid fa-plane-departure text-success"></i>
+            <span class="mx-4 p-2">Airport : {{getSearchedFlight[0].airport}}</span>
+          </div>
+
+          <div class="even-date">
+            <i class="fa-brands fa-bandcamp text-warning"></i>
+            <span class="mx-4 p-2">Airline : {{getSearchedFlight[0].airline}}</span>
+          </div>
+
+          <div class="even-date">
+            <i class="fa fa-calendar text-secondary"></i>
             <time>
-              <span>wednesday 28 december 2014</span>
-              <span>08:55pm to 12:00 am</span>
+              <span class="mx-4 p-2">Date : {{formattedDate}}</span>
             </time>
           </div>
+
           <div class="even-info">
-            <i class="fa fa-map-marker"></i>
-            <p>nexen square for people australia, sydney</p>
+            <i class="fa fa-map-marker text-danger"></i>
+            <b class="mx-4 p-2">Arrival : {{getSearchedFlight[0].to}}</b>
           </div>
-          <a href="#">tickets</a>
+
+            <router-link class="bg-danger text-white" :to="{ name: 'Payement' }">Book tickets</router-link>
         </section>
       </article>
     </div>
@@ -33,6 +50,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
 import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   data() {
@@ -41,14 +59,15 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getSearchedFlight"]),
+    ...mapGetters(["getSearchedFlight", "formattedDate"]),
     ...mapState(["searchedFlights"])
   },
   methods: {},
-  async mounted() {
-    let data = JSON.parse(localStorage.getItem("data"));
-    this.data = data;
-    console.log("here created" + data);
+  updated() {
+    console.log(this.getSearchedFlight);
+  }, 
+  components : {
+     'router-link': RouterLink
   }
 };
 </script>
@@ -57,9 +76,9 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
 .ticketContainer {
-  border: 2px solid red;
   width: 90%;
-  margin: 0 auto;
+  height: fit-content;
+  margin: 30px auto;
 }
 .fl-left {
   float: left;
@@ -74,27 +93,24 @@ h1 {
   font-weight: 900;
   border-left: 10px solid #fec500;
   padding-left: 10px;
-  /* margin-bottom: 30px; */
 }
 
-/* .row {
+.row {
   overflow: hidden;
-} */
+  margin: 30px auto;
+}
 
 .card {
+  border: 3px solid green;
   display: table-row;
-  width: 49%;
+  width: 50%;
   background-color: #fff;
   color: #989898;
-  margin-bottom: 10px;
+  margin-bottom: 20px auto;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
   border-radius: 4px;
   position: relative;
-}
-
-.card + .card {
-  margin-left: 2%;
 }
 
 .date {
@@ -103,25 +119,6 @@ h1 {
   position: relative;
   text-align: center;
   border-right: 2px dashed #dadde6;
-}
-
-.date:before,
-.date:after {
-  content: "";
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-color: #dadde6;
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  z-index: 1;
-  border-radius: 50%;
-}
-
-.date:after {
-  top: auto;
-  bottom: -15px;
 }
 
 .date time {
@@ -220,9 +217,6 @@ h1 {
     float: none;
     width: 100%;
     margin-bottom: 10px;
-  }
-  .card + .card {
-    margin-left: 0;
   }
   .card-cont .even-date,
   .card-cont .even-info {
