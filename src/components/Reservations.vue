@@ -1,6 +1,6 @@
 <template>
   <div class="flight-reservation">
-    <h2>Quickly scan all your favourite travel sites</h2>
+    <h1>Quickly scan all your favourite travel sites</h1>
     <form @submit.prevent="searchFlights">
       <div class="myForm">
         <div class="form-group">
@@ -27,7 +27,7 @@
           <label for="date">
             <i class="fa-solid fa-calendar-days"></i> Date
           </label>
-          <input type="date" id="date" v-model="date" required />
+          <input type="date" id="date" v-model="date" v-bind:min="minDate" required />
         </div>
         <div class="form-group">
           <label for="seats">
@@ -52,12 +52,17 @@ export default {
       from: "",
       to: "",
       date: "",
-      seats: 1
+      seats: 1, 
+      selectedDate: null,
     };
   },
   computed: {
     ...mapState(["searchedFlights"]),
-    ...mapGetters(["getSearchedFlight"])
+    ...mapGetters(["getSearchedFlight"]),
+     minDate() {
+      const today = new Date().toISOString().split('T')[0];
+      return today;
+    }
   },
   methods: {
     ...mapActions(["flightData", "getFlightDataFromTo"]),
@@ -69,7 +74,6 @@ export default {
         seats: this.seats
       };
       this.getFlightDataFromTo(data);
-      // this.$store.dispatch("getFlightDataFromTo", data);
     }
   },
   computed: {
@@ -83,14 +87,38 @@ export default {
 </script>
 
 <style >
+@import url("https://fonts.googleapis.com/css2?family=Petrona:ital,wght@1,300;1,400&display=swap");
 .flight-reservation {
   /* border: 2px solid red; */
   background-color: lightblue;
   height: auto;
-  top: 50%;
+  padding: 20px;
+  background-image: linear-gradient(
+    0deg,
+    hsl(206deg 75% 42%) 0%,
+    hsl(210deg 50% 50%) 6%,
+    hsl(211deg 47% 56%) 12%,
+    hsl(212deg 46% 60%) 18%,
+    hsl(213deg 44% 64%) 24%,
+    hsl(214deg 43% 68%) 31%,
+    hsl(214deg 42% 71%) 37%,
+    hsl(215deg 42% 74%) 44%,
+    hsl(215deg 41% 77%) 51%,
+    hsl(215deg 40% 79%) 57%,
+    hsl(216deg 40% 82%) 63%,
+    hsl(216deg 39% 85%) 68%,
+    hsl(216deg 39% 87%) 72%,
+    hsl(216deg 38% 89%) 77%,
+    hsl(216deg 38% 92%) 82%,
+    hsl(217deg 37% 94%) 86%,
+    hsl(217deg 37% 96%) 91%,
+    hsl(217deg 37% 98%) 95%,
+    hsl(0deg 0% 100%) 100%
+  );
 }
-.flight-reservation h2 {
+.flight-reservation h1 {
   margin: 15px 0 0 20px;
+  font-family: "Petrona", serif;
 }
 .myForm {
   width: 100%;
@@ -103,13 +131,12 @@ export default {
   margin-bottom: 1rem;
   padding: 1rem;
   text-align: center;
-  background: rgba(216, 249, 254, 0.45);
+  background: rgba(185, 224, 241, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4.5px);
   -webkit-backdrop-filter: blur(4.5px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
   margin: 1rem 1rem;
 }
 

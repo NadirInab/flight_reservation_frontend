@@ -1,7 +1,7 @@
 <template>
   <div class="card1">
     <div class="card-image">
-      <img src="../assets/images/roma.jpg" alt />
+      <img :src="imageUrl" alt />
     </div>
     <div class="card-content">
       <h3 class="card-title">{{ title }}</h3>
@@ -37,6 +37,7 @@ export default {
   border-radius: 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin: 10px;
 }
 .card1:hover {
   scale: 1.01;

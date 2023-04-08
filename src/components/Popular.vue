@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="first">
+    <img :src="imageSrc" alt="Card image" />
+
+    <!-- <div class="first">
       <img :src="imageSrc" alt="Card image" />
       <img :src="imageSrc" alt="Card image" />
     </div>
@@ -8,7 +10,7 @@
       <img :src="imageSrc" alt="Card image" />
       <img :src="imageSrc" alt="Card image" />
       <img :src="imageSrc" alt="Card image" />
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -23,7 +25,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .first {
   display: grid;
   grid-template-columns: 1fr 1fr;

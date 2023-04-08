@@ -2,7 +2,8 @@
   <section class="ticketContainer">
     <h1>Events</h1>
     <div class="row">
-      <!-- <article class="card fl-left">
+      <article class="card fl-left">
+        <h1>herere {{getSearchedFlight}}</h1>
         <section class="date">
           <time datetime="23th feb">
             <span>23</span>
@@ -11,56 +12,7 @@
         </section>
         <section class="card-cont">
           <small>dj khaled</small>
-          <h3>live in sydney</h3>
-          <div class="even-date">
-            <i class="fa fa-calendar"></i>
-            <time>
-              <span>wednesday 28 december 2014</span>
-              <span>08:55pm to 12:00 am</span>
-            </time>
-          </div>
-          <div class="even-info">
-            <i class="fa fa-map-marker"></i>
-            <p>nexen square for people australia, sydney</p>
-          </div>
-          <a href="#">tickets</a>
-        </section>
-      </article> -->
-      <article class="card fl-left">
-        <section class="date">
-          <time datetime="23th feb">
-            <span>23</span>
-            <span>feb</span>
-          </time>
-        </section>
-        <section class="card-cont">
-          <small>{{searchedFlights}}</small>
-          <h3>corner obsest program</h3>
-          <div class="even-date">
-            <i class="fa fa-calendar"></i>
-            <time>
-              <span>wednesday 28 december 2014</span>
-              <span>08:55pm to 12:00 am</span>
-            </time>
-          </div>
-          <div class="even-info">
-            <i class="fa fa-map-marker"></i>
-            <p>nexen square for people australia, sydney</p>
-          </div>
-          <a href="#">tickets</a>
-        </section>
-      </article>
-
-      <article class="card fl-left">
-        <section class="date">
-          <time datetime="23th feb">
-            <span>23</span>
-            <span>feb</span>
-          </time>
-        </section>
-        <section class="card-cont">
-          <small></small>
-          <!-- <h3>{{getSearchedFlight.flight_name}}</h3> -->
+          <h3>{{data[0].flight_name}}</h3>
           <div class="even-date">
             <i class="fa fa-calendar"></i>
             <time>
@@ -83,26 +35,31 @@
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
 export default {
-  compute: {
-    ...mapGetters(["getSearchedFlight"]), 
-    ...mapState(["searchedFlights"]), 
-    // console.log(getSea)
+  data() {
+    return {
+      data: []
+    };
   },
-  methods: {}, 
-  updated(){
-    // console.log(this.getSearchedFlight);
-    // console.log($this.$store.state.searchedFlights)
+  computed: {
+    ...mapGetters(["getSearchedFlight"]),
+    ...mapState(["searchedFlights"])
+  },
+  methods: {},
+  async mounted() {
+    let data = JSON.parse(localStorage.getItem("data"));
+    this.data = data;
+    console.log("here created" + data);
   }
 };
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
-.ticketContainer{
-    border: 2px solid red;
-    width: 90%;
-    margin: 0 auto;
+.ticketContainer {
+  border: 2px solid red;
+  width: 90%;
+  margin: 0 auto;
 }
 .fl-left {
   float: left;
@@ -172,6 +129,7 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
+  font-size: 1em;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);

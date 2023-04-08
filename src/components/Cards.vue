@@ -2,16 +2,21 @@
   <header>
     <h3>Popular Destinations :</h3>
     <div class="container">
-      <Popular v-for="(image, index) in images" :key="index" :image-src="image.src" />
+      <div class="first">
+        <Popular v-for="(image, index) in images" :key="index" :image-src="image.src" />
+      </div>
+      <div class="seconde">
+        <Popular v-for="(image, index) in images" :key="index" :image-src="image.src" />
+      </div>
     </div>
     <h3>Popular Destinations :</h3>
     <div class="container">
       <Card
-        v-for="index in 9"
+        v-for="(image, index) in images"
         :key="index"
-        title="Rabat"
+        :title="image.title"
         :price="index"
-        imageUrl="../assets/images/roma.jpg"
+        :imageUrl="image.src"
       />
     </div>
   </header>
@@ -28,12 +33,39 @@ export default {
     return {
       images: [
         {
+          title: "rabat",
           src: rabat
         },
         {
+          title: "Tanger",
           src: Tanger
         },
         {
+          title: "Agadir",
+          src: Agadir
+        },
+        {
+          title: "rabat",
+          src: rabat
+        },
+        {
+          title: "Tanger",
+          src: Tanger
+        },
+        {
+          title: "Agadir",
+          src: Agadir
+        },
+        {
+          title: "rabat",
+          src: rabat
+        },
+        {
+          title: "Tanger",
+          src: Tanger
+        },
+        {
+          title: "Agadir",
           src: Agadir
         }
       ]
@@ -68,5 +100,27 @@ h3 {
 }
 .card:hover {
   transform: scale(1.05);
+}
+
+.first {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap:5px ;
+}
+.first img {
+  width: 400px;
+  height: 250px;
+  border-radius: 8px;
+}
+.seconde {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  margin: 8px 0;
+}
+.seconde img {
+  width: 300px;
+  height: 200px;
+  border-radius: 8px;
 }
 </style>

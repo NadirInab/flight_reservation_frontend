@@ -23,7 +23,8 @@ export default {
     scrollDown() {
       window.scrollBy(0, 300);
     }
-  }
+  },
+  components: {}
 };
 </script>
 
@@ -39,7 +40,13 @@ export default {
   background-size: cover;
   background-position: center center;
 }
-
+h1 {
+  text-transform: uppercase;
+  font-weight: 900;
+  border-left: 15px solid #fec500;
+  padding-left: 10px;
+  /* margin-bottom: 30px; */
+}
 .hero-video {
   position: absolute;
   top: 0;
@@ -88,7 +95,8 @@ export default {
   border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(241, 183, 75, 0.661) 0px 6px 6px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(241, 183, 75, 0.661) 0px 6px 6px;
 }
 .hero-button:hover {
   background-color: #0056b3;
