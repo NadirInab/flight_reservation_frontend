@@ -9,6 +9,7 @@ const store = createStore({
         showTicket: false,
         flights: [],
         searchedFlights: [],
+        isAdmin : false
     },
     getters: {
         showSignUp: state => state.showSignUp,
@@ -19,9 +20,13 @@ const store = createStore({
             const date = new Date(state.searchedFlights[0].date);
             const month = date.toLocaleString("default", { month: "long" });
             const day = date.getDate();
-            return `${month} ${day}`;
+            const hours = ("0" + date.getHours()).slice(-2);
+            const minutes = ("0" + date.getMinutes()).slice(-2);
+            const seconds = ("0" + date.getSeconds()).slice(-2);
+            return `${month} ${day} ${hours} ${minutes}`;
         },
-        showTicket: state => state.showTicket
+        showTicket: state => state.showTicket, 
+        isAdmin : state => state.isAdmin
 
     },
     mutations: {

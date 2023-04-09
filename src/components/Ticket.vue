@@ -1,32 +1,33 @@
 <template>
   <section class="ticketContainer">
-    <h1>Your Flight</h1>
+    <h1>Your Flights</h1>
     <div class="row">
-      <article v-if="getSearchedFlight[0]" class="card fl-left">
-        <h4 class="text-center">{{getSearchedFlight[0].flight_name}} </h4>
+    <!-- loop over the ticket of the same day ==> i it's pretty easy .  -->
+      <article :key="ticket" v-for="ticket in getSearchedFlight" v-if="getSearchedFlight" class="card fl-left">
+        <h4 class="text-center">{{ticket.flight_name}} </h4>
         <section class="date">
           <time>
             <span>{{formattedDate.split(" ")[0]}}</span>
             <span>{{formattedDate.split(" ")[1]}}</span>
           </time>
-            <h5 class="text-danger text-decoration-underline">{{getSearchedFlight[0].price}} MAD</h5>
+            <h5 v-if="ticket" class="text-danger text-decoration-underline">{{ticket.price}} MAD</h5>
         </section>
 
         <section class="card-cont">
           <div class="even-date">
             <i class="fa fa-map-marker text-danger"></i>
-            <b class="mx-4 p-2">Departure : {{getSearchedFlight[0].from}}</b>
+            <b class="mx-4 p-2">Departure : {{ticket.from}}</b>
             <h3>{{getSearchedFlight.flight_name}}</h3>
           </div>
 
           <div class="even-date">
             <i class="fa-sharp fa-solid fa-plane-departure text-success"></i>
-            <span class="mx-4 p-2">Airport : {{getSearchedFlight[0].airport}}</span>
+            <span class="mx-4 p-2">Airport : {{ticket.airport}}</span>
           </div>
 
           <div class="even-date">
             <i class="fa-brands fa-bandcamp text-warning"></i>
-            <span class="mx-4 p-2">Airline : {{getSearchedFlight[0].airline}}</span>
+            <span class="mx-4 p-2">Airline : {{ticket.airline}}</span>
           </div>
 
           <div class="even-date">
@@ -38,7 +39,7 @@
 
           <div class="even-info">
             <i class="fa fa-map-marker text-danger"></i>
-            <b class="mx-4 p-2">Arrival : {{getSearchedFlight[0].to}}</b>
+            <b class="mx-4 p-2">Arrival : {{ticket.to}}</b>
           </div>
 
             <router-link class="bg-danger text-white" :to="{ name: 'Payement' }">Book tickets</router-link>
@@ -65,6 +66,7 @@ export default {
   methods: {},
   updated() {
     console.log(this.getSearchedFlight);
+    // console.log(this.formattedDate) ;
   }, 
   components : {
      'router-link': RouterLink

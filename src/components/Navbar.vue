@@ -34,7 +34,7 @@
         </li>
       </ul>
     </nav>
-    <router-view />
+    <!-- <router-view /> -->
   </header>
 </template>
 

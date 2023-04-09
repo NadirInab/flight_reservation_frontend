@@ -1,62 +1,103 @@
+
 <template>
-  <div>
-    <nav class="navbar navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Admin Dashboard</a>
-    </nav>
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <router-link class="nav-link" to="/flights">Flights</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/users">Users</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/tickets">Tickets</router-link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <router-view></router-view>
-        </main>
+  <div class="admin-dashboard">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="../../assets/images/admin.avif" alt="Profile Picture" />
+        <h2>Admin</h2>
       </div>
+      <ul>
+        <li>Statistics</li>
+        <li>Flights</li>
+        <li>Users</li>
+        <li>Tickets</li>
+        <li>
+          <router-link to="/dashboard/settings">Profile</router-link>Profile
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <router-view></router-view>
+      <Statistics />
+      <Flights />
+      <Profile />
     </div>
   </div>
 </template>
 
 <script>
+import Statistics from "./Statistics.vue";
+import Flights from "../../views/Flights.vue";
+import Profile from "./Profile.vue";
 export default {
-  name: 'AdminDashboard',
+  components: {
+    Statistics,
+    Flights,
+    Profile
+  }
 };
 </script>
-
 <style scoped>
-.sidebar {
-    /* border: 2px solid red; */
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
   position: fixed;
-  top: 2rem;
   bottom: 0;
   left: 0;
-  z-index: 100;
-  padding: 48px 0 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+.profile {
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin-left: 40px;
+  box-sizing: border-box;
 }
 
-.nav-link {
-  font-weight: 500;
+.profile img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.sidebar {
+  flex: 0 0 200px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: start;
+}
+
+li {
+  left: 0;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+li:hover {
+  background-color: #ddd;
+}
+a {
   color: #333;
+  text-decoration: none;
 }
 
-.nav-link:hover {
-  color: #23527c;
+a:hover {
+  color: #000;
 }
 
-.nav-link.active {
-  color: #23527c;
-  font-weight: 700;
+.content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  border: 2px solid green;
 }
 </style>

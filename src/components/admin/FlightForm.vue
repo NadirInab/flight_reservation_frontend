@@ -83,46 +83,30 @@ export default {
   methods: {
     ...mapActions(["addFlight"]),
     submitForm() {
+      let myDate = new Date(this.date) ;
+      // let theDate = date('Y-m-d H:i:s', strtotime(myDate)) ;
+       const formattedDate = myDate.toISOString().slice(0, 19).replace('T', ' ') ;
+       console.log(formattedDate) ;
       const flightData = {
         flight_name: this.flight_name,
         airport: this.airport,
         from: this.from,
         to: this.to,
-        date: this.date,
+        date: formattedDate,
         airline: this.airline,
         aircraft: this.aircraft,
         image: this.image,
         price: this.price,
         number_of_seats: this.number_of_seats
       };
-      // console.log(data)
       this.addFlight(flightData);
-      // axios
-      //   .post("http://127.0.0.1:8000/api/flights", {
-      //     flight_name: this.flight_name,
-      //     airport: this.airport,
-      //     from: this.from,
-      //     to: this.to,
-      //     date: this.date,
-      //     airline: this.airline,
-      //     aircraft: this.aircraft,
-      //     image: this.image,
-      //     price: this.price,
-      //     number_of_seats: this.number_of_seats
-      //   })
-      //   .then(response => {
-      //     console.log(response.data);
-      //   })
-      //   .catch(error => {
-      //     console.log(error.response.data);
-      //   });
     }
   }
 };
 </script>
 <style scoped>
 form {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   display: grid;
   width: 75%;
   margin: 0 auto;

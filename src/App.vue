@@ -1,29 +1,37 @@
 <template>
   <header>
-    <Navbar />
-    <Footer />
+    <Navbar  v-if="!isAdmin"/>
+    <router-view />
+    <Footer v-if="!isAdmin" />
   </header>
 </template>
 
 <script >
+// v-if="!isAdmin" 
+import { mapGetters, mapState } from "vuex";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 export default {
   data() {
     return {
-      test: "tes", 
-      cities : [1, 2, 3, ]
+      test: "tes",
+      cities: [1, 2, 3]
     };
   },
   components: {
     Navbar,
     Footer
+  },
+  computed: {
+    ...mapGetters(["isAdmin"])
+    // isAdmin() {
+    //   return this.$route.path.startsWith("/admin");
+    // }
   }
 };
 </script>
 
 <style >
-
 .container {
   /* border: 2px solid red; */
   display: flex;
@@ -32,7 +40,6 @@ export default {
   width: 100%;
   margin: 0 auto;
   background-color: #f2f2f2;
-
 }
 .card {
   width: 20rem;

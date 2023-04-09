@@ -13,11 +13,10 @@
         </label>
         <input type="password" v-model="password" placeholder="************" required />
       </div>
-      <button class="w-50" type="submit">Login</button>
+      <button :disabled="!email && !password" class="w-50" type="submit">Login</button>
       <span class="text-muted">
         Don't Have an account ?
-        <span @click="handleClick" class="goSignUp text-primary">Sign Up
-        </span>
+        <span @click="handleClick" class="goSignUp text-primary">Sign Up</span>
       </span>
     </form>
   </div>

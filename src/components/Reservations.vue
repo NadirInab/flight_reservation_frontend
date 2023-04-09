@@ -11,7 +11,7 @@
             <option
               v-for="flight in flights"
               :key="flight.id"
-              :value="flight.from "
+              :value="flight.from"
             >{{ flight.from }}</option>
           </select>
         </div>
@@ -49,8 +49,8 @@ import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      from: "",
-      to: "",
+      from: "rabat",
+      to: "agadir",
       date: "",
       seats: 1, 
       selectedDate: null,
@@ -91,8 +91,8 @@ export default {
 .flight-reservation {
   /* border: 2px solid red; */
   background-color: lightblue;
-  height: auto;
-  padding: 20px;
+  height: 30rem;
+  padding: 30px;
   background-image: linear-gradient(
     0deg,
     hsl(206deg 75% 42%) 0%,
@@ -122,6 +122,7 @@ export default {
 }
 .myForm {
   width: 100%;
+  margin-top: 3rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }

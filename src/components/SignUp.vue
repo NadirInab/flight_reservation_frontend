@@ -52,7 +52,7 @@
           >{{ passwordConfirmationError }}</span>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary w-50">Register</button>
+      <button :disabled="!email && !password" type="submit" class="btn btn-primary w-50">Register</button>
       <span class="text-muted">
         Already Have an account
         <span @click="handleClick" class="text-primary">Sign In</span>

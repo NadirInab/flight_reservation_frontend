@@ -7,7 +7,7 @@
           <div class="col-12">
             <div class="d-flex flex-column">
               <p class="text mb-1">Person Name</p>
-              <input class="form-control mb-3" type="text" placeholder="Name" value="Barry Allen" />
+              <input class="form-control mb-3" type="text" placeholder="Name" value="User Name" />
             </div>
           </div>
           <div class="col-12">
@@ -25,7 +25,7 @@
           <div class="col-6">
             <div class="d-flex flex-column">
               <p class="text mb-1">CVV/CVC</p>
-              <input class="form-control mb-3 pt-2" type="password" placeholder="***" />
+              <input class="form-control mb-3 pt-2" type="password" placeholder="******" />
             </div>
           </div>
           <div class="col-12">

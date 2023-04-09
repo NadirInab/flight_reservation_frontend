@@ -1,7 +1,7 @@
 <template>
   <div class="tableContainer">
     <h3>
-      Where do you want to go?
+      <!-- Where do you want to go? -->
       <i class="fa-solid fa-earth-americas fa-bounce"></i>
     </h3>
     <table>
@@ -15,7 +15,7 @@
           <th><i class="fa-brands fa-bandcamp"></i> Airline</th>
           <th><i class="fa-sharp fa-solid fa-money-check-dollar"></i> Price (MAD)</th>
           <th><i class="fa-regular fa-seat-airline"></i> Seats</th>
-          <th>Book it</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -70,11 +70,13 @@ export default {
 </script>
 
 <style scoped>
-.tableContainer {
+
+/* .tableContainer {
   border: 2px solid red;
-  /* max-height: 80vh; */
-  /* overflow-y: scroll; */
-}
+  max-height: 80vh;
+  overflow-y: scroll;
+} */
+
 .tableContainer h3 {
   margin: 20px 30px;
 }

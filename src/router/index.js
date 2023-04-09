@@ -2,9 +2,9 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/',
+    path: '',
     name: 'home',
-    component : ()=> import('../views/Home.vue')
+    component: () => import('../views/Home.vue')
   },
   {
     path: '/About',
@@ -20,11 +20,14 @@ const routes = [
     path: '/Sign',
     name: 'Sign',
     component: () => import('../views/Sign.vue')
-  }, 
+  },
   {
     path: '/admin',
     name: 'admin',
-    component: () => import('../components/admin/dashboard.vue')
+    component: () => import('../components/admin/dashboard.vue'),
+    meta: {
+      needsAuth: false
+    }
   },
   {
     path: '/Payement',
@@ -37,6 +40,14 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.needsAuth) {
+    next('/Sign');
+  } else {
+    next();
+  }
 })
 
 export default router

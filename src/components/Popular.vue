@@ -1,16 +1,7 @@
 <template>
-  <div>
-    <img :src="imageSrc" alt="Card image" />
-
-    <!-- <div class="first">
-      <img :src="imageSrc" alt="Card image" />
-      <img :src="imageSrc" alt="Card image" />
-    </div>
-    <div class="seconde">
-      <img :src="imageSrc" alt="Card image" />
-      <img :src="imageSrc" alt="Card image" />
-      <img :src="imageSrc" alt="Card image" />
-    </div>-->
+  <div class="image-container">
+    <img :src="imageSrc" alt="your-image-alt" />
+    <h2 class="image-title">{{cityName}}</h2>
   </div>
 </template>
 
@@ -20,7 +11,8 @@ export default {
     return {};
   },
   props: {
-    imageSrc: String
+    imageSrc: String,
+    cityName: String
   }
 };
 </script>
@@ -46,4 +38,26 @@ export default {
   height: 200px;
   border-radius: 8px;
 }
+.image-container {
+  position: relative;
+  margin-top: 20px;
+}
+
+.image-title {
+  position: absolute;
+  top: -20px; 
+  left: 70%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: rgba(1, 27, 93, 0.984);
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
 </style>
