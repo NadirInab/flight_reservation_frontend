@@ -29,7 +29,7 @@
         </li> -->
         <li>
           <router-link to="/Sign">
-            <i class="fa-sharp fa-solid fa-user"></i> Sign In
+            <i class="fa-sharp fa-solid fa-user"></i> Sign Up
           </router-link>
         </li>
       </ul>

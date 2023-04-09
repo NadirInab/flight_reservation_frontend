@@ -9,7 +9,7 @@ const store = createStore({
         showTicket: false,
         flights: [],
         searchedFlights: [],
-        isAdmin : false
+        isAdmin : true
     },
     getters: {
         showSignUp: state => state.showSignUp,

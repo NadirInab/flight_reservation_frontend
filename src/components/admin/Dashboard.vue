@@ -19,7 +19,8 @@
     <div class="content">
       <router-view></router-view>
       <Statistics />
-      <Flights />
+      <Users />
+      <!-- <Flights /> -->
       <Profile />
     </div>
   </div>
@@ -27,13 +28,15 @@
 
 <script>
 import Statistics from "./Statistics.vue";
+import Users from "./Users.vue";
 import Flights from "../../views/Flights.vue";
 import Profile from "./Profile.vue";
 export default {
   components: {
     Statistics,
     Flights,
-    Profile
+    Profile,
+    Users
   }
 };
 </script>

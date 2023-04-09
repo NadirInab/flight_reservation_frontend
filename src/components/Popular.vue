@@ -40,7 +40,7 @@ export default {
 }
 .image-container {
   position: relative;
-  margin-top: 20px;
+  margin: 20px 0px;
 }
 
 .image-title {
