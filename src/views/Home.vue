@@ -7,9 +7,10 @@
     </div>
     <section class="popular p-4">
       <h3>Popular Destinations :</h3>
-      <div class="first">
+      <div class="container first">
         <Popular v-for="(image, index) in images" :key="index" :image-src="image.src"  :cityName="image.title"/>
       </div>
+      <MiniCard />
     </section>
   </header>
 </template>
@@ -20,6 +21,7 @@ import Agadir from "../assets/images/Agadir.jpg";
 import Tanger from "../assets/images/Tanger.jpg";
 import Roma from "../assets/images/roma.jpg";
 
+import MiniCard from "../components/MiniCard.vue";
 import Hero from "../components/Hero.vue";
 import Ticket from "../components/Ticket.vue";
 import Reservations from "../components/Reservations.vue";
@@ -72,7 +74,8 @@ export default {
     Hero,
     Reservations,
     Ticket,
-    Popular
+    Popular, 
+    MiniCard
   },
   computed: {
     ...mapGetters(["showTicket"])

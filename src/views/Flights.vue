@@ -1,14 +1,15 @@
 <template>
   <section>
-    <!-- <div class="hero"></div> -->
+    <div v-if="!isAdmin" class="hero"></div>
     <FlightData />
-    <FlightForm />
+    <FlightForm v-show="isAdmin"/>
   </section>
 </template>
 
 <script>
 import FlightData from "../components/FlightData.vue";
 import FlightForm from "../components/admin/FlightForm.vue";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   data() {
@@ -18,7 +19,10 @@ export default {
   },
   components: {
     FlightData,
-    FlightForm,
+    FlightForm
+  },
+  computed: {
+    ...mapGetters(["isAdmin"])
   }
 };
 </script>

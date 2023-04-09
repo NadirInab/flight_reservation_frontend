@@ -1,0 +1,45 @@
+<template>
+  <div class="container mt-4 parent">
+    <img src="../assets/images/sahara.jpeg" alt srcset />
+    <div class="child">
+      <h3>Your Next Trip start here :</h3>
+      <b class="d-block">Escape for a while</b>
+      <br />
+      <small>Enjoy the freedom of a monthly stay on Booking.com</small>
+    </div>
+    <img
+      src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/f7/1d/a0/caption.jpg?w=1000&h=-1&s=1"
+      alt
+      srcset
+    />
+  </div>
+</template>
+
+<script>
+import TES from "../assets/images/sahara.jpeg";
+export default {};
+</script>
+
+<style>
+.parent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  /* border: 2px solid red; */
+  justify-content: space-evenly;
+  font-style: italic;
+  background-color: antiquewhite;
+}
+.child {
+  margin-top: 2rem;
+  background-color: antiquewhite;
+}
+.child b,
+small {
+  text-align: start;
+}
+.parent img {
+  width: 100%;
+  height: 200px;
+}
+</style>

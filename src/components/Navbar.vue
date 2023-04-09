@@ -24,9 +24,9 @@
         <li>
           <router-link to="/About">Destinations</router-link>
         </li>
-        <li>
+        <!-- <li>
           <router-link to="/About">Stories</router-link>
-        </li>
+        </li> -->
         <li>
           <router-link to="/Sign">
             <i class="fa-sharp fa-solid fa-user"></i> Sign In

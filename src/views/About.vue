@@ -7,6 +7,13 @@
         width="100%"
         height="140"
       />
+      <div class="child">
+        <h1>Explore the world with us!</h1>
+        <small>
+          Save at least 15% of your time
+          <b class="text-success">Booking</b> From Home .
+        </small>
+      </div>
     </div>
     <Cards />
   </header>
@@ -30,7 +37,7 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  background-image: url("https://assets.wego.com/image/upload/c_fill,fl_los…_auto,w_2560/v1597920829/web/hero_images/ma_1.jpg");
+  /* background-image: url("https://assets.wego.com/image/upload/c_fill,fl_los…_auto,w_2560/v1597920829/web/hero_images/ma_1.jpg"); */
   position: relative;
   height: 100vh;
   padding-top: 0px;
@@ -38,5 +45,19 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+.child {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: #fff;
+}
+.child h1 {
+  font-size: 3rem;
+}
+.child small {
+  font-size: 1rem;
 }
 </style>
