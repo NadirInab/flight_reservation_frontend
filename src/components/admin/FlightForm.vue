@@ -96,7 +96,6 @@ export default {
     },
     onFileSelected2(event) {
       this.to_image = event.target.files[0];
-      console.log(this.to_image);
     },
     toFormData() {
       const formData = new FormData();

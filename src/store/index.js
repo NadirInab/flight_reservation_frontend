@@ -28,9 +28,10 @@ const store = createStore({
         showTicket: state => state.showTicket, 
         isAdmin : state => state.isAdmin, 
         getFlightImage(state){
-            // return state.flights.map(flight => flight.from_image) ;
-            // console.log(state.flights) ;
-
+            // let images = state.flights.map(flight => flight.from_image) ;
+            let images = state.flights.map(flight => `http://localhost:8000/images/${flight.from_image}`) ;
+            console.log(images);
+            return images ;
         }
 
     },

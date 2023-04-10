@@ -48,10 +48,10 @@ export default {
     Slider
   }, 
   computed:{
-    ...mapGetters(["getFlightImage"])
+    ...mapState(["flights"]) 
   }, 
   mounted(){
-    console.log(this.getFlightImage) ;
+    // console.log(this.getFlightImage) ;
   }
 };
 </script>

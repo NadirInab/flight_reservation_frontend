@@ -1,7 +1,7 @@
 <template>
   <div class="image-container">
-    <img :src="imageSrc" alt="your-image-alt" />
-    <h2 class="image-title">{{cityName}}</h2>
+    <img :src="image" alt="your-image-alt" />
+    <!-- <h2 class="image-title">{{cityName}}</h2> -->
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     return {};
   },
   props: {
-    imageSrc: String,
+    image: String,
     cityName: String
   }
 };

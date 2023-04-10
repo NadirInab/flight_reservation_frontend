@@ -8,8 +8,11 @@
     <section class="popular p-4">
       <h3>Popular Destinations :</h3>
       <div class="container first">
-        <Popular v-for="(image, index) in images" :key="index" :image-src="image.src"  :cityName="image.title"/>
+        <Popular v-for="(image, index) in this.getFlightImage" :key="index" :image="image"  />
+        <!-- :cityName="image.title" -->
       </div>
+      <h1>Heelo</h1>
+      <img :src="this.getFlightImage[this.getFlightImage.length -1]" alt="image">
       <MiniCard />
     </section>
   </header>
@@ -26,48 +29,11 @@ import Hero from "../components/Hero.vue";
 import Ticket from "../components/Ticket.vue";
 import Reservations from "../components/Reservations.vue";
 import Popular from "../components/Popular.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-      images: [
-        {
-          title: "rabat",
-          src: rabat
-        },
-        {
-          title: "Tanger",
-          src: Tanger
-        },
-        {
-          title: "Agadir",
-          src: Agadir
-        },
-        {
-          title: "rabat",
-          src: Roma
-        },
-        {
-          title: "Tanger",
-          src: Tanger
-        },
-        {
-          title: "Agadir",
-          src: Agadir
-        },
-        {
-          title: "rabat",
-          src: rabat
-        },
-        {
-          title: "Tanger",
-          src: Tanger
-        },
-        {
-          title: "Agadir",
-          src: Agadir
-        }
-      ]
+     images : []
     };
   },
   components: {
@@ -78,7 +44,11 @@ export default {
     MiniCard
   },
   computed: {
-    ...mapGetters(["showTicket"])
+    ...mapGetters(["showTicket", "getFlightImage"]), 
+  }, 
+  mounted() {
+    // console.log(this.getFlightImage[this.getFlightImage.length -1]) ;
+    this.getFlightImage ;
   }
 };
 </script>

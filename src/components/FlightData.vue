@@ -82,7 +82,7 @@ export default {
     this.$store.dispatch("flightData");
   },
   updated(){
-    console.log(this.flights[this.flights.length -1]);
+    // console.log(this.flights[this.flights.length -1]);
   }
 };
 </script>
