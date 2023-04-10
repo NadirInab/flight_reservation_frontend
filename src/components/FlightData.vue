@@ -7,14 +7,30 @@
     <table>
       <thead>
         <tr>
-          <th><i class="fa-duotone fa-passport"></i> Flight Name</th>
-          <th><i class="fa-sharp fa-solid fa-calendar-days"></i> Date</th>
-          <th><i class="fa-sharp fa-solid fa-plane-departure"></i> From</th>
-          <th><i class="fa-sharp fa-solid fa-plane-arrival"></i> To</th>
-          <th><i class="fa-sharp fa-solid fa-plane-circle-check"></i> Airport</th>
-          <th><i class="fa-brands fa-bandcamp"></i> Airline</th>
-          <th><i class="fa-sharp fa-solid fa-money-check-dollar"></i> Price (MAD)</th>
-          <th><i class="fa-regular fa-seat-airline"></i> Seats</th>
+          <th>
+            <i class="fa-duotone fa-passport"></i> Flight Name
+          </th>
+          <th>
+            <i class="fa-sharp fa-solid fa-calendar-days"></i> Date
+          </th>
+          <th>
+            <i class="fa-sharp fa-solid fa-plane-departure"></i> From
+          </th>
+          <th>
+            <i class="fa-sharp fa-solid fa-plane-arrival"></i> To
+          </th>
+          <th>
+            <i class="fa-sharp fa-solid fa-plane-circle-check"></i> Airport
+          </th>
+          <th>
+            <i class="fa-brands fa-bandcamp"></i> Airline
+          </th>
+          <th>
+            <i class="fa-sharp fa-solid fa-money-check-dollar"></i> Price (MAD)
+          </th>
+          <th>
+            <i class="fa-regular fa-seat-airline"></i> Seats
+          </th>
           <th></th>
         </tr>
       </thead>
@@ -22,17 +38,16 @@
         <tr v-for="flight in flights" :key="flight.id">
           <td class="flight-name">{{ flight.flight_name }}</td>
           <td class="flight-date">{{ flight.date }}</td>
-          <td class="from-to">{{ flight.from }}</td>
-          <td class="from-to">{{ flight.to }}</td>
-          <td class="airport">{{ flight.airport }}</td>
+          <td class="from-to">{{ flight.from_city }}</td>
+          <td class="from-to">{{ flight.to_city }}</td>
+          <td class="airport">{{ flight.from_airport }}</td>
           <td class="airline">{{ flight.airline }}</td>
           <td class="price">
             <b>{{flight.price}}</b>
           </td>
-          <td class="seats">{{flight.number_of_seats }}</td>
+          <td class="seats">{{flight.number_of_seats}}</td>
           <td class="seats">
             <i @click="deleteFlight(flight.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
-            <!-- <i class="fa-sharp fa-solid fa-circle-plus text-success"></i> -->
             <i @click="upDateFlight(flight.id)" class="fa-solid fa-pen-to-square mx-1 text-primary"></i>
           </td>
         </tr>
@@ -42,7 +57,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex"; 
+import { mapState, mapActions } from "vuex";
 import { toRaw } from "vue";
 
 export default {
@@ -52,12 +67,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["flightData", "removeFlightFromDb", "editFlightData"]), 
-    deleteFlight(id){
-      this.removeFlightFromDb(id) ;
-    } , 
-    upDateFlight(id){
-        this.editFlightData(id) ;
+    ...mapActions(["flightData", "removeFlightFromDb", "editFlightData"]),
+    deleteFlight(id) {
+      this.removeFlightFromDb(id);
+    },
+    upDateFlight(id) {
+      this.editFlightData(id);
     }
   },
   computed: {
@@ -65,12 +80,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch("flightData");
+  },
+  updated(){
+    console.log(this.flights[this.flights.length -1]);
   }
 };
 </script>
 
 <style scoped>
-
 /* .tableContainer {
   border: 2px solid red;
   max-height: 80vh;
@@ -126,7 +143,7 @@ tr:hover {
   background-color: rgba(153, 223, 247, 0.732);
   color: darkblue;
 }
-i{
+i {
   cursor: pointer;
 }
 </style>

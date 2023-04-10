@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4 parent">
+  <div class="container p-0 mt-4 parent">
     <img src="../assets/images/sahara.jpeg" alt srcset />
     <div class="child">
       <h3>Your Next Trip start here :</h3>
@@ -20,7 +20,7 @@ import TES from "../assets/images/sahara.jpeg";
 export default {};
 </script>
 
-<style>
+<style scoped>
 .parent {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -32,7 +32,7 @@ export default {};
 }
 .child {
   margin-top: 2rem;
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
 }
 .child b,
 small {

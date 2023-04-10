@@ -9,7 +9,7 @@ const store = createStore({
         showTicket: false,
         flights: [],
         searchedFlights: [],
-        isAdmin : true
+        isAdmin : false
     },
     getters: {
         showSignUp: state => state.showSignUp,
@@ -26,7 +26,12 @@ const store = createStore({
             return `${month} ${day} ${hours} ${minutes}`;
         },
         showTicket: state => state.showTicket, 
-        isAdmin : state => state.isAdmin
+        isAdmin : state => state.isAdmin, 
+        getFlightImage(state){
+            // return state.flights.map(flight => flight.from_image) ;
+            // console.log(state.flights) ;
+
+        }
 
     },
     mutations: {

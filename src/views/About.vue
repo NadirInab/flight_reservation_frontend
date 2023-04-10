@@ -15,6 +15,7 @@
         </small>
       </div>
     </div>
+
     <Cards />
   </header>
 </template>
@@ -37,7 +38,6 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  /* background-image: url("https://assets.wego.com/image/upload/c_fill,fl_los…_auto,w_2560/v1597920829/web/hero_images/ma_1.jpg"); */
   position: relative;
   height: 100vh;
   padding-top: 0px;
@@ -49,15 +49,15 @@ export default {
 .child {
   position: absolute;
   top: 40%;
-  left: 45%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
   color: #fff;
 }
 .child h1 {
-  font-size: 3rem;
+  font-size: 4rem;
 }
 .child small {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 </style>

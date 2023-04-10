@@ -7,27 +7,31 @@
           <label for="from">
             <i class="fa-solid fa-plane-departure"></i> From
           </label>
-          <select id="from" v-model="from" name>
+          <select id="from" v-model="from_city" name>
             <option
               v-for="flight in flights"
               :key="flight.id"
-              :value="flight.from"
-            >{{ flight.from }}</option>
+              :value="flight.from_city"
+            >{{ flight.from_city }}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="to">
             <i class="fa-solid fa-plane-arrival"></i> To
           </label>
-          <select id="from" v-model="to" name>
-            <option v-for="flight in flights" :key="flight.id" :value="flight.to">{{ flight.to }}</option>
+          <select id="from" v-model="to_city" name>
+            <option
+              v-for="flight in flights"
+              :key="flight.id"
+              :value="flight.to_city"
+            >{{ flight.to_city }}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="date">
             <i class="fa-solid fa-calendar-days"></i> Date
           </label>
-          <input type="date" id="date" v-model="date" v-bind:min="minDate" required />
+          <input type="date" id="date" v-model="date" required />
         </div>
         <div class="form-group">
           <label for="seats">
@@ -49,39 +53,34 @@ import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      from: "rabat",
-      to: "agadir",
+      from_city: "Port Marquesborough",
+      to_city: "Lesliehaven",
       date: "",
-      seats: 1, 
-      selectedDate: null,
+      seats: 1,
+      selectedDate: null
     };
   },
   computed: {
     ...mapState(["searchedFlights"]),
     ...mapGetters(["getSearchedFlight"]),
-     minDate() {
-      const today = new Date().toISOString().split('T')[0];
-      return today;
-    }
+    ...mapState(["flights"])
   },
   methods: {
     ...mapActions(["flightData", "getFlightDataFromTo"]),
     searchFlights() {
       const data = {
-        from: this.from,
-        to: this.to,
+        from_city: this.from_city,
+        to_city: this.to_city,
         date: this.date,
         seats: this.seats
       };
+      // console.log(data);
       this.getFlightDataFromTo(data);
     }
   },
-  computed: {
-    ...mapState(["flights"])
-  },
   mounted() {
-    // ...mapActions(["flightData']) ;
     this.$store.dispatch("flightData");
+    console.log(this.getSearchedFlight) ;
   }
 };
 </script>
@@ -89,7 +88,6 @@ export default {
 <style >
 @import url("https://fonts.googleapis.com/css2?family=Petrona:ital,wght@1,300;1,400&display=swap");
 .flight-reservation {
-  /* border: 2px solid red; */
   background-color: lightblue;
   height: 30rem;
   padding: 30px;

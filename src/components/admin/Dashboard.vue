@@ -20,7 +20,7 @@
       <router-view></router-view>
       <Statistics />
       <Users />
-      <!-- <Flights /> -->
+      <Flights />
       <Profile />
     </div>
   </div>

@@ -32,6 +32,7 @@ export default {
 <style scoped>
 .card1 {
   display: flex;
+  flex-wrap: nowrap;
   margin-bottom: 20px;
   background-color: #ffffff;
   border-radius: 5px;
@@ -52,6 +53,10 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.card-image img:hover {
+  opacity: 0.8;
 }
 .card-content {
   width: 150px;

@@ -8,24 +8,27 @@
           <input class="form-input" type="text" id="flight_name" v-model="flight_name" />
         </div>
         <div class="form-group">
-          <label class="form-label1" for="from">From</label>
-          <input class="form-input" type="text" id="from" v-model="from" />
+          <label class="form-label1" for="from">From City</label>
+          <input class="form-input" type="text" id="from" v-model="from_city" />
         </div>
 
         <div class="form-group">
           <label class="form-label1" for="price">Price</label>
           <input class="form-input" type="number" id="price" v-model="price" />
         </div>
+        <div class="form-group">
+          <label class="form-label1" for="price">To City</label>
+          <input class="form-input" type="number" id="price" v-model="to_city" />
+        </div>
       </div>
-
       <div>
         <div class="form-group">
-          <label class="form-label1" for="airport">Airport</label>
-          <input class="form-input" type="text" id="airport" v-model="airport" />
+          <label class="form-label1" for="airport">From Airport</label>
+          <input class="form-input" type="text" id="airport" v-model="from_airport" />
         </div>
         <div class="form-group">
-          <label class="form-label1" for="to">To</label>
-          <input class="form-input" type="text" id="to" v-model="to" />
+          <label class="form-label1" for="to">To Airport</label>
+          <input class="form-input" type="text" id="to" v-model="to_airport" />
         </div>
 
         <div class="form-group">
@@ -41,8 +44,12 @@
 
       <div>
         <div class="form-group">
-          <label class="form-label1" for="image">Image</label>
-          <input class="form-input" type="text" id="image" v-model="image" />
+          <label class="form-label1" for="image">From Image</label>
+          <input class="form-input" type="file" id="image" @change="onFileSelected" />
+        </div>
+        <div class="form-group">
+          <label class="form-label1" for="image">To Image</label>
+          <input class="form-input" type="file" id="image" @change="onFileSelected2" />
         </div>
 
         <div class="form-group">
@@ -52,7 +59,7 @@
 
         <div class="form-group">
           <label class="form-label1" for="number_of_seats">Number of Seats</label>
-          <input class="form-input" type="number" id="number_of_seats" v-model="number_of_seats" />
+          <input class="form-input" type="number" id="number_of_seats" v-model="seats" />
         </div>
       </div>
 
@@ -69,57 +76,64 @@ export default {
   data() {
     return {
       flight_name: "",
-      airport: "",
-      from: "",
-      to: "",
+      from_city: "",
+      to_city: "",
+      from_airport: "",
+      to_airport: "",
+      from_image: "",
+      to_image: "",
       date: "",
       airline: "",
       aircraft: "",
-      image: "",
       price: "",
-      number_of_seats: ""
+      seats: ""
     };
   },
   methods: {
     ...mapActions(["addFlight"]),
+    onFileSelected(event) {
+      this.from_image = event.target.files[0];
+    },
+    onFileSelected2(event) {
+      this.to_image = event.target.files[0];
+      console.log(this.to_image);
+    },
+    toFormData() {
+      const formData = new FormData();
+      formData.append("flight_name", this.flight_name);
+      formData.append("from_city", this.from_city);
+      formData.append("to_city", this.to_city);
+      formData.append("from_airport", this.from_airport);
+      formData.append("to_airport", this.to_airport);
+      formData.append("date", this.date);
+      formData.append("aircraft", this.aircraft);
+      formData.append("airline", this.airline);
+      formData.append("price", this.price);
+      formData.append("seats", this.seats);
+      formData.append("to_image", this.to_image);
+      formData.append("from_image", this.from_image);
+      return formData;
+    },
     submitForm() {
-      let myDate = new Date(this.date) ;
-      // let theDate = date('Y-m-d H:i:s', strtotime(myDate)) ;
-       const formattedDate = myDate.toISOString().slice(0, 19).replace('T', ' ') ;
-       console.log(formattedDate) ;
-      const flightData = {
-        flight_name: this.flight_name,
-        airport: this.airport,
-        from: this.from,
-        to: this.to,
-        date: formattedDate,
-        airline: this.airline,
-        aircraft: this.aircraft,
-        image: this.image,
-        price: this.price,
-        number_of_seats: this.number_of_seats
-      };
-      this.addFlight(flightData);
+      this.addFlight(this.toFormData());
     }
   }
 };
 </script>
 <style scoped>
 form {
-  /* border: 2px solid red; */
   display: grid;
   width: 75%;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
-  /* margin: 100px 0 0 200px; */
 }
 .form-group {
   margin: 0 5px 5px 0;
   background-color: white;
 }
 button {
-  grid-column: 1 / -1; /* Make button span both columns */
-  justify-self: center; /* Center button horizontally */
-  align-self: center; /* Center button vertically */
+  grid-column: 1 / -1;
+  justify-self: center;
+  align-self: center;
 }
 </style>
