@@ -1,23 +1,28 @@
 <template>
   <section class="container1">
     <div class="image-container">
-      <img src="../assets/images/Marra.jpg" alt="Image 1" />
-      <img src="../assets/images/roma.jpg" alt="Image 2" />
+      <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />
     </div>
     <div class="container bg-white image-container2">
-      <img src="../assets/images/Agadir.jpg" alt="Image 1" />
-      <img src="../assets/images/sahara.jpeg" alt="Image 2" />
-      <img src="../assets/images/Tanger.jpg" alt="Image 2" />
-      <img src="../assets/images/Agadir.jpg" alt="Image 1" />
-      <img src="../assets/images/sahara.jpeg" alt="Image 2" />
-      <img src="../assets/images/Tanger.jpg" alt="Image 2" />
+            <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />
+
+
     </div>
   </section>
 </template>
 
 <script>
 // import tes from "../assets/images"
-export default {};
+import {mapGetters, mapState, mapActions} from "vuex";
+export default {
+  computed : {
+    ...mapGetters(["getFlightImage"]),
+    // ...mapState(["flights"])
+  },
+  mounted(){
+    console.log(this.getFlightImage)
+  }
+};
 </script>
 
 <style scoped>

@@ -4,7 +4,8 @@
     <div class="row">
     <!-- loop over the ticket of the same day ==> i it's pretty easy .  -->
       <article :key="ticket" v-for="ticket in getSearchedFlight" v-if="getSearchedFlight" class="card fl-left">
-        <h4 class="text-center">{{ticket.flight_name}} </h4>
+        <h4 class="text-center text-dark">{{authUser.name}} </h4>
+        <!-- <h4 class="text-center">{{ticket.flight_name}} </h4> -->
         <section class="date">
           <time>
             <span>{{formattedDate.split(" ")[0]}}</span>
@@ -61,11 +62,12 @@ export default {
   },
   computed: {
     ...mapGetters(["getSearchedFlight", "formattedDate"]),
-    ...mapState(["searchedFlights"])
+    ...mapState(["searchedFlights", "authUser"])
   },
   methods: {},
   updated() {
-    console.log(this.getSearchedFlight);
+    // console.log(this.getSearchedFlight);
+    // console.log(thgetSearchedFlight) ;
     // console.log(this.formattedDate) ;
   }, 
   components : {
@@ -80,7 +82,7 @@ export default {
 .ticketContainer {
   width: 90%;
   height: fit-content;
-  margin: 30px auto;
+  margin: 20px auto;
 }
 .fl-left {
   float: left;
@@ -105,7 +107,7 @@ h1 {
 .card {
   border: 3px solid green;
   display: table-row;
-  width: 50%;
+  width: 70%;
   background-color: #fff;
   color: #989898;
   margin-bottom: 20px auto;
@@ -128,7 +130,7 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  font-size: 1em;
+  font-size: 0.8em;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -136,9 +138,10 @@ h1 {
 
 .date time span {
   display: block;
+  margin: 10px;
 }
 
-.date time span:first-child {
+.date time span {
   color: #2b2b2b;
   font-weight: 600;
   font-size: 250%;
