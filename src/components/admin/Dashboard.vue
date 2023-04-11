@@ -1,4 +1,3 @@
-
 <template>
   <div class="admin-dashboard">
     <div class="sidebar">
@@ -19,7 +18,7 @@
     <div class="content">
       <router-view></router-view>
       <Statistics />
-      <Users />
+      <Users :users="users" />
       <Flights />
       <Profile />
     </div>
@@ -27,6 +26,7 @@
 </template>
 
 <script>
+import {mapActions, mapState, mapGetters} from "vuex" ;
 import Statistics from "./Statistics.vue";
 import Users from "./Users.vue";
 import Flights from "../../views/Flights.vue";
@@ -37,9 +37,19 @@ export default {
     Flights,
     Profile,
     Users
+  }, 
+  computed : {
+    ...mapActions(["getUsers"]), 
+    ...mapState(["users"])
+  }, 
+  mounted(){
+    console.log("hee") ;
+    console.log(this.users) ;
+    console.log("first") ;
   }
 };
 </script>
+
 <style scoped>
 .admin-dashboard {
   display: flex;

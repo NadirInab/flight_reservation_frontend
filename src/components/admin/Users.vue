@@ -2,7 +2,7 @@
   <div class="container pt-4 mt-4">
     <div class="d-flex justify-content-between w-100">
       <h3>Users</h3>
-      <input type="search" placeholder="Search..." class="search-input mx-2" />
+      <input type="search" placeholder="Search..." v-model="searchQuery" class="search-input mx-2" />
     </div>
     <table>
       <thead>
@@ -14,23 +14,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>John Smith</td>
-          <td>john@example.com</td>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jane Doe</td>
-          <td>jane@example.com</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Bob Johnson</td>
-          <td>bob@example.com</td>
-          <td>2</td>
+        <tr v-for="user in users" :key="user.id">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
         </tr>
       </tbody>
     </table>
@@ -38,7 +25,37 @@
 </template>
 
 <script>
-export default {};
+import {mapActions, mapState, mapGetters} from "vuex" ;
+
+export default {
+  data() {
+    return {
+      searchQuery: ""
+    };
+  },
+  props: {
+    users: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    // ...mapActions(["getUsers"]),
+    // ...mapState(["users"]),
+    filteredUsers() {
+      if (!this.searchQuery) {
+        return this.users;
+      } else {
+        return this.users.filter(user => {
+          return (
+            user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+            user.email.toLowerCase().includes(this.searchQuery.toLowerCase())
+          );
+        });
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
