@@ -66,8 +66,9 @@ export default {
 .goSignUp {
   cursor: pointer;
 }
+
 form {
-  max-width: 450px;
+  max-width: 40%;
   /* width: 100%; */
   margin: 100px auto;
   padding: 20px;
@@ -77,7 +78,6 @@ form {
   animation: fadein 1s ease-out;
 }
 
-/* Add animation for form fade-in effect */
 @keyframes fadein {
   from {
     opacity: 0;

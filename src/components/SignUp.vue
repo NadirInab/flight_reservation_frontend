@@ -130,6 +130,8 @@ export default {
           console.log(response);
           this.$router.push("/");
           localStorage.setItem("auth_token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          // console.log(first)
         })
         .catch(error => {
           console.log(error.response.data);

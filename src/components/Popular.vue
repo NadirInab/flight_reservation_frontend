@@ -1,7 +1,8 @@
 <template>
   <div class="image-container">
     <img :src="image" alt="your-image-alt" />
-    <!-- <h2 class="image-title">{{cityName}}</h2> -->
+    <h2 class="image-title">{{cityName}}</h2>
+    <h2 class="image-title">CasaBlanca</h2>
   </div>
 </template>
 

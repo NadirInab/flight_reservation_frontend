@@ -8,7 +8,7 @@
       <span class="navbar__toggle-icon"></span>
       </button>-->
       <ul class="navbar__menu">
-        <li>
+        <li v-if="isAdmin">
           <router-link to="/admin">Admin</router-link>
         </li>
         <li>
@@ -26,7 +26,7 @@
         </li>
         <!-- <li>
           <router-link to="/About">Stories</router-link>
-        </li> -->
+        </li>-->
         <li>
           <router-link to="/Sign">
             <i class="fa-sharp fa-solid fa-user"></i> Sign Up
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -60,6 +62,9 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
+  },
+  computed: {
+    ...mapGetters(["isAdmin"])
   }
 };
 </script>
