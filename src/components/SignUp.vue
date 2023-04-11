@@ -78,7 +78,11 @@ export default {
       passwordConfirmationError: ""
     };
   },
-  computed: {},
+  computed: {
+    inputType() {
+      return this.showPassword ? "text" : "password";
+    }
+  },
   methods: {
     handleClick() {
       this.$store.commit("showSignUp");
@@ -127,11 +131,9 @@ export default {
           password_confirmation: this.password_confirmation
         })
         .then(response => {
-          console.log(response);
           this.$router.push("/");
           localStorage.setItem("auth_token", response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data.user));
-          // console.log(first)
         })
         .catch(error => {
           console.log(error.response.data);

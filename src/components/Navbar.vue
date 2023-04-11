@@ -4,9 +4,9 @@
       <div class="navbar__brand">
         <a href="#">Flights</a>
       </div>
-      <!-- <button class="navbar__toggle" @click="toggleNav">
+      <button class="navbar__toggle" @click="toggleNav">
       <span class="navbar__toggle-icon"></span>
-      </button>-->
+      </button>
       <ul class="navbar__menu">
         <li v-if="isAdmin">
           <router-link to="/admin">Admin</router-link>
@@ -24,12 +24,15 @@
         <li>
           <router-link to="/About">Destinations</router-link>
         </li>
-        <!-- <li>
-          <router-link to="/About">Stories</router-link>
-        </li>-->
-        <li>
+        <li v-if="!isLoggedIn">
           <router-link to="/Sign">
             <i class="fa-sharp fa-solid fa-user"></i> Sign Up
+          </router-link>
+        </li>
+        <li @click="SignOut" v-if="isLoggedIn">
+          <router-link to="/">
+            SignOut
+            <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
           </router-link>
         </li>
       </ul>
@@ -39,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -54,7 +57,8 @@ export default {
     },
     handleScroll() {
       this.isFixed = window.pageYOffset > 0;
-    }
+    },
+    ...mapActions(["SignOut"])
   },
   components: {},
   mounted() {
@@ -64,7 +68,10 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   computed: {
-    ...mapGetters(["isAdmin"])
+    ...mapGetters(["isAdmin"]),
+    isLoggedIn() {
+      return localStorage.getItem("user") !== null;
+    }
   }
 };
 </script>
@@ -91,11 +98,10 @@ header {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .fixed-navbar ul li a {
-  color: #f3bb20;
+  color: #e4edf1;
 }
 .hero-section {
   height: 100vh;
@@ -121,9 +127,6 @@ header {
 }
 
 .navbar__menu li {
-  /* color: #ff6e31; */
-  box-shadow: 1.5px 1px 1px 0px;
-  padding: 5px;
   margin: rgb(1, 94, 77);
   padding: 10px;
   transition: transform 0.5s ease;

@@ -1,15 +1,18 @@
 import { createStore } from "vuex";
 import axios from "axios";
 import Flights from "../Api/Flight";
+import User from "../Api/User";
 
 
 const store = createStore({
     state: {
+        authUser : JSON.parse(localStorage.getItem("data")),
+        isAdmin : false,
+        users : [],
         showSignUp: true,
         showTicket: false,
         flights: [],
         searchedFlights: [],
-        isAdmin : false
     },
     getters: {
         showSignUp: state => state.showSignUp,
@@ -28,10 +31,9 @@ const store = createStore({
         showTicket: state => state.showTicket, 
         isAdmin : state => state.isAdmin, 
         getFlightImage(state){
-            let images = state.flights.slice((state.flights.length -15), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`) ;
+            let images = state.flights.slice((state.flights.length - 5), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`) ;
             let from_city = state.flights.slice((state.flights.length -15), state.flights.length).map(flight => flight.from_city) ;
-            // console.log(from_city);
-            return [images, from_city] ;
+            return images  ;
         }
 
     },
@@ -64,6 +66,14 @@ const store = createStore({
         },
         showTicket(state) {
             state.showTicket = true;
+        }, 
+
+        // Admin routes : 
+        setUsers(state, data){
+            state.users = data
+        }, 
+        outUser(state, data){
+            state.authUser = data
         }
     },
     actions: {
@@ -107,14 +117,27 @@ const store = createStore({
         editFlightData({ commit }, id) {
             axios.put(`http://127.0.0.1:8000/api/flights/${id}`)
                 .then(response => {
-                    // console.log(id)
-                    // commit('updatedflightTable')
+    
                 })
-        }
+        }, 
+
+        // Admin 
+        getUsers({commit}){
+            User.all()
+            .then(res => {
+                commit('setUsers', res.data.users) ;
+            }).catch(err => {
+                console.log(err.res.data) ;
+            })
+        }, 
+
+
+        // sign Out
+        SignOut({ commit }) {
+            localStorage.clear() ;
+            commit('outUser', null);
+          },
     },
-
-
-
     modules: {
 
     }
