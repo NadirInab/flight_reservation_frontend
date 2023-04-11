@@ -7,23 +7,16 @@
     </div>
     <section class="popular p-4">
       <h3>Popular Destinations :</h3>
-      <div class="container first">
-        <Popular v-for="(image, index) in this.getFlightImage" :key="index" :image="image"  />
-        <!-- :cityName="image.title" -->
+      <div class="container first bg-white">
+        <Popular v-for="(image, index) in this.getFlightImage[0]" :key="index" :image="image"  />
+        <!-- :cityName="image.title" :cityName="this.getFlightImage[1]" -->
       </div>
-      <h1>Heelo</h1>
-      <img :src="this.getFlightImage[this.getFlightImage.length -1]" alt="image">
       <MiniCard />
     </section>
   </header>
 </template>
 
 <script>
-import rabat from "../assets/images/rabat.jpg";
-import Agadir from "../assets/images/Agadir.jpg";
-import Tanger from "../assets/images/Tanger.jpg";
-import Roma from "../assets/images/roma.jpg";
-
 import MiniCard from "../components/MiniCard.vue";
 import Hero from "../components/Hero.vue";
 import Ticket from "../components/Ticket.vue";
@@ -33,7 +26,8 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-     images : []
+     images : [], 
+     titles : []
     };
   },
   components: {
@@ -47,8 +41,10 @@ export default {
     ...mapGetters(["showTicket", "getFlightImage"]), 
   }, 
   mounted() {
-    // console.log(this.getFlightImage[this.getFlightImage.length -1]) ;
-    this.getFlightImage ;
+    this.images = this.getFlightImage[0] ;
+    this.titles = this.getFlightImage[1] ;
+    let user = JSON.parse(localStorage.getItem('user')) ;
+    // console.log(user) ;
   }
 };
 </script>
