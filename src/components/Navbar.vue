@@ -6,7 +6,7 @@
       </div>
       <!-- <button class="navbar__toggle" @click="toggleNav">
       <span class="navbar__toggle-icon"></span>
-      </button> -->
+      </button>-->
       <ul class="navbar__menu">
         <li v-if="isAdmin">
           <router-link to="/admin">Admin</router-link>
@@ -29,9 +29,13 @@
             <i class="fa-sharp fa-solid fa-user"></i> Sign Up
           </router-link>
         </li>
-        <li @click="SignOut" v-if="isLoggedIn">
+        <li v-if="isLoggedIn">
+          <Avatar :email="email" />
+        </li>
+
+        <li class="out" @click="SignOut" v-if="isLoggedIn">
           <router-link to="/">
-            SignOut
+            <!-- SignOut -->
             <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
           </router-link>
         </li>
@@ -43,12 +47,14 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Avatar from "../components/Avatar.vue";
 
 export default {
   data() {
     return {
       isNavOpen: false,
-      isFixed: false
+      isFixed: false, 
+      email: 'example@email.com'
     };
   },
   methods: {
@@ -60,7 +66,9 @@ export default {
     },
     ...mapActions(["SignOut"])
   },
-  components: {},
+  components: {
+    Avatar
+  },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
@@ -77,6 +85,10 @@ export default {
 </script>
 
 <style scoped>
+.out:hover {
+  content: "SignOut";
+  border :2px solid red;
+}
 header {
   padding: 0;
 }
