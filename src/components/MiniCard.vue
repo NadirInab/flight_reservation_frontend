@@ -25,7 +25,6 @@ export default {};
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  /* border: 2px solid red; */
   justify-content: space-evenly;
   font-style: italic;
   background-color: antiquewhite;
@@ -41,5 +40,11 @@ small {
 .parent img {
   width: 100%;
   height: 200px;
+}
+
+@media only screen and (max-width: 830px) {
+  .parent {
+    display: none;
+  }
 }
 </style>

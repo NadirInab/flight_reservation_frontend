@@ -1,9 +1,6 @@
 <template>
   <div class="hero">
-    <!-- <video autoplay muted loop class="hero-video">
-      <source src="/path/to/video.mp4" type="video/mp4">
-    </video>-->
-    <div class="hero-overlay"></div>
+    <!-- <div class="hero-overlay"></div> -->
     <div class="hero-content">
       <h1 class="hero-title">Fly with us</h1>
       <p class="hero-subtitle">Book your next flight today</p>
@@ -46,22 +43,6 @@ h1 {
   border-left: 15px solid #fec500;
   padding-left: 10px;
 }
-.hero-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 
 .hero-content {
   position: absolute;
@@ -99,5 +80,28 @@ h1 {
 }
 .hero-button:hover {
   background-color: #0056b3;
+}
+@media only screen and (max-width: 830px) {
+  .hero {
+    height: 50vh;
+    background-image: url("../assets/images/theflight.jpg");
+    overflow: hidden;
+    width: 100vw;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 3px solid lightcoral;
+  }
+  .hero-content {
+    padding: 30px;
+  }
+  .hero-content h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+  }
+  .hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
 }
 </style>

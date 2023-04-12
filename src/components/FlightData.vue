@@ -1,9 +1,11 @@
 <template>
   <div class="tableContainer">
-    <h3>
-      <!-- Where do you want to go? -->
-      <i class="fa-solid fa-earth-americas fa-bounce"></i>
-    </h3>
+    <div v-if="!isAdmin" class="container bg-white">
+      <h3>
+        Where do you want to go?
+        <i class="fa-solid fa-earth-americas fa-bounce"></i>
+      </h3>
+    </div>
     <table>
       <thead>
         <tr>
@@ -46,7 +48,7 @@
             <b>{{flight.price}}</b>
           </td>
           <td class="seats">{{flight.number_of_seats}}</td>
-          <td class="seats">
+          <td v-if="isAdmin" class="seats">
             <i @click="deleteFlight(flight.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
             <i @click="upDateFlight(flight.id)" class="fa-solid fa-pen-to-square mx-1 text-primary"></i>
           </td>
@@ -57,7 +59,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import { toRaw } from "vue";
 
 export default {
@@ -76,8 +78,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(["flights"])
-  },
+    ...mapState(["flights"]),
+    ...mapGetters(["isAdmin"])
+  }
 };
 </script>
 
@@ -109,36 +112,41 @@ table {
   }
 }
 th {
-  color: rgb(36, 17, 17);
+  color: rgb(249, 237, 237);
   padding: 8px;
   text-align: center;
   font-weight: bold;
-  background-color: rgba(85, 201, 255, 0.63);
+  background-color: rgba(1, 27, 39, 0.749);
+}
+tr:first-child {
+  background-color: #f6cccc6e;
+}
+
+tr:nth-child(2n + 1) {
+  background-color: #384f5c79;
 }
 
 td {
   padding: 8px;
-  border-bottom: 1px dashed #000b5c;
+  border-bottom: 1px dashed #055890;
   text-align: center;
   transition: background-color 0.3s ease;
-}
-tr,
-td {
-  background-color: whitesmoke;
-}
-
-tr:last-child td {
-  border-bottom: none;
 }
 
 th:hover,
 td:hover,
 tr:hover {
-  background-color: rgba(153, 223, 247, 0.732);
+  background-color: rgba(1, 69, 91, 0.384);
   color: darkblue;
 }
 i {
   cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+  th,
+  td {
+    padding: 5px;
+  }
 }
 </style>
 
