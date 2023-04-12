@@ -4,55 +4,31 @@
       <h1>Make your Tours Amazing with us !!</h1>
       <Slider />
     </div>
-    <!--     
+        
     <div class="container bg-white">
       <Card
-        v-for="(image, index) in images"
+        v-for="(flight, index) in this.flights"
         :key="index"
-        :title="image.title"
-        :price="index"
-        :imageUrl="image.src"
+        :title="flight.to_city"
+        :price="flight.price"
+        :imageUrl="flight.to_image"
       />
-    </div>-->
+    </div>
   </header>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex" ;
-import rabat from "../assets/images/rabat.jpg";
-import Agadir from "../assets/images/Agadir.jpg";
-import Tanger from "../assets/images/Tanger.jpg";
 import Slider from "./Slider.vue";
 import Card from "./Card.vue";
 export default {
-  data() {
-    return {
-      images: [
-        {
-          title: "rabat",
-          src: rabat
-        },
-        {
-          title: "Tanger",
-          src: Tanger
-        },
-        {
-          title: "Agadir",
-          src: Agadir
-        }
-      ]
-    };
-  },
   components: {
     Card,
     Slider
   }, 
   computed:{
-    ...mapState(["flights"]) 
+    ...mapState(["flights"]) , 
   }, 
-  mounted(){
-    // console.log(this.getFlightImage) ;
-  }
 };
 </script>
 

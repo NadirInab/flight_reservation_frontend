@@ -1,27 +1,24 @@
 <template>
-  <section class="container1">
+  <section class="container bg-white">
     <div class="image-container">
-      <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />
+      <img v-for="(flight, index ) in filteredItems" :key="index" :src="flight" alt="Image 1" />
     </div>
     <div class="container bg-white image-container2">
-            <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />
-
-
+      <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />
     </div>
   </section>
 </template>
 
 <script>
 // import tes from "../assets/images"
-import {mapGetters, mapState, mapActions} from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 export default {
-  computed : {
-    ...mapGetters(["getFlightImage"]),
-    // ...mapState(["flights"])
+  computed: {
+    ...mapGetters(["getFlightImage"]) ,
+    filteredItems() {
+      return this.getFlightImage.slice(0, 5);
+    }
   },
-  mounted(){
-    console.log(this.getFlightImage)
-  }
 };
 </script>
 
@@ -49,7 +46,8 @@ export default {
   border-radius: 10px;
 }
 
-.image-container:hover, .image-container2 img:hover {
+/* .image-container:hover, */
+.image-container img:hover {
   opacity: 0.8;
 }
 </style>

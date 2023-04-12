@@ -5,6 +5,7 @@
     </div>
     <div class="card-content">
       <h3 class="card-title">{{ title }}</h3>
+      <h3 class="card-title mt-2">{{ price }} MAD</h3>
     </div>
   </div>
 </template>
@@ -20,8 +21,8 @@ export default {
       type: String,
       required: true
     },
-    date: {
-      type: String,
+    price: {
+      type: Number,
       required: true
     }
   },
@@ -44,12 +45,14 @@ export default {
   scale: 1.01;
 }
 .card-image {
+  position: relative;
   width: 200px;
   height: 150px;
   border-radius: 5px 0 0 5px;
   overflow: hidden;
 }
 .card-image img {
+  position: relative;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -64,11 +67,11 @@ export default {
   padding: 10px;
 }
 .card-title {
-  margin-top: 0;
-  margin-bottom: 5px;
+  margin-top: 10px 0px;
   font-size: 18px;
   font-weight: bold;
-  color: #333333;
+  color: #240099;
+  
 }
 .card-date {
   margin: 0;
