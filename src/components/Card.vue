@@ -22,7 +22,7 @@ export default {
       required: true
     },
     price: {
-      type: Number,
+      type: String,
       required: true
     }
   },
@@ -30,7 +30,8 @@ export default {
   computed: {
     getImageUrl() {
       return `http://localhost:8000/images/${this.imageUrl}`;
-    }
+    }, 
+    
   }
 };
 </script>

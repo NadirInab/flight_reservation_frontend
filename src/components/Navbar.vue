@@ -53,8 +53,8 @@ export default {
   data() {
     return {
       isNavOpen: false,
-      isFixed: false, 
-      email: 'example@email.com'
+      isFixed: false,
+      email: "example@email.com"
     };
   },
   methods: {
@@ -87,7 +87,7 @@ export default {
 <style scoped>
 .out:hover {
   content: "SignOut";
-  border :2px solid red;
+  border: 2px solid red;
 }
 header {
   padding: 0;
@@ -100,7 +100,12 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: transparent;
+  background: rgba(240, 240, 240, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   z-index: 1;
   border-bottom: 1px solid lightblue;
 }
@@ -109,7 +114,6 @@ header {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  /* border: 1px solid rgba(255, 255, 255, 0.18); */
 }
 .fixed-navbar ul li a {
   color: #e4edf1;

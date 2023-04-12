@@ -1,6 +1,6 @@
 <template>
   <header class="avatarContainer">
-    <!-- <b class="mx-2">{{userName.name}}</b> -->
+    <b class="mx-2">{{userName.name}}</b>
     <div class="avatar">
       <img :src="avatarUrl" :size="80" />
     </div>
