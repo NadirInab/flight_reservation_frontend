@@ -1,10 +1,13 @@
 <template>
-  <div class="tableContainer">
+  <div class="tableContainer pt-4">
     <div v-if="!isAdmin" class="container bg-white">
       <h3>
         Where do you want to go?
         <i class="fa-solid fa-earth-americas fa-bounce"></i>
       </h3>
+    </div>
+    <div v-else>
+      <button @click="showForm" class="btn btn-success mx-4 mb-3">Add Flight</button>
     </div>
     <table>
       <thead>
@@ -70,11 +73,15 @@ export default {
   },
   methods: {
     ...mapActions(["flightData", "removeFlightFromDb", "editFlightData"]),
+    ...mapState(["showForm"]),
     deleteFlight(id) {
       this.removeFlightFromDb(id);
     },
     upDateFlight(id) {
       this.editFlightData(id);
+    },
+    showForm() {
+      this.showForm = !this.showForm
     }
   },
   computed: {

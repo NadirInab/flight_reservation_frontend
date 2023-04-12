@@ -20,6 +20,7 @@
       <Statistics />
       <Users />
       <Flights />
+      <Tickets />
       <Profile />
     </div>
   </div>
@@ -31,6 +32,7 @@ import Statistics from "./Statistics.vue";
 import Users from "./Users.vue";
 import Flights from "../../views/Flights.vue";
 import Profile from "./Profile.vue";
+import Tickets from "./Tickets.vue";
 export default {
   data(){
     return {
@@ -41,7 +43,8 @@ export default {
     Statistics,
     Flights,
     Profile,
-    Users
+    Users, 
+    Tickets
   }, 
   computed : {
   }, 

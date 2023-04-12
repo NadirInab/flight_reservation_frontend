@@ -60,16 +60,13 @@ export default {
 
     filteredUsers() {
       console.log(this.searchQuery);
-      console.log("helo") ;
     //    const filteredItems = this.users.filter(item => {
     //   return item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     // })
     },
     
     deleteUser(id) {
-      // console.log(id) ;
-      // const userId = id ;
-      this.removeUserFromDb(userId);
+      this.removeUserFromDb(id);
     }
   }
 };

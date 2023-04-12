@@ -43,7 +43,7 @@
             <b class="mx-4 p-2">Arrival : {{ticket.to}}</b>
           </div>
 
-            <router-link class="bg-danger text-white" :to="{ name: 'Payement' }">Book tickets</router-link>
+            <router-link @click="bookTheTicket(ticket.id)" class="bg-danger text-white" :to="{ name: 'Payement' }">Book tickets</router-link>
         </section>
       </article>
     </div>
@@ -62,16 +62,23 @@ export default {
   },
   computed: {
     ...mapGetters(["getSearchedFlight", "formattedDate"]),
-    ...mapState(["searchedFlights", "authUser"])
+    ...mapState(["searchedFlights", "authUser"]), 
+    ...mapActions(["bookTicket"])
   },
-  methods: {},
-  updated() {
-    // console.log(this.getSearchedFlight);
-    // console.log(thgetSearchedFlight) ;
-    // console.log(this.formattedDate) ;
+  methods: {
+    bookTheTicket(id){
+      let ticketData = {
+        flight_id : id, 
+        user_id : this.authUser.id
+      };
+      this.$store.dispatch("bookTicket", ticketData) ;
+    }
   }, 
   components : {
      'router-link': RouterLink
+  }, 
+  mounted(){
+    // console.log(this.getSearchedFlight);
   }
 };
 </script>

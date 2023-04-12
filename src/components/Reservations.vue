@@ -80,7 +80,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("flightData");
-    console.log(this.flights)
   }
 };
 </script>
