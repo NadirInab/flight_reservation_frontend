@@ -31,7 +31,7 @@ const store = createStore({
         showTicket: state => state.showTicket, 
         isAdmin : state => state.isAdmin, 
         getFlightImage(state){
-            let images = state.flights.slice((state.flights.length - 5), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`) ;
+            let images = state.flights.slice((state.flights.length - 7), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`) ;
             let from_city = state.flights.slice((state.flights.length -15), state.flights.length).map(flight => flight.from_city) ;
             return images  ;
         }
@@ -74,7 +74,12 @@ const store = createStore({
         }, 
         outUser(state, data){
             state.authUser = data
-        }
+        }, 
+        removeUserFromTable(state, id) {
+            state.users = state.users.filter((user) => {
+                return user.id !== id;
+            })
+        },
     },
     actions: {
         // fetch all flight : 
@@ -125,12 +130,26 @@ const store = createStore({
         getUsers({commit}){
             User.all()
             .then(res => {
+                console.log(res.data.users)
                 commit('setUsers', res.data.users) ;
             }).catch(err => {
                 console.log(err.res.data) ;
             })
         }, 
-
+        getUser(){
+            let user = JSON.parse(localStorage.getItem("data")) ;
+            console.log(user) ;
+        },
+        removeUserFromDb({ commit }, id) {
+            console.log(typeof(id)) ;
+            // User.remove(id)
+            //     .then(response => {
+            //         commit('removeUserFromTable', response.data[0].id);
+            //     })
+            //     .catch(error => {
+            //         console.log(error.response.data);
+            //     });
+        },
 
         // sign Out
         SignOut({ commit }) {

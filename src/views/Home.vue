@@ -8,8 +8,7 @@
     <section class="popular p-4">
       <h3>Popular Destinations :</h3>
       <div class="container first bg-white">
-        <Popular v-for="(image, index) in this.getFlightImage[0]" :key="index" :image="image"  />
-        <!-- :cityName="image.title" :cityName="this.getFlightImage[1]" -->
+        <Popular v-for="(flight, index) in this.flights" :key="index" :image="flight.to_image" :cityName="flight.to_city" />
       </div>
       <MiniCard />
     </section>
@@ -26,8 +25,6 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-     images : [], 
-     titles : []
     };
   },
   components: {
@@ -38,13 +35,12 @@ export default {
     MiniCard
   },
   computed: {
-    ...mapGetters(["showTicket", "getFlightImage"]), 
+    ...mapGetters(["showTicket", "getFlightImage"]),
+    ...mapState(["flights"]) 
   }, 
   mounted() {
-    this.images = this.getFlightImage[0] ;
-    this.titles = this.getFlightImage[1] ;
+    console.log(this.flights[0])
     let user = JSON.parse(localStorage.getItem('user')) ;
-    // console.log(user) ;
   }
 };
 </script>

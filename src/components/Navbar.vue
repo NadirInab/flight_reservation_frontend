@@ -4,9 +4,9 @@
       <div class="navbar__brand">
         <a href="#">Flights</a>
       </div>
-      <button class="navbar__toggle" @click="toggleNav">
+      <!-- <button class="navbar__toggle" @click="toggleNav">
       <span class="navbar__toggle-icon"></span>
-      </button>
+      </button> -->
       <ul class="navbar__menu">
         <li v-if="isAdmin">
           <router-link to="/admin">Admin</router-link>
@@ -88,7 +88,6 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* padding: 1rem; */
   background-color: transparent;
   z-index: 1;
   border-bottom: 1px solid lightblue;
@@ -98,7 +97,7 @@ header {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  /* border: 1px solid rgba(255, 255, 255, 0.18); */
 }
 .fixed-navbar ul li a {
   color: #e4edf1;
@@ -144,10 +143,6 @@ header {
   border-radius: 5px;
   transform: translateX(20px);
 }
-/* .navbar__menu li a:hover {
-  color: white;
-} */
-
 .navbar__toggle {
   position: relative;
   display: block;

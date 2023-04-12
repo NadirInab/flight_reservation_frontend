@@ -18,8 +18,8 @@
     <div class="content">
       <router-view></router-view>
       <Statistics />
-      <Users :users="users" />
-      <Flights />
+      <Users />
+      <!-- <Flights /> -->
       <Profile />
     </div>
   </div>
@@ -39,14 +39,7 @@ export default {
     Users
   }, 
   computed : {
-    ...mapActions(["getUsers"]), 
-    ...mapState(["users"])
   }, 
-  mounted(){
-    console.log("hee") ;
-    console.log(this.users) ;
-    console.log("first") ;
-  }
 };
 </script>
 

@@ -2,7 +2,13 @@
   <div class="container pt-4 mt-4">
     <div class="d-flex justify-content-between w-100">
       <h3>Users</h3>
-      <input type="search" placeholder="Search..." v-model="searchQuery" class="search-input mx-2" />
+      <input
+        @change="filteredUsers"
+        type="search"
+        placeholder="Search..."
+        v-model="searchQuery"
+        class="search-input mx-2"
+      />
     </div>
     <table>
       <thead>
@@ -11,13 +17,18 @@
           <th>Name</th>
           <th>Email</th>
           <th>Tickets</th>
+          <th>Tickets</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in this.users" :key="user.id">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.tickets_count }}</td>
+          <td>
+            <i @click="deleteUser(user.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -25,7 +36,7 @@
 </template>
 
 <script>
-import {mapActions, mapState, mapGetters} from "vuex" ;
+import { mapActions, mapState, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -33,26 +44,19 @@ export default {
       searchQuery: ""
     };
   },
-  props: {
-    users: {
-      type: Array,
-      required: true
-    }
-  },
   computed: {
-    // ...mapActions(["getUsers"]),
-    // ...mapState(["users"]),
+    ...mapActions(["getUsers", "removeUserFromDb"]),
+    ...mapState(["users"])
+  },
+  mounted() {
+    this.$store.dispatch("getUsers");
+  },
+  methods: {
     filteredUsers() {
-      if (!this.searchQuery) {
-        return this.users;
-      } else {
-        return this.users.filter(user => {
-          return (
-            user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-            user.email.toLowerCase().includes(this.searchQuery.toLowerCase())
-          );
-        });
-      }
+      console.log(this.searchQuery);
+    },
+    deleteUser(id) {
+      this.removeUserFromDb(id);
     }
   }
 };
@@ -69,6 +73,9 @@ td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+}
+td i {
+  cursor: pointer;
 }
 
 th {

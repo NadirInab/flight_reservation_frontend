@@ -7,15 +7,12 @@
 </template>
 
 <script >
-// v-if="!isAdmin" 
 import { mapGetters, mapState } from "vuex";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 export default {
   data() {
     return {
-      test: "tes",
-      cities: [1, 2, 3]
     };
   },
   components: {
@@ -24,16 +21,12 @@ export default {
   },
   computed: {
     ...mapGetters(["isAdmin"])
-    // isAdmin() {
-    //   return this.$route.path.startsWith("/admin");
-    // }
   }
 };
 </script>
 
 <style >
 .container {
-  /* border: 2px solid red; */
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -47,7 +40,6 @@ export default {
   margin: 20px;
   border-radius: 10px;
   background-color: #f2f2f2;
-  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
   transition: transform 0.3s ease-in-out;
 }
 
