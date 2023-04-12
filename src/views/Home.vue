@@ -6,7 +6,6 @@
       <Ticket />
     </div>
     <section class="popular p-4">
-      <h3>Popular Destinations :</h3>
       <div class="container first bg-white">
         <Popular
           v-for="(flight, index) in this.flights"
@@ -43,7 +42,7 @@ export default {
     ...mapState(["flights"])
   },
   mounted() {
-    console.log(this.flights[0]);
+    // console.log(this.flights[0]);
     let user = JSON.parse(localStorage.getItem("user"));
   }
 };
@@ -53,15 +52,11 @@ export default {
 .popular {
   margin-top: 50px;
   background-color: white;
-
-  border: 2px solid red;
 }
 .first {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
-
-  border: 2px solid green;
 }
 .first img {
   width: 400px;

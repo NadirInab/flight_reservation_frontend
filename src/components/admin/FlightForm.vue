@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
           <label class="form-label1" for="price">To City</label>
-          <input class="form-input" type="number" id="price" v-model="to_city" />
+          <input class="form-input" type="text" id="price" v-model="to_city" />
         </div>
       </div>
       <div>

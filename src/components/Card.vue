@@ -1,7 +1,7 @@
 <template>
   <div class="card1">
     <div class="card-image">
-      <img :src="imageUrl" alt />
+      <img :src="getImageUrl" alt />
     </div>
     <div class="card-content">
       <h3 class="card-title">{{ title }}</h3>
@@ -26,7 +26,12 @@ export default {
       required: true
     }
   },
-  methods: {}
+  methods: {},
+  computed: {
+    getImageUrl() {
+      return `http://localhost:8000/images/${this.imageUrl}`;
+    }
+  }
 };
 </script>
 
@@ -71,7 +76,6 @@ export default {
   font-size: 18px;
   font-weight: bold;
   color: #240099;
-  
 }
 .card-date {
   margin: 0;
@@ -80,11 +84,11 @@ export default {
 }
 
 @media only screen and (max-width: 830px) {
-.card1 {
-  flex-direction: column;
-}
-.card-image{
-  width: 100%;
-}
+  .card1 {
+    flex-direction: column;
+  }
+  .card-image {
+    width: 100%;
+  }
 }
 </style>

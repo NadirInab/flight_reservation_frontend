@@ -16,7 +16,8 @@ export default {
   computed: {
     ...mapGetters(["getFlightImage"]) ,
     filteredItems() {
-      return this.getFlightImage.slice(0, 5);
+      // randomIndex = Math.floor(Math.random() * this.getFlightImage.length);
+      return this.getFlightImage;
     }
   },
 };
@@ -28,7 +29,7 @@ export default {
 }
 .image-container {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-between; */
 }
 
 .image-container img {

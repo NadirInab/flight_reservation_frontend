@@ -1,6 +1,6 @@
 <template>
   <div class="image-container">
-    <img :src="image" alt="your-image-alt" />
+    <img :src="getImageUrl" alt="your-image-alt" />
     <h2 class="image-title">{{cityName}}</h2>
   </div>
 </template>
@@ -13,6 +13,11 @@ export default {
   props: {
     image: String,
     cityName: String
+  },
+  computed: {
+    getImageUrl() {
+      return `http://localhost:8000/images/${this.image}`;
+    }
   }
 };
 </script>
@@ -42,10 +47,17 @@ export default {
   position: relative;
   margin: 20px 0px;
 }
-
+.image-container {
+  transition: transform 0.3s ease-in-out;
+}
+.image-container:hover,
+.image-container img {
+  transform: scale(1.01);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
 .image-title {
   position: absolute;
-  top: -20px; 
+  top: -20px;
   left: 70%;
   transform: translateX(-50%);
   padding: 10px;
@@ -59,5 +71,4 @@ export default {
   text-overflow: ellipsis;
   max-width: 100%;
 }
-
 </style>
