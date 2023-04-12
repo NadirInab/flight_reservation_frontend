@@ -76,9 +76,10 @@ const store = createStore({
             state.authUser = data
         }, 
         removeUserFromTable(state, id) {
-            state.users = state.users.filter((user) => {
-                return user.id !== id;
-            })
+            console.log(id) ;
+            // state.users = state.users.filter((user) => {
+            //     return user.id !== id;
+            // })
         },
     },
     actions: {
@@ -141,7 +142,8 @@ const store = createStore({
             console.log(user) ;
         },
         removeUserFromDb({ commit }, id) {
-            console.log(typeof(id)) ;
+            // console.log(typeof(id)) ;
+            console.log(id)
             // User.remove(id)
             //     .then(response => {
             //         commit('removeUserFromTable', response.data[0].id);

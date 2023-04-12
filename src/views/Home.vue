@@ -8,7 +8,12 @@
     <section class="popular p-4">
       <h3>Popular Destinations :</h3>
       <div class="container first bg-white">
-        <Popular v-for="(flight, index) in this.flights" :key="index" :image="flight.to_image" :cityName="flight.to_city" />
+        <Popular
+          v-for="(flight, index) in this.flights"
+          :key="index"
+          :image="flight.to_image"
+          :cityName="flight.to_city"
+        />
       </div>
       <MiniCard />
     </section>
@@ -24,23 +29,22 @@ import Popular from "../components/Popular.vue";
 import { mapGetters, mapState } from "vuex";
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     Hero,
     Reservations,
     Ticket,
-    Popular, 
+    Popular,
     MiniCard
   },
   computed: {
     ...mapGetters(["showTicket", "getFlightImage"]),
-    ...mapState(["flights"]) 
-  }, 
+    ...mapState(["flights"])
+  },
   mounted() {
-    console.log(this.flights[0])
-    let user = JSON.parse(localStorage.getItem('user')) ;
+    console.log(this.flights[0]);
+    let user = JSON.parse(localStorage.getItem("user"));
   }
 };
 </script>
@@ -49,15 +53,28 @@ export default {
 .popular {
   margin-top: 50px;
   background-color: white;
+
+  border: 2px solid red;
 }
 .first {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
+
+  border: 2px solid green;
 }
 .first img {
   width: 400px;
   height: 250px;
   border-radius: 8px;
+}
+@media only screen and (max-width: 830px) {
+  .popular{
+    width: 100vw;
+  }
+  .first {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
 }
 </style>

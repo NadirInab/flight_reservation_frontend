@@ -2,7 +2,7 @@
   <section>
     <div v-if="!isAdmin" class="hero"></div>
     <FlightData />
-    <FlightForm />
+    <FlightForm v-if="isAdmin" />
   </section>
 </template>
 
