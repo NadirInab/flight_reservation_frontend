@@ -7,7 +7,7 @@
       </div>
       <ul>
         <li>Statistics</li>
-        <li>Flights</li>
+        <li @click="showFlights">Flights</li>
         <li>Users</li>
         <li>Tickets</li>
         <li>
@@ -19,7 +19,7 @@
       <router-view></router-view>
       <Statistics />
       <Users />
-      <!-- <Flights /> -->
+      <Flights />
       <Profile />
     </div>
   </div>
@@ -32,6 +32,11 @@ import Users from "./Users.vue";
 import Flights from "../../views/Flights.vue";
 import Profile from "./Profile.vue";
 export default {
+  data(){
+    return {
+      showFlights : false
+    }
+  },
   components: {
     Statistics,
     Flights,
@@ -40,6 +45,11 @@ export default {
   }, 
   computed : {
   }, 
+  methods : {
+    showFlights(){
+      console.log("show Flight") ;
+    }
+  }
 };
 </script>
 

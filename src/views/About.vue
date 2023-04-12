@@ -1,12 +1,22 @@
 <template>
   <header>
     <div class="hero">
-      <img
-        style="display: block;-webkit-user-select: none;margin: auto;cursor: zoom-in;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;width:100%;height:100vh"
-        src="https://assets.wego.com/image/upload/c_fill,fl_lossy,q_auto:best,f_auto,w_2560/v1597920829/web/hero_images/ma_1.jpg"
-        width="100%"
-        height="140"
-      />
+      <video
+        autoplay
+        loop
+        id="expert-video"
+        muted
+        playsinline
+        class="absolute top-0 left-0 object-cover h-full w-full z-0"
+        poster="https://lonelyplanetstatic.imgix.net/marketing/2023/BIT/images/hero-poster/NewMexico_3.jpg"
+      >
+        <source
+          src="https://lonelyplanetstatic.imgix.net/marketing/2023/BIT/videos/LOOPING%20VIDEOS/MAIN%20PAGE/NewMexico_3.mp4"
+          type="video/mp4"
+        />
+        <track kind="captions" />
+      </video>
+
       <div class="child">
         <h1>Explore the world with us!</h1>
         <small>
@@ -52,12 +62,13 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  color: #fff;
+  color: #ce1010;
 }
 .child h1 {
   font-size: 4rem;
 }
 .child small {
+  color: rgb(2, 81, 103);
   font-size: 1.5rem;
 }
 </style>

@@ -78,4 +78,13 @@ export default {
   font-size: 14px;
   color: #999999;
 }
+
+@media only screen and (max-width: 830px) {
+.card1 {
+  flex-direction: column;
+}
+.card-image{
+  width: 100%;
+}
+}
 </style>

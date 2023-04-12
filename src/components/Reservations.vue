@@ -57,7 +57,7 @@ export default {
       to_city: "Lesliehaven",
       date: "",
       seats: 1,
-      selectedDate: null
+      selectedDate: null, 
     };
   },
   computed: {
@@ -124,10 +124,10 @@ export default {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
-.custom-select {
+/* .custom-select {
   appearance: none;
   background-color: transparent;
-  /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3E%3Cpath d='M8 12.5L3.5 8H13z'/%3E%3C/svg%3E"); */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23333'%3E%3Cpath d='M8 12.5L3.5 8H13z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.5rem center;
   background-size: 1em auto;
@@ -136,7 +136,7 @@ export default {
   font-size: 1rem;
   line-height: 1.5;
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-}
+} */
 .form-group {
   display: flex;
   flex-direction: column;

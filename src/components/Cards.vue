@@ -38,7 +38,7 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 .container h1 {
   margin: 10px 10px;
@@ -87,5 +87,11 @@ h1 {
 }
 img:hover {
   opacity: 0.8;
+}
+@media only screen and (max-width: 830px) {
+  .container {
+    border : 2px solid red;
+    justify-content: center;
+  }
 }
 </style>

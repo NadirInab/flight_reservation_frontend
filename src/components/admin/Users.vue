@@ -13,7 +13,7 @@
     <table>
       <thead>
         <tr>
-          <th>ID</th>
+          <th>ID  </th>
           <th>Name</th>
           <th>Email</th>
           <th>Tickets</th>
@@ -23,6 +23,7 @@
       <tbody>
         <tr v-for="user in this.users" :key="user.id">
           <td>{{ user.id }}</td>
+          <!-- <td><Avatar /></td> -->
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.tickets_count }}</td>
@@ -37,12 +38,16 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
+import Avatar from "../Avatar.vue" ;
 
 export default {
   data() {
     return {
       searchQuery: ""
     };
+  },
+  components : {
+    Avatar
   },
   computed: {
     ...mapActions(["getUsers", "removeUserFromDb"]),
@@ -52,11 +57,19 @@ export default {
     this.$store.dispatch("getUsers");
   },
   methods: {
+
     filteredUsers() {
       console.log(this.searchQuery);
+      console.log("helo") ;
+    //    const filteredItems = this.users.filter(item => {
+    //   return item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    // })
     },
+    
     deleteUser(id) {
-      this.removeUserFromDb(id);
+      // console.log(id) ;
+      // const userId = id ;
+      this.removeUserFromDb(userId);
     }
   }
 };
