@@ -1,17 +1,22 @@
 <template>
   <section class="ticketContainer">
     <h1>Your Flights</h1>
-    <div class="row">
-    <!-- loop over the ticket of the same day ==> i it's pretty easy .  -->
-      <article :key="ticket" v-for="ticket in getSearchedFlight" v-if="getSearchedFlight" class="card fl-left">
-        <h4 class="text-center text-dark">{{authUser.name}} </h4>
+    <div class="row mt-4">
+      <!-- loop over the ticket of the same day ==> i it's pretty easy .  -->
+      <article
+        :key="ticket"
+        v-for="ticket in getSearchedFlight"
+        v-if="getSearchedFlight"
+        class="card fl-left"
+      >
+        <h4 class="text-center text-dark">{{authUser && authUser.name}}</h4>
         <!-- <h4 class="text-center">{{ticket.flight_name}} </h4> -->
         <section class="date">
           <time>
             <span>{{formattedDate.split(" ")[0]}}</span>
             <span>{{formattedDate.split(" ")[1]}}</span>
           </time>
-            <h5 v-if="ticket" class="text-danger text-decoration-underline">{{ticket.price}} MAD</h5>
+          <h5 v-if="ticket" class="text-danger text-decoration-underline">{{ticket.price}} DH</h5>
         </section>
 
         <section class="card-cont">
@@ -23,7 +28,7 @@
 
           <div class="even-date">
             <i class="fa-sharp fa-solid fa-plane-departure text-success"></i>
-            <span class="mx-4 p-2">Airport : {{ticket.airport}}</span>
+            <span class="mx-4 p-2">Airport : {{ticket.departure_city.airport}}</span>
           </div>
 
           <div class="even-date">
@@ -34,7 +39,9 @@
           <div class="even-date">
             <i class="fa fa-calendar text-secondary"></i>
             <time>
-              <span class="mx-4 p-2">Date : {{formattedDate}}</span>
+              <span
+                class="mx-4 p-2 text-danger"
+              >Time : {{`${formattedDate.split(" ")[2]}h ${formattedDate.split(" ")[3]}` }}</span>
             </time>
           </div>
 
@@ -43,7 +50,19 @@
             <b class="mx-4 p-2">Arrival : {{ticket.to}}</b>
           </div>
 
-            <router-link @click="bookTheTicket(ticket.id)" class="bg-danger text-white" :to="{ name: 'Payement' }">Book tickets</router-link>
+          <router-link
+            @click="bookTheTicket(ticket.id)"
+            class="bg-danger text-white"
+            :to="{ name: 'Payement' }"
+          >Book tickets</router-link>
+        </section>
+
+        <section class="from_to">
+          <div class="inFromTo container bg-white">
+            <span>Casablanca</span>
+            <h3><i class="fa-sharp fa-solid fa-plane-circle-check fa-bounce"></i></h3>
+            <span>Agadir</span>
+          </div>
         </section>
       </article>
     </div>
@@ -52,7 +71,7 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from "vue-router";
 import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   data() {
@@ -62,23 +81,23 @@ export default {
   },
   computed: {
     ...mapGetters(["getSearchedFlight", "formattedDate"]),
-    ...mapState(["searchedFlights", "authUser"]), 
+    ...mapState(["searchedFlights", "authUser"]),
     ...mapActions(["bookTicket"])
   },
   methods: {
-    bookTheTicket(id){
+    bookTheTicket(id) {
       let ticketData = {
-        flight_id : id, 
-        user_id : this.authUser.id
+        flight_id: id,
+        user_id: this.authUser.id
       };
-      this.$store.dispatch("bookTicket", ticketData) ;
+      this.$store.dispatch("bookTicket", ticketData);
     }
-  }, 
-  components : {
-     'router-link': RouterLink
-  }, 
-  mounted(){
-    // console.log(this.getSearchedFlight);
+  },
+  components: {
+    "router-link": RouterLink
+  },
+  mounted() {
+    console.log(this.getSearchedFlight);
   }
 };
 </script>
@@ -112,11 +131,11 @@ h1 {
 }
 
 .card {
-  border: 3px solid green;
+  border: 2px solid rgba(123, 123, 123, 0.697);
   display: table-row;
   width: 70%;
   background-color: #fff;
-  color: #989898;
+  color: #110c0c;
   margin-bottom: 20px auto;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
@@ -131,7 +150,19 @@ h1 {
   text-align: center;
   border-right: 2px dashed #dadde6;
 }
-
+.from_to {
+  display: table-cell;
+  width: 20%;
+  position: relative;
+  text-align: center;
+  border-left: 2px dashed #dadde6;
+}
+.inFromTo {
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid red; */
+  height: 150px;
+}
 .date time {
   display: block;
   position: absolute;
@@ -162,7 +193,7 @@ h1 {
 
 .card-cont {
   display: table-cell;
-  width: 75%;
+  width: 55%;
   font-size: 85%;
   padding: 10px 10px 30px 50px;
 }

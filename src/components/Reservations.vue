@@ -32,12 +32,13 @@
             <i class="fa-solid fa-calendar-days"></i> Date
           </label>
           <input type="date" id="date" v-model="date" required />
+          <span v-if="dateError" class="text-danger">Please select a date greater than or equal to today's date</span>
         </div>
         <div class="form-group">
           <label for="seats">
             <i class="fa-duotone fa-person-seat"></i> Number of Seats
           </label>
-          <input type="number" id="seats" v-model.number="seats" min="1" max="10" required />
+          <input type="number" id="seats" v-model.number="seats" :min="minDate" max="10" required />
         </div>
       </div>
       <button @click="showTicket" class="booking-button" type="submit">
@@ -58,16 +59,25 @@ export default {
       date: "",
       seats: 1,
       selectedDate: null, 
+         dateError: false,
     };
   },
   computed: {
     ...mapState(["searchedFlights"]),
     ...mapGetters(["getSearchedFlight"]),
-    ...mapState(["flights"])
+    ...mapState(["flights"]),
+    minDate() {
+      const now = new Date();
+      return now.toISOString().slice(0, 10);
+    },
   },
   methods: {
     ...mapActions(["flightData", "getFlightDataFromTo"]),
     searchFlights() {
+      if (new Date(this.date) < new Date().setHours(0, 0, 0, 0)) {
+        this.dateError = true; // set data property to show error message
+        return; // stop the method from executing further
+      }
       const data = {
         from_city: this.from_city,
         to_city: this.to_city,

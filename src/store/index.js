@@ -2,17 +2,20 @@ import { createStore } from "vuex";
 import axios from "axios";
 import Flights from "../Api/Flight";
 import User from "../Api/User";
+import Ticket from "../Api/Ticket";
 
 
 const store = createStore({
     state: {
-        authUser : JSON.parse(localStorage.getItem("data")),
-        isAdmin : false,
-        users : [],
+        authUser: JSON.parse(localStorage.getItem("user")),
+        isAdmin: false,
+        users: [],
+        showForm : false,
         showSignUp: true,
         showTicket: false,
         flights: [],
         searchedFlights: [],
+        tickets: []
     },
     getters: {
         showSignUp: state => state.showSignUp,
@@ -28,12 +31,12 @@ const store = createStore({
             const seconds = ("0" + date.getSeconds()).slice(-2);
             return `${month} ${day} ${hours} ${minutes}`;
         },
-        showTicket: state => state.showTicket, 
-        isAdmin : state => state.isAdmin, 
-        getFlightImage(state){
-            let images = state.flights.slice((state.flights.length - 7), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`) ;
-            let from_city = state.flights.slice((state.flights.length -15), state.flights.length).map(flight => flight.from_city) ;
-            return images  ;
+        showTicket: state => state.showTicket,
+        isAdmin: state => state.isAdmin,
+        getFlightImage(state) {
+            let images = state.flights.slice((state.flights.length - 7), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`);
+            let from_city = state.flights.slice((state.flights.length - 15), state.flights.length).map(flight => flight.from_city);
+            return images;
         }
 
     },
@@ -66,21 +69,26 @@ const store = createStore({
         },
         showTicket(state) {
             state.showTicket = true;
-        }, 
+        },
 
         // Admin routes : 
-        setUsers(state, data){
+        setUsers(state, data) {
             state.users = data
-        }, 
-        outUser(state, data){
+        },
+        outUser(state, data) {
             state.authUser = data
-        }, 
+        },
         removeUserFromTable(state, id) {
-            console.log(id) ;
+            console.log(id);
             // state.users = state.users.filter((user) => {
             //     return user.id !== id;
             // })
         },
+
+        //Ticket 
+        setTicket(state, data) {
+            state.tickets = data
+        }
     },
     actions: {
         // fetch all flight : 
@@ -95,6 +103,7 @@ const store = createStore({
         getFlightDataFromTo({ commit }, data) {
             Flights.getFromTo(data)
                 .then(res => {
+                    console.log(res.data) ;
                     commit('searchedFlights', res.data);
                     commit('showTicket');
                 })
@@ -123,23 +132,22 @@ const store = createStore({
         editFlightData({ commit }, id) {
             axios.put(`http://127.0.0.1:8000/api/flights/${id}`)
                 .then(response => {
-    
+
                 })
-        }, 
+        },
 
         // Admin 
-        getUsers({commit}){
+        getUsers({ commit }) {
             User.all()
-            .then(res => {
-                console.log(res.data.users)
-                commit('setUsers', res.data.users) ;
-            }).catch(err => {
-                console.log(err.res.data) ;
-            })
-        }, 
-        getUser(){
-            let user = JSON.parse(localStorage.getItem("data")) ;
-            console.log(user) ;
+                .then(res => {
+                    commit('setUsers', res.data.users);
+                }).catch(err => {
+                    console.log(err.res.data);
+                })
+        },
+        getUser() {
+            let user = JSON.parse(localStorage.getItem("data"));
+            console.log(user);
         },
         removeUserFromDb({ commit }, id) {
             // console.log(typeof(id)) ;
@@ -153,15 +161,35 @@ const store = createStore({
             //     });
         },
 
-        // sign Out
-        SignOut({ commit }) {
-            localStorage.clear() ;
-            commit('outUser', null);
-          },
+        //  Tikcet : 
+        bookTicket({ commit }, ticketData) {
+            Ticket.add(ticketData)
+                .then(res => {
+                    console.log(res.data);
+                }).catch(error => {
+                    console.log(error.response.data);
+                });
+        },
+
+        getTickets() {
+            Ticket.all()
+                .then(res => {
+                    console.log(res.data)
+                    commit("setTicket", res.data);
+                }).catch(error => {
+                    console.log(err.res.data);
+                })
+        },
+
+    // sign Out
+    SignOut({ commit }) {
+        localStorage.clear();
+        commit('outUser', null);
     },
+},
     modules: {
 
-    }
+}
 })
 
 export default store;

@@ -16,7 +16,6 @@
         />
         <track kind="captions" />
       </video>
-
       <div class="child">
         <h1>Explore the world with us!</h1>
         <small>
