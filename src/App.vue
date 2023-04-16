@@ -1,8 +1,8 @@
 <template>
   <header>
-    <Navbar  v-if="!isAdmin"/>
+    <Navbar  v-if="isAdmin"/>
     <router-view />
-    <Footer v-if="!isAdmin" />
+    <Footer v-if="isAdmin" />
   </header>
 </template>
 
@@ -20,7 +20,7 @@ export default {
     Footer
   },
   computed: {
-    ...mapGetters(["isAdmin"])
+    ...mapState(["isAdmin"])
   }
 };
 </script>

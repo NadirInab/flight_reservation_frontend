@@ -13,6 +13,9 @@
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
     "crypto-js": "^4.1.1",
+    "html2canvas": "^1.4.1",
+    "notifyjs": "^3.0.0",
+    "notyf": "^3.10.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
     "vuex": "^4.0.2"

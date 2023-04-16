@@ -33,7 +33,10 @@
             <i class="fa-solid fa-envelope mx-1"></i> Email :
           </label>
           <input type="email" class id="email" placeholder="JohnDoe@gmail.com" v-model.trim="email" />
-          <span v-if="emailError" class="invalid-feedback">{{ emailError }}</span>
+          <small
+            v-if="this.$store.state.signUpInErr"
+            class="alert alert-danger"
+          >{{ this.$store.state.signUpInErr }}</small>
         </div>
 
         <div>
@@ -52,6 +55,7 @@
           >{{ passwordConfirmationError }}</span>
         </div>
       </div>
+
       <button :disabled="!email && !password" type="submit" class="btn btn-primary w-50">Register</button>
       <span class="text-muted">
         Already Have an account
@@ -62,7 +66,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   data() {
@@ -87,57 +90,16 @@ export default {
     handleClick() {
       this.$store.commit("showSignUp");
     },
-
-    validateForm() {
-      let isValid = true;
-      if (!this.name) {
-        this.nameError = "Name is required";
-        isValid = false;
-      }
-      if (!this.email) {
-        this.emailError = "Email is required";
-        isValid = false;
-      }
-      if (!this.password) {
-        this.passwordError = "Password is required";
-        isValid = false;
-      } else if (this.password.length < 8) {
-        this.passwordError = "Password must be at least 8 characters long";
-        isValid = false;
-      }
-      if (!this.password_confirmation) {
-        this.passwordConfirmationError = "Password confirmation is required";
-        isValid = false;
-      } else if (this.password_confirmation !== this.password) {
-        this.passwordConfirmationError = "Passwords do not match";
-        isValid = false;
-      }
-      return isValid;
-    },
-
     register() {
-      this.isLoading = true;
       this.data = {
         name: this.name,
         email: this.email,
         password: this.password,
         password_confirmation: this.password_confirmation
       };
-      axios
-        .post("http://127.0.0.1:8000/api/register", {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-          password_confirmation: this.password_confirmation
-        })
-        .then(response => {
-          this.$router.push("/");
-          localStorage.setItem("auth_token", response.data.token);
-          localStorage.setItem("user", JSON.stringify(response.data.user));
-        })
-        .catch(error => {
-          console.log(error.response.data);
-        });
+      this.$store.dispatch("SignUp", this.data);
+      // this.$router.push("/");
+      // console.log(first)
     }
   }
 };

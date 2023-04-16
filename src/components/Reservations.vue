@@ -31,14 +31,13 @@
           <label for="date">
             <i class="fa-solid fa-calendar-days"></i> Date
           </label>
-          <input type="date" id="date" v-model="date" required />
-          <span v-if="dateError" class="text-danger">Please select a date greater than or equal to today's date</span>
+          <input type="date" id="date" :min="minDate" v-model="date" required />
         </div>
         <div class="form-group">
           <label for="seats">
             <i class="fa-duotone fa-person-seat"></i> Number of Seats
           </label>
-          <input type="number" id="seats" v-model.number="seats" :min="minDate" max="10" required />
+          <input type="number" id="seats" v-model.number="seats"  max="10" required />
         </div>
       </div>
       <button @click="showTicket" class="booking-button" type="submit">
@@ -50,16 +49,16 @@
 </template>
 
 <script>
+import notyf from "../notyf";
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      from_city: "Port Marquesborough",
-      to_city: "Lesliehaven",
+      from_city: "",
+      to_city: "",
       date: "",
       seats: 1,
-      selectedDate: null, 
-         dateError: false,
+      selectedDate: null
     };
   },
   computed: {
@@ -69,14 +68,25 @@ export default {
     minDate() {
       const now = new Date();
       return now.toISOString().slice(0, 10);
-    },
+    }
   },
   methods: {
     ...mapActions(["flightData", "getFlightDataFromTo"]),
+    isEmpty(str) {
+      return !str.trim().length;
+    },
     searchFlights() {
+      if (this.isEmpty(this.from_city) || this.isEmpty(this.to_city)) {
+        notyf.open({
+          type: "warn",
+          message: "Please make sure to fill inputs !!"
+        });
+      }
       if (new Date(this.date) < new Date().setHours(0, 0, 0, 0)) {
-        this.dateError = true; // set data property to show error message
-        return; // stop the method from executing further
+        notyf.error(
+          "Please select a date greater than or equal to today's date asshole"
+        );
+        return;
       }
       const data = {
         from_city: this.from_city,

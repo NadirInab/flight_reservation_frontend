@@ -1,16 +1,10 @@
 <template>
   <section class="ticketContainer">
     <h1>Your Flights</h1>
-    <div class="row mt-4">
-      <!-- loop over the ticket of the same day ==> i it's pretty easy .  -->
-      <article
-        :key="ticket"
-        v-for="ticket in getSearchedFlight"
-        v-if="getSearchedFlight"
-        class="card fl-left"
-      >
+    <div class="row mt-4" v-if="getSearchedFlight">
+      <article :key="ticket" v-for="ticket in getSearchedFlight" id="Ticket"  class="card fl-left">
         <h4 class="text-center text-dark">{{authUser && authUser.name}}</h4>
-        <!-- <h4 class="text-center">{{ticket.flight_name}} </h4> -->
+        <h4 class="text-center">{{ticket.flight_name}}</h4>
         <section class="date">
           <time>
             <span>{{formattedDate.split(" ")[0]}}</span>
@@ -55,12 +49,15 @@
             class="bg-danger text-white"
             :to="{ name: 'Payement' }"
           >Book tickets</router-link>
+          <button @click="download">DownLoad</button>
         </section>
 
         <section class="from_to">
           <div class="inFromTo container bg-white">
             <span>Casablanca</span>
-            <h3><i class="fa-sharp fa-solid fa-plane-circle-check fa-bounce"></i></h3>
+            <h3>
+              <i class="fa-sharp fa-solid fa-plane-circle-check fa-bounce"></i>
+            </h3>
             <span>Agadir</span>
           </div>
         </section>
@@ -73,6 +70,8 @@
 <script>
 import { RouterLink } from "vue-router";
 import { mapActions, mapGetters, mapState } from "vuex";
+import html2canvas from "html2canvas";
+
 export default {
   data() {
     return {
@@ -91,6 +90,18 @@ export default {
         user_id: this.authUser.id
       };
       this.$store.dispatch("bookTicket", ticketData);
+    },
+    download() {
+      // let div = document.getElementById("Ticket");
+      let div = document.querySelector(".card");
+      console.log(div);
+      console.log("after life");
+      html2canvas(div).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "myDiv.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      });
     }
   },
   components: {

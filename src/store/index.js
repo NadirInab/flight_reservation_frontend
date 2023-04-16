@@ -3,6 +3,8 @@ import axios from "axios";
 import Flights from "../Api/Flight";
 import User from "../Api/User";
 import Ticket from "../Api/Ticket";
+import notyf from "../notyf";
+import router from "../router/index" ;
 
 
 const store = createStore({
@@ -10,12 +12,13 @@ const store = createStore({
         authUser: JSON.parse(localStorage.getItem("user")),
         isAdmin: false,
         users: [],
-        showForm : false,
-        showSignUp: true,
-        showTicket: false,
+        tickets: [],
         flights: [],
         searchedFlights: [],
-        tickets: []
+        showForm: false,
+        showSignUp: true,
+        showTicket: false,
+        editedFlight: {}
     },
     getters: {
         showSignUp: state => state.showSignUp,
@@ -35,7 +38,6 @@ const store = createStore({
         isAdmin: state => state.isAdmin,
         getFlightImage(state) {
             let images = state.flights.slice((state.flights.length - 7), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`);
-            let from_city = state.flights.slice((state.flights.length - 15), state.flights.length).map(flight => flight.from_city);
             return images;
         }
 
@@ -55,7 +57,8 @@ const store = createStore({
                 return flight.id !== id;
             })
         },
-        updatedflightTable(state, id) {
+        setEditeFlight(state, data){
+            state.editedFlight = data
         }
         ,
         // search for flights
@@ -63,6 +66,7 @@ const store = createStore({
             state.searchedFlights = data;
             // console.log(state.searchedFlights)
         },
+
         // Toggle between signIn and signUp .
         showSignUp(state) {
             state.showSignUp = !state.showSignUp
@@ -70,19 +74,26 @@ const store = createStore({
         showTicket(state) {
             state.showTicket = true;
         },
+        // set Message error ;
+        setMessageErr(state, err) {
+            state.signUpInErr = err
+        },
 
         // Admin routes : 
         setUsers(state, data) {
             state.users = data
         },
+        isAdmin(state) {
+            state.isAdmin = !state.isAdmin;
+        }
+        ,
         outUser(state, data) {
             state.authUser = data
         },
         removeUserFromTable(state, id) {
-            console.log(id);
-            // state.users = state.users.filter((user) => {
-            //     return user.id !== id;
-            // })
+            state.users = state.users.filter(user => {
+                return user.id !== id;
+            })
         },
 
         //Ticket 
@@ -93,7 +104,13 @@ const store = createStore({
     actions: {
         // fetch all flight : 
         flightData({ commit }) {
-            Flights.all()
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            Flights.all(config)
                 .then(res => {
                     commit('setFlightsData', res.data);
                 })
@@ -101,9 +118,15 @@ const store = createStore({
 
         // get Flight by departure and arrival and date =: 
         getFlightDataFromTo({ commit }, data) {
-            Flights.getFromTo(data)
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            Flights.getFromTo(data, config)
                 .then(res => {
-                    console.log(res.data) ;
+                    console.log(res.data);
                     commit('searchedFlights', res.data);
                     commit('showTicket');
                 })
@@ -112,7 +135,13 @@ const store = createStore({
         // =========> Here flight crud beggins ;
         // Handle SignIn and Sign Up ,
         addFlight({ commit }, flightData) {
-            Flights.add(flightData)
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            Flights.add(flightData, config)
                 .then(response => {
                     commit('addFlightTable', response.data);
                 })
@@ -121,8 +150,17 @@ const store = createStore({
                 });
         },
         removeFlightFromDb({ commit }, id) {
-            Flights.remove(id)
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            console.log(token) ;
+            console.log(config) ;
+            Flights.remove(id, config)
                 .then(response => {
+                    console.log(response) ;
                     commit('removeFlightTable', response.data[0].id);
                 })
                 .catch(error => {
@@ -130,11 +168,22 @@ const store = createStore({
                 });
         },
         editFlightData({ commit }, id) {
-            axios.put(`http://127.0.0.1:8000/api/flights/${id}`)
-                .then(response => {
-
-                })
+            console.log(id) ;
+            Flights.show(id).then(res => {
+                commit("setEditeFlight", res.data)
+                console.log(res.data)
+            }).catch(err => {
+                console.log(err) ;
+            })
         },
+        // updatedflightTable({ commit }, id) {
+        //     console.log(id) ;
+        //     flight.get($id).then(res => {
+        //         console.log(res.data)
+        //     }).catch(err => {
+        //         console.log(err) ;
+        //     })
+        // },
 
         // Admin 
         getUsers({ commit }) {
@@ -150,15 +199,20 @@ const store = createStore({
             console.log(user);
         },
         removeUserFromDb({ commit }, id) {
-            // console.log(typeof(id)) ;
-            console.log(id)
-            // User.remove(id)
-            //     .then(response => {
-            //         commit('removeUserFromTable', response.data[0].id);
-            //     })
-            //     .catch(error => {
-            //         console.log(error.response.data);
-            //     });
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            User.remove(id, config)
+                .then(response => {
+                    console.log(response.data)
+                    commit('removeUserFromTable', response.data[0].id);
+                })
+                .catch(error => {
+                    // console.log(error.response.data);
+                });
         },
 
         //  Tikcet : 
@@ -171,25 +225,72 @@ const store = createStore({
                 });
         },
 
-        getTickets() {
-            Ticket.all()
+        getTickets({ commit }) {
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            Ticket.all(config)
                 .then(res => {
-                    console.log(res.data)
+                    console.log(res.data) ;
                     commit("setTicket", res.data);
                 }).catch(error => {
-                    console.log(err.res.data);
+                    console.log(error);
                 })
         },
 
-    // sign Out
-    SignOut({ commit }) {
-        localStorage.clear();
-        commit('outUser', null);
+        // Sign Up :
+        SignUp({ commit }, data) {
+            User.add(data)
+                .then(response => {
+                    console.log(response);
+                    localStorage.setItem("auth_token", response.data.token);
+                    localStorage.setItem("user", JSON.stringify(response.data.user));
+                    // commit("isAdmin") ;
+                    notyf.open({
+                        type: 'info',
+                        message: 'Account is successfullu created'
+                    });
+                })
+                .catch(err => {
+                    notyf.error(err.response.data.message)
+                    // commit("setMessageErr", err.response.data.message) ;
+                })
+        },
+        SignIn({ commit }, data) {
+            User.logIn(data)
+                .then(response => {
+                    localStorage.setItem("auth_token", response.data.token);
+                    localStorage.setItem("user", JSON.stringify(response.data.user));
+                    if (response.data.role === "admin") {
+                        commit("isAdmin");
+                        router.push("/admin");
+                        // window.reload() ;
+                    } else {
+                        console.log("not admin");
+                        router.push("/home");
+                        window.reload() ;
+
+                    }
+                }).catch(err => {
+                    // commit("setMessageErr", err.response.data.message);
+                    notyf.error(err.response.data.message)
+                    // console.log(err.response.data.message);
+                }
+                )
+        },
+        // sign Out
+        SignOut({ commit }) {
+            localStorage.clear();
+            commit('outUser', null);
+            window.location.reload();
+        },
     },
-},
     modules: {
 
-}
+    }
 })
 
 export default store;

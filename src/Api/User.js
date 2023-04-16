@@ -1,10 +1,19 @@
 import Api from "./Api" ;
 
+const END_POINT = "users"
 export default {
     all(){
-        return Api.get("/users")
+        return Api.get(END_POINT)
     }, 
-    remove(id){
-        return Api.delete(`/users/${id}`)
+    add(data){
+        return Api.post("/register",data )
+    },
+    logIn(data){
+        return Api.post("/login", data)
     }
+    ,
+    remove(id){
+        return Api.delete(`${END_POINT}/${id}`)
+    }
+
 }

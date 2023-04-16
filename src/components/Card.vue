@@ -4,8 +4,9 @@
       <img :src="getImageUrl" alt />
     </div>
     <div class="card-content">
+      <img  src="https://cdn3.iconfinder.com/data/icons/world-flags-africa/64/_Morocco_2-64.png" alt="">
       <h3 class="card-title">{{ title }}</h3>
-      <h3 class="card-title mt-2">{{ price }} MAD</h3>
+      <h3 class="card-title mt-2 text-danger">{{ price }} MAD</h3>
     </div>
   </div>
 </template>
@@ -53,7 +54,7 @@ export default {
 .card-image {
   position: relative;
   width: 200px;
-  height: 150px;
+  height: 180px;
   border-radius: 5px 0 0 5px;
   overflow: hidden;
 }
@@ -69,14 +70,17 @@ export default {
 }
 .card-content {
   width: 150px;
-
   padding: 10px;
+}
+.card-content img {
+  width: 30px;
+  height: auto;
 }
 .card-title {
   margin-top: 10px 0px;
   font-size: 18px;
   font-weight: bold;
-  color: #240099;
+  color: #11004a;
 }
 .card-date {
   margin: 0;

@@ -1,6 +1,10 @@
 <template>
   <div class="signIn pt-5">
     <form @submit.prevent="login">
+      <div
+        v-if="this.$store.state.signUpInErr"
+        class="alert alert-danger"
+      >{{ this.$store.state.signUpInErr }}</div>
       <div>
         <label>
           <i class="fa-solid fa-envelope mx-1"></i> Email:
@@ -25,7 +29,11 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      email: "",
+      password: "",
+      data: {}
+    };
   },
   methods: {
     handleClick() {
@@ -33,18 +41,11 @@ export default {
     },
 
     login() {
-      axios
-        .post("http://127.0.0.1:8000/api/login", {
-          email: this.email,
-          password: this.password
-        })
-        .then(response => {
-          localStorage.setItem("auth_token", response.data.token);
-          this.$router.push("/");
-        })
-        .catch(error => {
-          console.log(error.response.data);
-        });
+      this.data = {
+        email: this.email,
+        password: this.password
+      };
+      this.$store.dispatch("SignIn", this.data);
     }
   }
 };

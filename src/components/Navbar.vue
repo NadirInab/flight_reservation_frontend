@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar" :class="{ 'navbar--open': isNavOpen, 'fixed-navbar': isFixed  }">
+    <nav  class="navbar" :class="{ 'navbar--open': isNavOpen, 'fixed-navbar': isFixed  }">
       <div class="navbar__brand">
         <a href="#">Flights</a>
       </div>
@@ -22,7 +22,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/About">Destinations</router-link>
+          <router-link to="/About"><i class="fa-solid fa-earth-asia"></i> Destinations</router-link>
         </li>
         <li v-if="!isLoggedIn">
           <router-link to="/Sign">
@@ -32,10 +32,8 @@
         <li v-if="isLoggedIn">
           <Avatar :email="email" />
         </li>
-
         <li class="out" @click="SignOut" v-if="isLoggedIn">
           <router-link to="/">
-            <!-- SignOut -->
             <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
           </router-link>
         </li>

@@ -1,10 +1,11 @@
 <template>
   <header class="container bg-white">
-    <div class="container1 bg-white">
-      <h1>Make your Tours Amazing with us !!</h1>
+    <div class="container1 bg-white p-4">
+      <h1 class="p-2 m-4">Make your Tours Amazing with us </h1>
       <Slider />
     </div>
         
+    <h2 class="">Availabale Destinations : </h2>
     <div class="container bg-white">
       <Card
         v-for="(flight, index) in this.flights"
@@ -50,6 +51,12 @@ h1 {
   text-transform: uppercase;
   font-weight: 900;
   border-left: 15px solid #062381;
+  padding-left: 10px;
+}
+h2 {
+  text-transform: uppercase;
+  font-weight: 900;
+  border-left: 15px solid #02843c;
   padding-left: 10px;
 }
 .card {

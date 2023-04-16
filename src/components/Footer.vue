@@ -10,10 +10,10 @@
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#">Flights</a></li>
-            <li><a href="#">Hotels</a></li>
-            <li><a href="#">Car Rentals</a></li>
-            <li><a href="#">Vacation Packages</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="https://www.booking.com/">Hotels</a></li>
+            <li><a href="https://www.moroccocar.com/">Car Rentals</a></li>
+            <li><a href="https://www.booking.com/">Vacation Packages</a></li>
+            <!-- <li><a href="#">Contact Us</a></li> -->
           </ul>
         </div>
         <div class="col-md-4">
