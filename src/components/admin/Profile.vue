@@ -1,11 +1,12 @@
 <template>
-  <div class="profileContainer">
+  <div class="profileContainer bg-white">
+    <Stats />
     <div class="first p-3">
       <img class="item1" src="../../assets/images/admin.avif" alt />
       <div class="item2 p-3 w-100">
         <h3 class>Lorem, ipsum.</h3>
-        <span class="text-primary ml-5">johnDoe@gmail.com</span> -
-        <b class="text-muted">Admin</b>
+        <span class="text-primary ml-5">{{getAdminData().email}}</span> -
+        <b class="text-muted">{{getRole().name}}</b>
       </div>
     </div>
     <div class="formContainer">
@@ -17,7 +18,7 @@
             class="form-control w-75"
             id="name"
             placeholder="Enter your name"
-            value="JohnDoe"
+            :value="getAdminData().name"
           />
         </div>
         <div class="group mb-3">
@@ -27,7 +28,7 @@
             class="form-control w-75"
             id="email"
             placeholder="Enter your email"
-            value="JohnDoe@gmail.com"
+            :value="getAdminData().email"
           />
         </div>
         <div class="group mb-3">
@@ -37,17 +38,17 @@
             class="form-control w-75 mx-3"
             id="password"
             placeholder="Enter your password"
-            value="12345678"
+           :value="getAdminData().password"
           />
         </div>
         <div class="group mb-3">
-          <label for="password" class="form-label">Role</label>
+          <label for="role" class="form-label">Role</label>
           <input
-            type="password"
+            type="text"
             class="form-control w-75"
             id="password"
             placeholder="Enter your password"
-            value="Admin"
+            :value="getRole().name"
           />
         </div>
       </form>
@@ -56,13 +57,42 @@
 </template>
 
 <script>
-export default {};
+import Stats from "./Statistics.vue" ;
+export default {
+  data(){
+    return {
+      text : "test"
+    }
+  }, 
+  components : {
+    Stats
+  }, 
+  methods : {
+    getRole(){
+     let admin = {
+        // "name" : JSON.parse(localStorage.getItem("user")).roles[0].name,
+      }
+      return admin ;
+    }, 
+    getAdminData(){
+      let admin = {
+        "name" : JSON.parse(localStorage.getItem("user")).name,
+        "email" : JSON.parse(localStorage.getItem("user")).email
+      }
+      return admin ;
+    }
+  }, 
+  mounted(){
+    console.log(this.getAdminData()) ;
+    console.log(this.getRole()) ;
+  }
+};
 </script>
 
 <style>
 .profileContainer {
   font-style: italic;
-  width: 80%;
+  width: 90%;
   height: 80vh;
   margin: 10px 30px;
   padding: 20px;

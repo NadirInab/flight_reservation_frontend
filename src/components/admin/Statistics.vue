@@ -1,11 +1,10 @@
 <template>
-  <div>
-    <h1>Statistics :</h1>
+  <div class="p-4">
     <div class="stats">
       <div class="container1">
         <div>
-          <h3>45</h3>
-          <span class="muted">Users</span>
+          <h3>{{this.users.length}}</h3>
+          <span class="muted fw-bold">Passenger(s)</span>
         </div>
         <div>
           <span class="font">
@@ -15,21 +14,19 @@
       </div>
       <div class="container1">
         <div>
-          <h3>83</h3>
-          <span class="muted">Tickets</span>
+          <h3>{{this.tickets.length}}</h3>
+          <span class="muted fw-bold">Ticket(s)</span>
         </div>
         <div>
           <span class="font">
-            <!-- <i class="fa-solid fa-user"></i> -->
-
-           <i class="fa-light fa-tickets-airline"></i>
+            <i class="fa-light fa-tickets-airline"></i>
           </span>
         </div>
       </div>
       <div class="container1">
         <div>
-          <h3>56</h3>
-          <span class="muted">Flights</span>
+          <h3>{{this.flights.length}}</h3>
+          <span class="muted fw-bold">Flight(s)</span>
         </div>
         <div>
           <span class="font">
@@ -42,7 +39,19 @@
 </template>
 
 <script>
-export default {};
+import { mapState, mapActions } from "vuex";
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState(["users", "tickets", "flights"]),
+    ...mapActions(["getTickets", "getUsers", "flightData"])
+  },
+  mounted() {
+    this.getTickets, this.getUsers, this.flightData;
+  }
+};
 </script>
 
 <style scoped>
@@ -70,5 +79,7 @@ export default {};
 }
 .stats {
   display: flex;
+  margin-top: 30px;
+  padding: 20px;
 }
 </style>

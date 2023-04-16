@@ -1,13 +1,13 @@
 <template>
-  <div class="container pt-4 mt-4">
-    <div class="d-flex justify-content-between w-100">
-      <h3>Users</h3>
+  <div class="container bg-white">
+     <Stats />
+    <div class="d-flex ">
       <input
         @change="filteredUsers"
         type="search"
         placeholder="Search..."
         v-model="searchQuery"
-        class="search-input mx-2"
+        class="search-input mx-2 mb-3"
       />
     </div>
     <table>
@@ -17,16 +17,17 @@
           <th>Name</th>
           <th>Email</th>
           <th>Tickets</th>
-          <th>Tickets</th>
+          <th>role</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in this.users" :key="user.id">
-          <td>{{ user.id }}</td>
+        <tr v-for="(user, index) in this.users" :key="index">
+          <td>{{index+1}}</td>
           <!-- <td><Avatar /></td> -->
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.tickets_count }}</td>
+          <td>{{user.roles[0] && user.roles[0].name }}</td>
           <td>
             <i @click="deleteUser(user.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
           </td>
@@ -37,8 +38,9 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 import Avatar from "../Avatar.vue" ;
+import Stats from "./Statistics.vue" ;
 
 export default {
   data() {
@@ -47,7 +49,8 @@ export default {
     };
   },
   components : {
-    Avatar
+    Avatar, 
+    Stats
   },
   computed: {
     ...mapActions(["getUsers", "removeUserFromDb"]),
@@ -57,16 +60,13 @@ export default {
     this.$store.dispatch("getUsers");
   },
   methods: {
-
     filteredUsers() {
       console.log(this.searchQuery);
-    //    const filteredItems = this.users.filter(item => {
-    //   return item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    // })
     },
     
     deleteUser(id) {
-      this.removeUserFromDb(id);
+      this.$store.dispatch("removeUserFromDb", id) ;
+      // this.removeUserFromDb(id);
     }
   }
 };
@@ -75,7 +75,7 @@ export default {
 <style scoped>
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 96%;
 }
 
 th,

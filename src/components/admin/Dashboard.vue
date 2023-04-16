@@ -6,51 +6,54 @@
         <h2>Admin</h2>
       </div>
       <ul>
-        <li>Statistics</li>
-        <li @click="showFlights">Flights</li>
-        <li>Users</li>
-        <li>Tickets</li>
         <li>
-          <router-link to="/dashboard/settings">Profile</router-link>Profile
+          <router-link :to="{name : 'admin.statistics'}">Stats</router-link>
+        </li>
+
+        <li>
+          <router-link to="/admin/flights">Flights</router-link>
+        </li>
+        <li>
+          <router-link to="/admin/users">Users</router-link>
+        </li>
+        <li>
+          <router-link to="/admin/tickets">Tickets</router-link>
+        </li>
+        <li>
+          <router-link to="/admin/profile">Profile</router-link>
         </li>
       </ul>
     </div>
     <div class="content">
       <router-view></router-view>
-      <Statistics />
-      <Users />
-      <Flights />
-      <Tickets />
-      <Profile />
     </div>
   </div>
 </template>
 
 <script>
-import {mapActions, mapState, mapGetters} from "vuex" ;
 import Statistics from "./Statistics.vue";
 import Users from "./Users.vue";
 import Flights from "../../views/Flights.vue";
 import Profile from "./Profile.vue";
 import Tickets from "./Tickets.vue";
 export default {
-  data(){
+  data() {
     return {
-      showFlights : false
-    }
+      showFlights: false
+    };
   },
   components: {
     Statistics,
     Flights,
     Profile,
-    Users, 
+    Users,
     Tickets
-  }, 
-  computed : {
-  }, 
-  methods : {
-    showFlights(){
-      console.log("show Flight") ;
+  },
+  computed: {},
+  methods: {
+    showFlights() {
+      console.log("show Flight");
+      console.log(this.$store.state.isAdmin) ;
     }
   }
 };
@@ -113,10 +116,12 @@ a:hover {
 }
 
 .content {
+  width: 90vw;
   flex: 1;
   padding: 20px;
+  margin-left: 80;
   box-sizing: border-box;
   overflow-y: scroll;
-  border: 2px solid green;
+  border: 3px solid rgb(5, 110, 96);
 }
 </style>

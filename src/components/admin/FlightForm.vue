@@ -54,7 +54,7 @@
 
         <div class="form-group">
           <label class="form-label1 mb-2" for="date">Date</label>
-          <input class="form-input" type="date" id="date" v-model="date" />
+          <input class="form-input" type="date" id="date" v-model="date" :min="minDate" />
         </div>
 
         <div class="form-group">
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 // import tes from "../../assets/images/";
 
 export default {
@@ -116,6 +116,16 @@ export default {
     submitForm() {
       this.addFlight(this.toFormData());
     }
+  },
+  computed: {
+    minDate() {
+      const now = new Date();
+      return now.toISOString().slice(0, 10);
+    },
+    ...mapState(["editedFlight"])
+  },
+  updated() {
+    console.log(this.editedFlight);
   }
 };
 </script>
