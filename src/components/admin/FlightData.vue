@@ -1,13 +1,13 @@
 <template>
   <div class="tableContainer pt-4">
-    <div v-if="!isAdmin" class="container bg-white">
+    <div class="container bg-white">
       <h3>
         Where do you want to go?
         <i class="fa-solid fa-earth-americas fa-bounce"></i>
       </h3>
     </div>
-    <div v-else>
-      <button @click="showForm" class="btn btn-success mx-4 mb-3">Add Flight</button>
+    <div>
+      <!-- <button @click="showForm" class="btn btn-success mx-4 mb-3">Add Flight</button> -->
     </div>
     <table>
       <thead>
@@ -51,7 +51,7 @@
             <b>{{flight.price}}</b>
           </td>
           <td class="seats">{{flight.number_of_seats}}</td>
-          <td  class="seats">
+          <td v-if="isAdmin" class="seats">
             <i @click="deleteFlight(flight.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
             <i @click="upDateFlight(flight.id)" class="fa-solid fa-pen-to-square mx-1 text-primary"></i>
           </td>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -73,22 +73,29 @@ export default {
   methods: {
     ...mapActions(["flightData", "removeFlightFromDb", "editFlightData"]),
     ...mapState(["showForm"]),
+    ...mapMutations(["setAdmin"]),
+
     deleteFlight(id) {
       this.removeFlightFromDb(id);
     },
     upDateFlight(id) {
-      console.log(id) ;
       this.editFlightData(id);
     },
     showForm() {
-      this.showForm = !this.showForm
+      this.showForm = !this.showForm;
     }
   },
   computed: {
     ...mapState(["flights", "editedFlight"]),
     ...mapGetters(["isAdmin"])
-  }, 
-
+  },
+  mounted() {
+    let data = JSON.parse(localStorage.getItem("user"));
+    if (!data) return;
+    if (data.roles.length === 0) return;
+    this.setAdmin(data.roles[0].name === "admin");
+    // console.log("here data name app : ",data) ;
+  }
 };
 </script>
 

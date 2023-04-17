@@ -92,10 +92,7 @@ export default {
       this.$store.dispatch("bookTicket", ticketData);
     },
     download() {
-      // let div = document.getElementById("Ticket");
       let div = document.querySelector(".card");
-      console.log(div);
-      console.log("after life");
       html2canvas(div).then(canvas => {
         const link = document.createElement("a");
         link.download = "myDiv.png";

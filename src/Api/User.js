@@ -6,7 +6,7 @@ export default {
         return Api.get(END_POINT)
     }, 
     add(data){
-        return Api.post("/register",data )
+        return Api.post("/register",data)
     },
     logIn(data){
         return Api.post("/login", data)

@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div v-if="isAdmin" class="form-container">
     <h3 class="text-center">Add Flight</h3>
     <form @submit.prevent="submitForm">
       <div>
@@ -69,8 +69,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-// import tes from "../../assets/images/";
+import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -91,6 +90,8 @@ export default {
   },
   methods: {
     ...mapActions(["addFlight"]),
+     ...mapMutations(["setAdmin"])
+    ,
     onFileSelected(event) {
       this.from_image = event.target.files[0];
     },
@@ -122,11 +123,16 @@ export default {
       const now = new Date();
       return now.toISOString().slice(0, 10);
     },
-    ...mapState(["editedFlight"])
+    ...mapState(["editedFlight"]), 
+    ...mapGetters(["isAdmin"])
   },
-  updated() {
-    console.log(this.editedFlight);
-  }
+  mounted() {
+    let data = JSON.parse(localStorage.getItem("user"));
+    if (!data) return;
+    if(data.roles.length === 0 ) return;
+    this.setAdmin(data.roles[0].name === "admin");
+    // console.log("here data name app : ",data) ;
+  },
 };
 </script>
 <style scoped>

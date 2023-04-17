@@ -11,22 +11,24 @@
         v-model="searchQuery"
         class="search-input mx-2"
       />
-    </div> -->
+    </div>-->
     <table>
       <thead>
         <tr>
           <th>ID</th>
           <th>User Name</th>
           <th>Flight Name</th>
+          <th>Payement</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(ticket, index) in this.tickets" :key="index">
-          <!-- <td>{{index+1}}</td> -->
-          <td>{{ ticket.id }}</td>
+          <td>{{index+1}}</td>
+          <!-- <td>{{ ticket.id }}</td> -->
           <td>{{ ticket.user.name }}</td>
           <td>{{ ticket.flight.flight_name }}</td>
+          <td>Payement</td>
           <td>
             <i @click="deleteTicket(ticket.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
           </td>
@@ -44,16 +46,18 @@ export default {
     return {};
   },
   computed: {
-    ...mapState(["tickets"])
+    ...mapState(["tickets"]),
   },
   mounted() {
     this.$store.dispatch("getTickets");
-    console.log(this.tickets)
-    console.log(this.tickets[0].user.name)
-    console.log(this.tickets[0].flight.flight_name)
   },
   components: {
     Stats
+  },
+  methods: {
+    deleteTicket(id) {
+      this.$store.dispatch("removeTicketFromDb", id);
+    }
   }
 };
 </script>

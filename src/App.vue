@@ -1,28 +1,35 @@
 <template>
   <header>
-    <Navbar  v-if="isAdmin"/>
+    <Navbar v-if="!isAdmin" />
     <router-view />
-    <Footer v-if="isAdmin" />
+    <Footer v-if="!isAdmin" />
   </header>
 </template>
 
 <script >
-import { mapGetters, mapState } from "vuex";
-// import Navbar from "./components/Navbar.vue";
-import Navbar from "./components/Home/Navbar.vue" ;
-import Footer from "./components/Home/Footer.vue" ;
-// import Footer from "./components/Footer.vue";
+import { mapGetters, mapState, mapMutations } from "vuex";
+import Navbar from "./components/Home/Navbar.vue";
+import Footer from "./components/Home/Footer.vue";
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     Navbar,
     Footer
   },
   computed: {
-    ...mapState(["isAdmin"])
+    ...mapGetters(["isAdmin"])
+  },
+  mounted() {
+    let data = JSON.parse(localStorage.getItem("user"));
+    if (!data) return;
+    if(data.roles.length === 0 ) return;
+    this.setAdmin(data.roles[0].name === "admin");
+    // console.log("here data name app : ",data) ;
+  },
+  methods: {
+    ...mapMutations(["setAdmin"])
   }
 };
 </script>

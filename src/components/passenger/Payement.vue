@@ -45,7 +45,7 @@
           </div>
           <div class="col-12">
             <div @click="handleSubmit" class="btn btn-primary mb-3">
-              <!-- <span v-if="getSearchedFlight"  class="ps-3 fw-bold">{{getSearchedFlight[0].price}} MAD</span> -->
+              <span v-if="getSearchedFlight"  class="ps-3 fw-bold">{{getSearchedFlight[0].price}} MAD</span>
               <!-- <input type="text" v-model="amount" > -->
               <!-- <span v-if="getSearchedFlight" class="ps-3 fw-bold">300 MAD</span> -->
               <span class="fas fa-arrow-right"></span>
@@ -84,12 +84,12 @@ export default {
       console.log(paymentDetails);
       console.log(this.getSearchedFlight) ;
       // console.log(document.querySelector("Ticket"));
-      // this.$store.dispatch("makePayement", paymentDetails) ;
+      this.$store.dispatch("makePayement", paymentDetails) ;
     }
   }, 
   mounted(){
-    console.log(this.getSearchedFlight) ;
-    console.log(this.getSearchedFlight[0].price) ;
+    // console.log(this.getSearchedFlight) ;
+    // console.log(this.getSearchedFlight[0].price) ;
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <div class="hero ">
     <!-- <div class="hero-overlay"></div> -->
     <div class="hero-content">
       <h1 class="hero-title">Fly with us</h1>

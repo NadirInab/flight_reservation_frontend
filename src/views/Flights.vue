@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="hero"></div>
+    <div v-if="!isAdmin" class="hero border border-warning"></div>
     <FlightData />
     <FlightForm  />
   </section>
@@ -9,7 +9,7 @@
 <script>
 import FlightData from "../components/admin/FlightData.vue";
 import FlightForm from "../components/admin/FlightForm.vue";
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -21,11 +21,17 @@ export default {
     FlightData,
     FlightForm
   },
-  computed: {
-    ...mapGetters(["isAdmin"]),
+    computed: {
+    ...mapGetters(["isAdmin"])
   }, 
-  mounted(){
-    console.log(this.isAdmin) 
+  // mounted(){
+  //   let data = JSON.parse(localStorage.getItem("user")); 
+  //   if(!data) return ;
+  //   if(data) return ;
+  // this.setAdmin(data.roles[0].name === 'admin') ;
+  // }, 
+  methods : {
+    ... mapMutations(["setAdmin"])
   }
 };
 </script>

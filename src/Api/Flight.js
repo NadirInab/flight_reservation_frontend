@@ -12,7 +12,7 @@ export default {
         return Api.get(`${END_POINT}/${data.from_city}/${data.to_city}/${data.date}`)
     }, 
     add(flightData){
-        return Api.post(END_POINT, flightData)
+        return Api.post(END_POINT, flightData, {headers : {"Content-Type": "multipart/form-data" } })
     }, 
     update(id,data){
         return Api.put(`${END_POINT}/${id}`, data)

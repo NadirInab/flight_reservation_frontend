@@ -10,7 +10,7 @@ import router from "../router/index";
 const store = createStore({
     state: {
         authUser: JSON.parse(localStorage.getItem("user")),
-        isAdmin: true,
+        isAdmin: false,
         users: [],
         tickets: [],
         flights: [],
@@ -39,7 +39,10 @@ const store = createStore({
         },
         // show tickets when user search for flights 
         showTicket: state => state.showTicket,
-        isAdmin: state => state.isAdmin,
+        isAdmin: state => {
+            // console.log(state);
+            return state.isAdmin;
+        },
         getFlightImage(state) {
             let images = state.flights.slice((state.flights.length - 7), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`);
             return images;
@@ -90,8 +93,8 @@ const store = createStore({
             state.users = data
         },
         // check if user is Admin .
-        isAdmin(state) {
-            state.isAdmin = !state.isAdmin;
+        setAdmin(state, data) {
+            state.isAdmin = data;
         },
         // clear local storage when user signs out .
         outUser(state, data) {
@@ -106,18 +109,15 @@ const store = createStore({
         // set Ticket  data in the state .
         setTicket(state, data) {
             state.tickets = data
+        }, 
+        removeTicketFromTbale(state, id){
+            state.tickets = state.tickets.filter(ticket => ticket.id !== id) ;
         }
     },
     actions: {
         // fetch all flight : 
         flightData({ commit }) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            Flights.all(config)
+            Flights.all()
                 .then(res => {
                     commit('setFlightsData', res.data);
                 })
@@ -125,13 +125,7 @@ const store = createStore({
 
         // get Flight by departure and arrival and date =: 
         getFlightDataFromTo({ commit }, data) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            Flights.getFromTo(data, config)
+            Flights.getFromTo(data)
                 .then(res => {
                     console.log(res.data);
                     commit('searchedFlights', res.data);
@@ -142,31 +136,18 @@ const store = createStore({
         // =========> Here flight crud beggins ;
         // Handle SignIn and Sign Up ,
         addFlight({ commit }, flightData) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            Flights.add(flightData, config)
+
+            Flights.add(flightData)
                 .then(response => {
                     commit('addFlightTable', response.data);
                 })
                 .catch(error => {
-                    console.log(error.response.data);
+                    console.log(error);
                 });
         },
         // delete flight
         removeFlightFromDb({ commit }, id) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            console.log(token);
-            console.log(config);
-            Flights.remove(id, config)
+            Flights.remove(id)
                 .then(response => {
                     console.log(response);
                     commit('removeFlightTable', response.data[0].id);
@@ -207,16 +188,10 @@ const store = createStore({
         },
         // delete user .
         removeUserFromDb({ commit }, id) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            User.remove(id, config)
+            User.remove(id)
                 .then(response => {
-                    console.log(response.data)
-                    commit('removeUserFromTable', response.data[0].id);
+                    // console.log(response) ;
+                    // commit('removeUserFromTable', response.data[0].id);
                 })
                 .catch(error => {
                     console.log(error);
@@ -225,48 +200,38 @@ const store = createStore({
 
         //  Tikcet : 
         bookTicket({ commit }, ticketData) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            Ticket.add(ticketData, config)
+            Ticket.add(ticketData)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                 }).catch(error => {
                     console.log(error.response.data);
                 });
         },
 
         getTickets({ commit }) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-            Ticket.all(config)
+            Ticket.all()
                 .then(res => {
-                    console.log(res.data);
                     commit("setTicket", res.data);
                 }).catch(error => {
                     console.log(error);
                 })
         },
+        removeTicketFromDb({commit}, id){
+            Ticket.remove(id)
+            .then(res => {
+                    commit('removeTicketFromTbale', res.data.ticket.id);
+            })
+            .catch(err => {
+                console.log(err) ;
+            })
+        },
 
         // Make Payements : 
         makePayement({ commit }, payementDetails) {
-            const token = localStorage.getItem('auth_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
             console.log("here from store payement methods");
-            console.log(payementDetails)
-            Payement.add(payementDetails, config).then(res => {
-                console.log(res.data);
+            console.log(payementDetails) ;
+            Payement.add(payementDetails).then(res => {
+                console.log(res);
             }).catch(err => {
                 console.log(err);
             })
@@ -276,10 +241,8 @@ const store = createStore({
         SignUp({ commit }, data) {
             User.add(data)
                 .then(response => {
-                    console.log(response);
                     localStorage.setItem("auth_token", response.data.token);
                     localStorage.setItem("user", JSON.stringify(response.data.user));
-                    // commit("isAdmin") ;
                     notyf.open({
                         type: 'info',
                         message: 'Account is successfullu created'
@@ -295,11 +258,8 @@ const store = createStore({
                     localStorage.setItem("auth_token", response.data.token);
                     localStorage.setItem("user", JSON.stringify(response.data.user));
                     if (response.data.role === "admin") {
-                        commit("isAdmin");
                         router.push("/admin");
-                        // window.reload() ;
                     } else {
-                        console.log("not admin");
                         router.push("/home");
                         window.reload();
 
