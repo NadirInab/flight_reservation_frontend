@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  background-image: url("../assets/images/theflight.jpg");
+  background-image: url("../../assets/images/theflight.jpg");
   position: relative;
   height: 100vh;
   padding-top: 0px;

@@ -33,10 +33,6 @@
             <i class="fa-solid fa-envelope mx-1"></i> Email :
           </label>
           <input type="email" class id="email" placeholder="JohnDoe@gmail.com" v-model.trim="email" />
-          <small
-            v-if="this.$store.state.signUpInErr"
-            class="alert alert-danger"
-          >{{ this.$store.state.signUpInErr }}</small>
         </div>
 
         <div>
@@ -56,7 +52,7 @@
         </div>
       </div>
 
-      <button :disabled="!email && !password" type="submit" class="btn btn-primary w-50">Register</button>
+      <button :disabled="!email && !isValidEmail && !password" type="submit" class="btn btn-primary w-50">Register</button>
       <span class="text-muted">
         Already Have an account
         <span @click="handleClick" class="text-primary">Sign In</span>
@@ -66,7 +62,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -82,8 +77,9 @@ export default {
     };
   },
   computed: {
-    inputType() {
-      return this.showPassword ? "text" : "password";
+    isValidEmail() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(this.email);
     }
   },
   methods: {

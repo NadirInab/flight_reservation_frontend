@@ -1,6 +1,6 @@
 <template>
   <div class="container p-0 mt-4 parent">
-    <img src="../assets/images/sahara.jpeg" alt srcset />
+    <img src="../../assets/images/sahara.jpeg" alt srcset />
     <div class="child">
       <h3>Your Next Trip start here :</h3>
       <b class="d-block">Escape for a while</b>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import TES from "../assets/images/sahara.jpeg";
 export default {};
 </script>
 

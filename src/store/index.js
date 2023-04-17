@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import axios from "axios";
 import Flights from "../Api/Flight";
 import User from "../Api/User";
 import Ticket from "../Api/Ticket";
@@ -21,10 +20,13 @@ const store = createStore({
         editedFlight: {}
     },
     getters: {
+        // Toggling between signIn & signUp
         showSignUp: state => state.showSignUp,
+        // when user Search for specifique flight .
         getSearchedFlight(state) {
             return state.searchedFlights;
         },
+        // function to formate data to extract the : day & hour & munites, for the purpose to show it in ticket .
         formattedDate: state => {
             const date = new Date(state.searchedFlights[0].date);
             const month = date.toLocaleString("default", { month: "long" });
@@ -34,6 +36,7 @@ const store = createStore({
             const seconds = ("0" + date.getSeconds()).slice(-2);
             return `${month} ${day} ${hours} ${minutes}`;
         },
+        // show tickets when user search for flights 
         showTicket: state => state.showTicket,
         isAdmin: state => state.isAdmin,
         getFlightImage(state) {
@@ -57,6 +60,7 @@ const store = createStore({
                 return flight.id !== id;
             })
         },
+        // edit flight data .
         setEditeFlight(state, data){
             state.editedFlight = data
         }
@@ -80,23 +84,25 @@ const store = createStore({
         },
 
         // Admin routes : 
+        // amdin dashboard contains list of users, so I set list of users comming for the db in state .
         setUsers(state, data) {
             state.users = data
         },
+        // check if user is Admin .
         isAdmin(state) {
             state.isAdmin = !state.isAdmin;
-        }
-        ,
+        } ,
+        // clear local storage when user signs out .
         outUser(state, data) {
             state.authUser = data
         },
+        // on of admin functionalities is delete a user .
         removeUserFromTable(state, id) {
             state.users = state.users.filter(user => {
                 return user.id !== id;
             })
         },
-
-        //Ticket 
+        // set Ticket  data in the state .
         setTicket(state, data) {
             state.tickets = data
         }
@@ -149,6 +155,7 @@ const store = createStore({
                     console.log(error.response.data);
                 });
         },
+        // delete flight
         removeFlightFromDb({ commit }, id) {
             const token = localStorage.getItem('auth_token');
             const config = {
@@ -167,6 +174,7 @@ const store = createStore({
                     console.log(error.response.data);
                 });
         },
+        // edit flight
         editFlightData({ commit }, id) {
             console.log(id) ;
             Flights.show(id).then(res => {
@@ -176,6 +184,7 @@ const store = createStore({
                 console.log(err) ;
             })
         },
+        // updated flight 
         // updatedflightTable({ commit }, id) {
         //     console.log(id) ;
         //     flight.get($id).then(res => {
@@ -186,6 +195,7 @@ const store = createStore({
         // },
 
         // Admin 
+        // query all the user in the db
         getUsers({ commit }) {
             User.all()
                 .then(res => {
@@ -194,10 +204,7 @@ const store = createStore({
                     console.log(err.res.data);
                 })
         },
-        getUser() {
-            let user = JSON.parse(localStorage.getItem("data"));
-            console.log(user);
-        },
+        // delete user .
         removeUserFromDb({ commit }, id) {
             const token = localStorage.getItem('auth_token');
             const config = {
@@ -211,7 +218,7 @@ const store = createStore({
                     commit('removeUserFromTable', response.data[0].id);
                 })
                 .catch(error => {
-                    // console.log(error.response.data);
+                    console.log(error);
                 });
         },
 
@@ -256,7 +263,6 @@ const store = createStore({
                 })
                 .catch(err => {
                     notyf.error(err.response.data.message)
-                    // commit("setMessageErr", err.response.data.message) ;
                 })
         },
         SignIn({ commit }, data) {
@@ -275,9 +281,7 @@ const store = createStore({
 
                     }
                 }).catch(err => {
-                    // commit("setMessageErr", err.response.data.message);
                     notyf.error(err.response.data.message)
-                    // console.log(err.response.data.message);
                 }
                 )
         },

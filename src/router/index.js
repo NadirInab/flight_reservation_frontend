@@ -1,5 +1,5 @@
-import { createRouter, createWebHashHistory } from 'vue-router' ;
-import adminRoutes from "./adminRoutes" ;
+import { createRouter, createWebHashHistory } from 'vue-router';
+import adminRoutes from "./adminRoutes";
 
 const routes = [
   {
@@ -20,20 +20,27 @@ const routes = [
   {
     path: '/Sign',
     name: 'Sign',
-    component: () => import('../views/Sign.vue')
+    component: () => import('../views/Sign.vue'),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("user")) {
+        next('/')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/admin',
     component: () => import('../components/admin/dashboard.vue'),
     meta: {
       needsAuth: true
-    }, 
-    children : adminRoutes
+    },
+    children: adminRoutes
   },
   {
     path: '/Payement',
     name: 'Payement',
-    component: () => import('../components/Payement.vue')
+    component: () => import('../components/passenger/Payement.vue')
   }
 
 ]

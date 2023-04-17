@@ -45,7 +45,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Avatar from "../components/Avatar.vue";
+import Avatar from "../Cards/Avatar.vue";
 
 export default {
   data() {

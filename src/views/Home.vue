@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import MiniCard from "../components/MiniCard.vue";
-import Hero from "../components/Hero.vue";
-import Ticket from "../components/Ticket.vue";
-import Reservations from "../components/Reservations.vue";
-import Popular from "../components/Popular.vue";
+import MiniCard from "../components/Cards/MiniCard.vue";
+import Hero from "../components/Home/Hero.vue";
+import Ticket from "../components/Home/Ticket.vue";
+import Reservations from "../components/Home/Reservations.vue";
+import Popular from "../components/Cards/Popular.vue";
 import { mapGetters, mapState } from "vuex";
 export default {
   data() {

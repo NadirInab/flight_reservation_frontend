@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import notyf from "../notyf";
+import notyf from "../../notyf";
 import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   data() {

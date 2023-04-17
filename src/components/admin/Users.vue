@@ -39,7 +39,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import Avatar from "../Avatar.vue" ;
+import Avatar from "../Cards/Avatar.vue" ;
 import Stats from "./Statistics.vue" ;
 
 export default {

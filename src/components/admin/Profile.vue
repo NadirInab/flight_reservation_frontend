@@ -32,22 +32,12 @@
           />
         </div>
         <div class="group mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control w-75 mx-3"
-            id="password"
-            placeholder="Enter your password"
-           :value="getAdminData().password"
-          />
-        </div>
-        <div class="group mb-3">
           <label for="role" class="form-label">Role</label>
           <input
             type="text"
             class="form-control w-75"
             id="password"
-            placeholder="Enter your password"
+            placeholder=""
             :value="getRole().name"
           />
         </div>
@@ -70,7 +60,7 @@ export default {
   methods : {
     getRole(){
      let admin = {
-        // "name" : JSON.parse(localStorage.getItem("user")).roles[0].name,
+        "name" : JSON.parse(localStorage.getItem("user")).roles[0].name,
       }
       return admin ;
     }, 

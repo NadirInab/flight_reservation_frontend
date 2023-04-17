@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import Cards from "../components/Cards.vue";
-import Hero from "../components/Hero.vue";
+import Cards from "../components/Cards/Cards.vue";
+import Hero from "../components/Home/Hero.vue";
 
 export default {
   data() {
