@@ -7,30 +7,47 @@
           <div class="col-12">
             <div class="d-flex flex-column">
               <p class="text mb-1">Person Name</p>
-              <input class="form-control mb-3" type="text" placeholder="Name" value="User Name" />
+              <input v-model="personName" class="form-control mb-3" type="text" placeholder="Name" />
             </div>
           </div>
           <div class="col-12">
             <div class="d-flex flex-column">
               <p class="text mb-1">Card Number</p>
-              <input class="form-control mb-3" type="text" placeholder="1234 5678 435678" />
+              <input
+                v-model="cardNumber"
+                class="form-control mb-3"
+                type="text"
+                placeholder="1234 5678 435678"
+              />
             </div>
           </div>
           <div class="col-6">
             <div class="d-flex flex-column">
               <p class="text mb-1">Expiry</p>
-              <input class="form-control mb-3" type="text" placeholder="MM/YYYY" />
+              <input
+                v-model="expirationDate"
+                class="form-control mb-3"
+                type="text"
+                placeholder="MM/YYYY"
+              />
             </div>
           </div>
           <div class="col-6">
             <div class="d-flex flex-column">
               <p class="text mb-1">CVV/CVC</p>
-              <input class="form-control mb-3 pt-2" type="password" placeholder="******" />
+              <input
+                v-model="cvv"
+                class="form-control mb-3 pt-2"
+                type="text"
+                placeholder="123"
+              />
             </div>
           </div>
           <div class="col-12">
-            <div class="btn btn-primary mb-3">
-              <span v-if="getSearchedFlight" class="ps-3 fw-bold">{{getSearchedFlight[0].price}} MAD</span>
+            <div @click="handleSubmit" class="btn btn-primary mb-3">
+              <!-- <span v-if="getSearchedFlight"  class="ps-3 fw-bold">{{getSearchedFlight[0].price}} MAD</span> -->
+              <!-- <input type="text" v-model="amount" > -->
+              <!-- <span v-if="getSearchedFlight" class="ps-3 fw-bold">300 MAD</span> -->
               <span class="fas fa-arrow-right"></span>
             </div>
           </div>
@@ -41,11 +58,39 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex";
 export default {
-    computed : {
-        ...mapGetters(['getSearchedFlight'])
+  data() {
+    return {
+      personName: "",
+      cardNumber: "",
+      expirationDate: "",
+      cvv: "", 
+      // amount :this.getSearchedFlight[0].price
+    };
+  },
+  computed: {
+    ...mapGetters(["getSearchedFlight"])
+  },
+  methods: {
+    handleSubmit() {
+      const paymentDetails = {
+        personName:this.personName,
+        cardNumber: this.cardNumber,
+        expiry: this.expirationDate,
+        cvv: this.cvv, 
+        amount : this.amount
+      };
+      console.log(paymentDetails);
+      console.log(this.getSearchedFlight) ;
+      // console.log(document.querySelector("Ticket"));
+      // this.$store.dispatch("makePayement", paymentDetails) ;
     }
+  }, 
+  mounted(){
+    console.log(this.getSearchedFlight) ;
+    console.log(this.getSearchedFlight[0].price) ;
+  }
 };
 </script>
 
@@ -103,17 +148,17 @@ p {
   transition: 0.5s;
   background-size: 200% auto;
 }
-
+/* 
 .btn.btn.btn-primary:hover {
   background-position: right center;
   color: #fff;
   text-decoration: none;
-}
+} */
 
-.btn.btn-primary:hover .fas.fa-arrow-right {
+/* .btn.btn-primary:hover .fas.fa-arrow-right {
   transform: translate(15px);
   transition: transform 0.2s ease-in;
-}
+} */
 
 .form-control {
   color: white;
@@ -124,12 +169,12 @@ p {
   vertical-align: middle;
 }
 
-.form-control:focus {
+/* .form-control:focus {
   color: white;
   background-color: #0c4160;
   border: 2px solid #2d4dda;
   box-shadow: none;
-}
+} */
 
 .text {
   font-size: 14px;

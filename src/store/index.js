@@ -2,14 +2,15 @@ import { createStore } from "vuex";
 import Flights from "../Api/Flight";
 import User from "../Api/User";
 import Ticket from "../Api/Ticket";
+import Payement from "../Api/Payement";
 import notyf from "../notyf";
-import router from "../router/index" ;
+import router from "../router/index";
 
 
 const store = createStore({
     state: {
         authUser: JSON.parse(localStorage.getItem("user")),
-        isAdmin: false,
+        isAdmin: true,
         users: [],
         tickets: [],
         flights: [],
@@ -61,7 +62,7 @@ const store = createStore({
             })
         },
         // edit flight data .
-        setEditeFlight(state, data){
+        setEditeFlight(state, data) {
             state.editedFlight = data
         }
         ,
@@ -91,7 +92,7 @@ const store = createStore({
         // check if user is Admin .
         isAdmin(state) {
             state.isAdmin = !state.isAdmin;
-        } ,
+        },
         // clear local storage when user signs out .
         outUser(state, data) {
             state.authUser = data
@@ -163,11 +164,11 @@ const store = createStore({
                     Authorization: `Bearer ${token}`
                 }
             };
-            console.log(token) ;
-            console.log(config) ;
+            console.log(token);
+            console.log(config);
             Flights.remove(id, config)
                 .then(response => {
-                    console.log(response) ;
+                    console.log(response);
                     commit('removeFlightTable', response.data[0].id);
                 })
                 .catch(error => {
@@ -176,12 +177,12 @@ const store = createStore({
         },
         // edit flight
         editFlightData({ commit }, id) {
-            console.log(id) ;
+            console.log(id);
             Flights.show(id).then(res => {
                 commit("setEditeFlight", res.data)
                 console.log(res.data)
             }).catch(err => {
-                console.log(err) ;
+                console.log(err);
             })
         },
         // updated flight 
@@ -224,7 +225,13 @@ const store = createStore({
 
         //  Tikcet : 
         bookTicket({ commit }, ticketData) {
-            Ticket.add(ticketData)
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            Ticket.add(ticketData, config)
                 .then(res => {
                     console.log(res.data);
                 }).catch(error => {
@@ -241,11 +248,28 @@ const store = createStore({
             };
             Ticket.all(config)
                 .then(res => {
-                    console.log(res.data) ;
+                    console.log(res.data);
                     commit("setTicket", res.data);
                 }).catch(error => {
                     console.log(error);
                 })
+        },
+
+        // Make Payements : 
+        makePayement({ commit }, payementDetails) {
+            const token = localStorage.getItem('auth_token');
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+            console.log("here from store payement methods");
+            console.log(payementDetails)
+            Payement.add(payementDetails, config).then(res => {
+                console.log(res.data);
+            }).catch(err => {
+                console.log(err);
+            })
         },
 
         // Sign Up :
@@ -277,7 +301,7 @@ const store = createStore({
                     } else {
                         console.log("not admin");
                         router.push("/home");
-                        window.reload() ;
+                        window.reload();
 
                     }
                 }).catch(err => {
