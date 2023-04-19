@@ -18,7 +18,6 @@ export default {
   computed: {
     ...mapGetters(["getFlightImage"]),
     filteredItems() {
-      // randomIndex = Math.floor(Math.random() * this.getFlightImage.length);
       return this.getFlightImage;
     },
     getRandomElement() {
@@ -38,7 +37,6 @@ export default {
 }
 .image-container {
   display: flex;
-  /* justify-content: space-between; */
 }
 
 .image-container img {
@@ -66,7 +64,6 @@ export default {
   transform: scale(1.05);
 }
 
-/* .image-container:hover, */
 .image-container img:hover {
   opacity: 0.8;
 }

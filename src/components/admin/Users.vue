@@ -18,6 +18,7 @@
           <th>Email</th>
           <th>Tickets</th>
           <th>role</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -66,7 +67,6 @@ export default {
     
     deleteUser(id) {
       this.$store.dispatch("removeUserFromDb", id) ;
-      // this.removeUserFromDb(id);
     }
   }
 };
@@ -139,8 +139,6 @@ tr:hover {
     padding-right: 10px;
     white-space: nowrap;
   }
-
-  /* Add a title for each row */
   td:nth-of-type(1):before {
     content: "ID:";
   }

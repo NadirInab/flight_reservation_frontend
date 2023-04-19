@@ -2,8 +2,8 @@
   <section class="ticketContainer">
     <h1>Your Flights</h1>
     <div class="row mt-4" v-if="getSearchedFlight">
-      <article :key="ticket" v-for="ticket in getSearchedFlight" id="Ticket"  class="card fl-left">
-        <h4 class="text-center text-dark">{{authUser && authUser.name}}</h4>
+      <article :key="ticket" v-for="ticket in getSearchedFlight" id="Ticket" class="card fl-left">
+        <h4 class="text-center text-primary border-2 border-bottom w-100">{{authUser && authUser.name}}</h4>
         <h4 class="text-center">{{ticket.flight_name}}</h4>
         <section class="date">
           <time>
@@ -49,17 +49,16 @@
             class="bg-danger text-white"
             :to="{ name: 'Payement' }"
           >Book tickets</router-link>
-          <button @click="download">DownLoad</button>
         </section>
 
         <section class="from_to">
           <div class="inFromTo container bg-white">
-            <span>Casablanca</span>
+            <span>{{ticket.to}}</span>
             <h3>
               <i class="fa-sharp fa-solid fa-plane-circle-check fa-bounce"></i>
             </h3>
-            <span>Agadir</span>
-          </div>
+            <span>{{ticket.from}}</span>
+          </div >
         </section>
       </article>
     </div>
@@ -70,7 +69,6 @@
 <script>
 import { RouterLink } from "vue-router";
 import { mapActions, mapGetters, mapState } from "vuex";
-import html2canvas from "html2canvas";
 
 export default {
   data() {
@@ -89,23 +87,12 @@ export default {
         flight_id: id,
         user_id: this.authUser.id
       };
-      this.$store.dispatch("bookTicket", ticketData);
-    },
-    download() {
-      let div = document.querySelector(".card");
-      html2canvas(div).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "myDiv.png";
-        link.href = canvas.toDataURL();
-        link.click();
-      });
+      localStorage.setItem("ticketData", JSON.stringify(ticketData));
+      // this.$store.dispatch("bookTicket", ticketData);
     }
   },
   components: {
     "router-link": RouterLink
-  },
-  mounted() {
-    console.log(this.getSearchedFlight);
   }
 };
 </script>
@@ -164,12 +151,12 @@ h1 {
   position: relative;
   text-align: center;
   border-left: 2px dashed #dadde6;
+  margin-bottom: 20px;
 }
 .inFromTo {
   display: flex;
   flex-direction: column;
-  /* border: 2px solid red; */
-  height: 150px;
+  height: 130px;
 }
 .date time {
   display: block;

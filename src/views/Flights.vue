@@ -1,8 +1,14 @@
 <template>
   <section>
-    <div v-if="!isAdmin" class="hero border border-warning"></div>
+    <div v-if="!isAdmin" class="hero">
+      <h1>
+        Life is Short and the world is wide
+        <i class="fa-sharp fa-solid fa-earth-americas fa-bounce"></i> ! <br>
+        <small>Choose Your Destination</small>
+      </h1>
+    </div>
     <FlightData />
-    <FlightForm  />
+    <FlightForm />
   </section>
 </template>
 
@@ -21,22 +27,22 @@ export default {
     FlightData,
     FlightForm
   },
-    computed: {
+  computed: {
     ...mapGetters(["isAdmin"])
-  }, 
+  },
   // mounted(){
-  //   let data = JSON.parse(localStorage.getItem("user")); 
+  //   let data = JSON.parse(localStorage.getItem("user"));
   //   if(!data) return ;
   //   if(data) return ;
   // this.setAdmin(data.roles[0].name === 'admin') ;
-  // }, 
-  methods : {
-    ... mapMutations(["setAdmin"])
+  // },
+  methods: {
+    ...mapMutations(["setAdmin"])
   }
 };
 </script>
 
-<style>
+<style scoped>
 .hero {
   width: 100%;
   background-image: url("../assets/images/theflight.jpg");
@@ -47,6 +53,28 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.hero h1 {
+  color: rgb(44 27 27);
+  width: 60rem;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-20%, -50%);
+  z-index: 1;
+  font-size: 3.5rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-left: 15px solid #b2f009ae;
+  border-bottom: 15px solid #0426bdc6;
+  padding-left: 10px;
 }
 section {
   background-repeat: no-repeat;
@@ -63,7 +91,6 @@ section {
 button {
   display: inline-block;
   padding: 12px 24px;
-
   font-size: 16px;
   font-weight: bold;
   text-decoration: none;

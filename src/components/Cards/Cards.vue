@@ -39,7 +39,6 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
-  /* margin: 0 auto; */
 }
 .container h1 {
   margin: 10px 10px;

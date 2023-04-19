@@ -7,7 +7,7 @@
 </template>
 
 <script >
-import { mapGetters, mapState, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import Navbar from "./components/Home/Navbar.vue";
 import Footer from "./components/Home/Footer.vue";
 export default {
@@ -24,9 +24,8 @@ export default {
   mounted() {
     let data = JSON.parse(localStorage.getItem("user"));
     if (!data) return;
-    if(data.roles.length === 0 ) return;
+    if (data.roles.length === 0) return;
     this.setAdmin(data.roles[0].name === "admin");
-    // console.log("here data name app : ",data) ;
   },
   methods: {
     ...mapMutations(["setAdmin"])

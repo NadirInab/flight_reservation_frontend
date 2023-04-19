@@ -53,7 +53,6 @@ export default {
 .avatar {
   height: 40px;
   width: 40px;
-  /* border: 2px solid red; */
 }
 .avatar img {
   border-radius: 50%;

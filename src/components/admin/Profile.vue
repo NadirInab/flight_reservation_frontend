@@ -1,6 +1,5 @@
 <template>
   <div class="profileContainer bg-white">
-    <Stats />
     <div class="first p-3">
       <img class="item1" src="../../assets/images/admin.avif" alt />
       <div class="item2 p-3 w-100">
@@ -47,7 +46,6 @@
 </template>
 
 <script>
-import Stats from "./Statistics.vue" ;
 export default {
   data(){
     return {
@@ -55,7 +53,6 @@ export default {
     }
   }, 
   components : {
-    Stats
   }, 
   methods : {
     getRole(){

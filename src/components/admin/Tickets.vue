@@ -18,7 +18,8 @@
           <th>ID</th>
           <th>User Name</th>
           <th>Flight Name</th>
-          <th>Payement</th>
+          <th>Payement_id</th>
+          <th>amount </th>
           <th></th>
         </tr>
       </thead>
@@ -28,7 +29,8 @@
           <!-- <td>{{ ticket.id }}</td> -->
           <td>{{ ticket.user.name }}</td>
           <td>{{ ticket.flight.flight_name }}</td>
-          <td>Payement</td>
+          <td>{{ ticket.payment.id }}</td>
+          <td>{{ ticket.payment.amount }} DH</td>
           <td>
             <i @click="deleteTicket(ticket.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
           </td>
@@ -39,17 +41,18 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
+import { mapState } from "vuex";
 import Stats from "./Statistics.vue";
 export default {
   data() {
     return {};
   },
   computed: {
-    ...mapState(["tickets"]),
+    ...mapState(["tickets"])
   },
   mounted() {
     this.$store.dispatch("getTickets");
+    console.log(this.tickets);
   },
   components: {
     Stats
@@ -70,7 +73,7 @@ table {
 
 th,
 td {
-  padding: 8px;
+  padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -130,7 +133,6 @@ tr:hover {
     white-space: nowrap;
   }
 
-  /* Add a title for each row */
   td:nth-of-type(1):before {
     content: "ID:";
   }

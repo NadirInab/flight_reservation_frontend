@@ -9,7 +9,6 @@
         <li>
           <router-link :to="{name : 'admin.statistics'}">Stats</router-link>
         </li>
-
         <li>
           <router-link to="/admin/flights">Flights</router-link>
         </li>
@@ -22,6 +21,9 @@
         <li>
           <router-link to="/admin/profile">Profile</router-link>
         </li>
+        <li @click="SignOut">
+          <i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>
+        </li>
       </ul>
     </div>
     <div class="content">
@@ -31,6 +33,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Statistics from "./Statistics.vue";
 import Users from "./Users.vue";
 import Flights from "../../views/Flights.vue";
@@ -52,9 +55,9 @@ export default {
   computed: {},
   methods: {
     showFlights() {
-      console.log("show Flight");
-      console.log(this.$store.state.isAdmin) ;
-    }
+      // console.log(this.$store.state.isAdmin);
+    },
+    ...mapActions(["SignOut"])
   }
 };
 </script>
@@ -122,6 +125,5 @@ a:hover {
   margin-left: 80;
   box-sizing: border-box;
   overflow-y: scroll;
-  border: 3px solid rgb(5, 110, 96);
 }
 </style>

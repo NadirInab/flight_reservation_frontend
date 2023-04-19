@@ -1,6 +1,5 @@
 <template>
-  <div class="hero ">
-    <!-- <div class="hero-overlay"></div> -->
+  <div class="hero">
     <div class="hero-content">
       <h1 class="hero-title">Fly with us</h1>
       <p class="hero-subtitle">Book your next flight today</p>

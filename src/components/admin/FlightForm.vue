@@ -116,6 +116,21 @@ export default {
     },
     submitForm() {
       this.addFlight(this.toFormData());
+      this.EmptyForm() ;
+    },
+    EmptyForm(){
+      this.flight_name= "",
+      this.from_city = "",
+      this.to_city= "",
+      this.from_airport= "",
+      this.to_airport= "",
+     this.from_image= "",
+      this.to_image= "",
+      this.date= "",
+      this.airline= "",
+      this.aircraft= "",
+      this.price= "",
+      this.seats= ""
     }
   },
   computed: {
@@ -131,7 +146,6 @@ export default {
     if (!data) return;
     if(data.roles.length === 0 ) return;
     this.setAdmin(data.roles[0].name === "admin");
-    // console.log("here data name app : ",data) ;
   },
 };
 </script>
@@ -142,7 +156,7 @@ export default {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-image: url("../../assets/images/addFlightbg.jfif");
+  /* background-image: url("../../assets/images/addFlightbg.jfif"); */
   background-size: cover;
   background-position: center;
 }

@@ -35,24 +35,26 @@
           <div class="col-6">
             <div class="d-flex flex-column">
               <p class="text mb-1">CVV/CVC</p>
-              <input
-                v-model="cvv"
-                class="form-control mb-3 pt-2"
-                type="text"
-                placeholder="123"
-              />
+              <input v-model="cvv" class="form-control mb-3 pt-2" type="text" placeholder="123" />
             </div>
           </div>
           <div class="col-12">
             <div @click="handleSubmit" class="btn btn-primary mb-3">
-              <span v-if="getSearchedFlight"  class="ps-3 fw-bold">{{getSearchedFlight[0].price}} MAD</span>
-              <!-- <input type="text" v-model="amount" > -->
+              <span
+                v-if="getSearchedFlight"
+                class="ps-3 fw-bold"
+              >{{getSearchedFlight[0] && getSearchedFlight[0].price}} MAD</span>
+              <!-- <input type="hidden" v-model="amount" > -->
               <!-- <span v-if="getSearchedFlight" class="ps-3 fw-bold">300 MAD</span> -->
               <span class="fas fa-arrow-right"></span>
             </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <div>
+      <img id="saved-image" src />
     </div>
   </div>
 </template>
@@ -62,11 +64,11 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      personName: "",
+      personName: this.getUserName(),
       cardNumber: "",
       expirationDate: "",
-      cvv: "", 
-      // amount :this.getSearchedFlight[0].price
+      cvv: "",
+      amount: this.getSearchedFlight ? this.getSearchedFlight[0].price : ""
     };
   },
   computed: {
@@ -75,21 +77,45 @@ export default {
   methods: {
     handleSubmit() {
       const paymentDetails = {
-        personName:this.personName,
+        personName: this.personName,
         cardNumber: this.cardNumber,
         expiry: this.expirationDate,
-        cvv: this.cvv, 
-        amount : this.amount
+        cvv: this.cvv,
+        amount: 20000
       };
-      console.log(paymentDetails);
-      console.log(this.getSearchedFlight) ;
-      // console.log(document.querySelector("Ticket"));
-      this.$store.dispatch("makePayement", paymentDetails) ;
+      // console.log(paymentDetails);
+      this.$store.dispatch("makePayement", paymentDetails);
+
+      // let amount = { nbrTicket: 3, amount: this.amount };
+      // this.$store.dispatch("storePayment", amount);
+      // this.$store.dispatch("bookTicket", ticketData);
+
+      // =====================downlaod ticket :
+      // this.downloadTicket() ;
+    },
+    getUserName() {
+      let data = JSON.parse(localStorage.getItem("user"));
+      return data.name;
+    },
+    getTicketData() {
+      let flight = JSON.parse(localStorage.getItem("ticketData"));
+      let payment = JSON.parse(localStorage.getItem("paymentId"));
+      return { flight, payment };
+    },
+    downloadTicket() {
+      const savedDataUrl = localStorage.getItem("myDivImage");
+      const savedImage = document.querySelector("#saved-image");
+      savedImage.src = savedDataUrl;
+      const downloadLink = document.createElement("a");
+      downloadLink.download = "saved-image.png";
+      downloadLink.href = savedDataUrl;
+      downloadLink.click();
     }
-  }, 
-  mounted(){
-    // console.log(this.getSearchedFlight) ;
-    // console.log(this.getSearchedFlight[0].price) ;
+  },
+  mounted() {
+    // const savedDataUrl = localStorage.getItem("myDivImage");
+    // const savedImage = document.querySelector("#saved-image");
+    // savedImage.src = savedDataUrl;
   }
 };
 </script>
@@ -97,7 +123,7 @@ export default {
 <style scoped>
 .hero {
   width: 100%;
-  background-image: url("../assets/images/payement.jpg");
+  background-image: url("../../assets/images/payement.jpg");
   position: relative;
   height: 100vh;
   padding-top: 0px;
@@ -109,7 +135,6 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
 
 .card {
-  border: 2px solid red;
   width: 600px;
   margin: 150px auto;
   color: black;
@@ -148,18 +173,6 @@ p {
   transition: 0.5s;
   background-size: 200% auto;
 }
-/* 
-.btn.btn.btn-primary:hover {
-  background-position: right center;
-  color: #fff;
-  text-decoration: none;
-} */
-
-/* .btn.btn-primary:hover .fas.fa-arrow-right {
-  transform: translate(15px);
-  transition: transform 0.2s ease-in;
-} */
-
 .form-control {
   color: white;
   background-color: #223c60;
@@ -168,13 +181,6 @@ p {
   padding-left: 20px;
   vertical-align: middle;
 }
-
-/* .form-control:focus {
-  color: white;
-  background-color: #0c4160;
-  border: 2px solid #2d4dda;
-  box-shadow: none;
-} */
 
 .text {
   font-size: 14px;

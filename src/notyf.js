@@ -26,6 +26,12 @@ const notyf = new Notyf({
             background: '#90EE90',
             duration : 3000,
             dismissible: true
+        },
+        {
+            type: 'flight',
+            background: '#FF7F50',
+            duration : 4000,
+            dismissible: true
         }
     ]
 });

@@ -37,7 +37,7 @@
           <label for="seats">
             <i class="fa-duotone fa-person-seat"></i> Number of Seats
           </label>
-          <input type="number" id="seats" v-model.number="seats"  max="10" required />
+          <input type="number" id="seats" v-model.number="seats" min="1" max="10" required />
         </div>
       </div>
       <button @click="showTicket" class="booking-button" type="submit">
@@ -94,8 +94,15 @@ export default {
         date: this.date,
         seats: this.seats
       };
-      // console.log(data);
+      // console.log(data) ;
       this.getFlightDataFromTo(data);
+      // this.EmtyFields()
+    },
+    EmtyFields() {
+      (this.from_city = ""),
+        (this.to_city = ""),
+        (this.date = ""),
+        (this.seats = 1);
     }
   },
   mounted() {

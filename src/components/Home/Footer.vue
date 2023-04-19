@@ -13,18 +13,17 @@
             <li><a href="https://www.booking.com/">Hotels</a></li>
             <li><a href="https://www.moroccocar.com/">Car Rentals</a></li>
             <li><a href="https://www.booking.com/">Vacation Packages</a></li>
-            <!-- <li><a href="#">Contact Us</a></li> -->
           </ul>
         </div>
         <div class="col-md-4">
           <h4>Subscribe to Our Newsletter</h4>
           <form>
-            <div class="input-group">
+            <!-- <div class="input-group">
               <input type="email" class="form-control" placeholder="Enter your email address">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Subscribe</button>
               </div>
-            </div>
+            </div> -->
           </form>
           <ul class="social-icons">
             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

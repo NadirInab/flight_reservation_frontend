@@ -19,7 +19,8 @@
         </div>
         <div>
           <span class="font">
-            <i class="fa-light fa-tickets-airline"></i>
+            <!-- <i class="fa-solid fa-user"></i> -->
+            <img src="https://cdn-icons-png.flaticon.com/512/389/389801.png" alt srcset />
           </span>
         </div>
       </div>
@@ -66,8 +67,8 @@ export default {
   transition: all 0.3s ease;
 }
 .container1:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  transform: translateY(-10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
 }
 .font {
   font-size: 3rem;
@@ -76,6 +77,10 @@ export default {
   border-left: 10px solid #1039cc;
   padding-left: 10px;
   margin-bottom: 30px;
+}
+.font img {
+  width: 50px;
+  height: 70px;
 }
 .stats {
   display: flex;

@@ -30,7 +30,6 @@ export default {};
 }
 .child {
   margin-top: 2rem;
-  /* background-color: antiquewhite; */
 }
 .child b,
 small {

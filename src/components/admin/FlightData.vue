@@ -1,14 +1,14 @@
 <template>
-  <div class="tableContainer pt-4">
-    <div class="container bg-white">
+  <div class="tableContainer pt-4 mb-5">
+    <!-- <div class="container bg-white">
       <h3>
         Where do you want to go?
         <i class="fa-solid fa-earth-americas fa-bounce"></i>
       </h3>
     </div>
     <div>
-      <!-- <button @click="showForm" class="btn btn-success mx-4 mb-3">Add Flight</button> -->
-    </div>
+      <button @click="showForm" class="btn btn-success mx-4 mb-3">Add Flight</button>
+    </div> -->
     <table>
       <thead>
         <tr>
@@ -36,7 +36,7 @@
           <th>
             <i class="fa-regular fa-seat-airline"></i> Seats
           </th>
-          <th></th>
+          <th v-if="isAdmin"></th>
         </tr>
       </thead>
       <tbody>
@@ -142,7 +142,7 @@ tr:nth-child(2n + 1) {
 }
 
 td {
-  padding: 8px;
+  padding: 12px;
   border-bottom: 1px dashed #055890;
   text-align: center;
   transition: background-color 0.3s ease;
