@@ -5,6 +5,7 @@ import Ticket from "../Api/Ticket";
 import Payement from "../Api/Payement";
 import notyf from "../notyf";
 import router from "../router/index";
+import Flight from "../Api/Flight";
 
 
 const store = createStore({
@@ -44,7 +45,10 @@ const store = createStore({
         },
 
         getFlightImage(state) {
-            let images = state.flights.slice((state.flights.length - 7), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`);
+            // let images = state.flights.slice((state.flights.length - 1), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`);
+            // let images = state.flights.map(flight => `http://localhost:8000/images/${flight.from_image}`);
+            let images = [...new Set(state.flights.map(flight => `http://localhost:8000/images/${flight.from_image}`))];
+
             return images;
         }
     },
@@ -134,7 +138,6 @@ const store = createStore({
                             message: 'No Flights are available !!'
                         });
                     }
-                    console.log(res);
                 })
         },
 
@@ -150,11 +153,32 @@ const store = createStore({
                     console.log(error);
                 });
         },
+        // search for flight
+        searchForFlight({ commit }, date) {
+            Flights.search(date).then(res => {
+                console.log(res.data.length);
+                if (res.data.length !== 0) {
+                    commit('setFlightsData', res.data);
+                } else {
+                    notyf.open({
+                        type: 'flight',
+                        message: 'No Flights are available !!'
+                    });
+                }
+
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        ,
         // delete flight
         removeFlightFromDb({ commit }, id) {
             Flights.remove(id)
                 .then(response => {
-                    console.log(response);
+                    notyf.open({
+                        type: 'user',
+                        message: 'Flight Deleted Successfully'
+                    });
                     commit('removeFlightTable', response.data[0].id);
                 })
                 .catch(error => {
@@ -165,8 +189,8 @@ const store = createStore({
         editFlightData({ commit }, id) {
             console.log(id);
             Flights.show(id).then(res => {
-                commit("setEditeFlight", res.data)
-                console.log(res.data)
+                commit("setEditeFlight", res.data[0])
+                console.log(res.data[0])
             }).catch(err => {
                 console.log(err);
             })
@@ -195,12 +219,27 @@ const store = createStore({
         removeUserFromDb({ commit }, id) {
             User.remove(id)
                 .then(response => {
-                    // console.log(response) ;
-                    // commit('removeUserFromTable', response.data[0].id);
+                    if (response.status === 200) {
+                        commit('removeUserFromTable', response.data.user.id);
+                        notyf.open({
+                            type: 'user',
+                            message: 'User Deleted Successfully'
+                        });
+                    }
                 })
                 .catch(error => {
-                    console.log(error);
                 });
+        },
+
+        //search for user 
+        search({ commit }, name) {
+            User.search(name)
+                .then(res => {
+                    commit("setUsers", res.data.user);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         },
 
         //  Tikcet : 
@@ -224,6 +263,10 @@ const store = createStore({
         removeTicketFromDb({ commit }, id) {
             Ticket.remove(id)
                 .then(res => {
+                    notyf.open({
+                        type: 'user',
+                        message: 'Ticket Deleted Successfully'
+                    });
                     commit('removeTicketFromTbale', res.data.ticket.id);
                 })
                 .catch(err => {
@@ -233,16 +276,18 @@ const store = createStore({
 
         // Make Payements : 
         makePayement({ commit, dispatch }, payementDetails) {
+            dispatch("storePayment", payementDetails);
             Payement.add(payementDetails).then(res => {
                 if (res.data.response === 'succeeded') {
                     dispatch("storePayment", payementDetails.amount);
-                    let data = JSON.stringify(localStorage.getItem('ticketData'));
+                    let data = JSON.parse(localStorage.getItem('ticketData'));
                     let ticketData = { flight_id: data.flight_id, user_id: data.user_id, payement_id: localStorage.getItem('payementId') };
-                    dispatch(bookTicket, ticketData);
+                    dispatch('bookTicket', ticketData);
                     notyf.open({
                         type: 'info',
                         message: 'Payment is successfully done'
                     });
+                    return true
                 } else {
                     notyf.open({
                         type: 'error',
@@ -254,11 +299,9 @@ const store = createStore({
             })
         },
         // send payament details to db .
-        storePayment({ commit }, amount) {
-            console.log(amount);
-            Payement.send(amount)
+        storePayment({ commit }, payementDetails) {
+            Payement.send(payementDetails.amount)
                 .then(res => {
-                    console.log(res.data.payment.id);
                     localStorage.setItem('payementId', res.data.payment.id)
                 })
                 .catch(err => {
@@ -277,7 +320,7 @@ const store = createStore({
                     });
                 })
                 .catch(err => {
-                    notyf.error(err.response.data.message)
+                    notyf.error("Passwords are not well matched")
                 })
         },
         SignIn({ commit }, data) {
@@ -289,11 +332,10 @@ const store = createStore({
                         router.push("/admin");
                     } else {
                         router.push("/home");
-                        window.reload();
-
+                        // this.$router.go();
                     }
                 }).catch(err => {
-                    notyf.error(err.response.data.message)
+                    notyf.error(err)
                 }
                 )
         },

@@ -35,7 +35,7 @@
           <div class="col-6">
             <div class="d-flex flex-column">
               <p class="text mb-1">CVV/CVC</p>
-              <input v-model="cvv" class="form-control mb-3 pt-2" type="text" placeholder="123" />
+              <input v-model="cvc" class="form-control mb-3 pt-2" type="text" placeholder="123" />
             </div>
           </div>
           <div class="col-12">
@@ -44,8 +44,6 @@
                 v-if="getSearchedFlight"
                 class="ps-3 fw-bold"
               >{{getSearchedFlight[0] && getSearchedFlight[0].price}} MAD</span>
-              <!-- <input type="hidden" v-model="amount" > -->
-              <!-- <span v-if="getSearchedFlight" class="ps-3 fw-bold">300 MAD</span> -->
               <span class="fas fa-arrow-right"></span>
             </div>
           </div>
@@ -67,7 +65,7 @@ export default {
       personName: this.getUserName(),
       cardNumber: "",
       expirationDate: "",
-      cvv: "",
+      cvc: "",
       amount: this.getSearchedFlight ? this.getSearchedFlight[0].price : ""
     };
   },
@@ -80,42 +78,41 @@ export default {
         personName: this.personName,
         cardNumber: this.cardNumber,
         expiry: this.expirationDate,
-        cvv: this.cvv,
-        amount: 20000
+        cvc: this.cvc,
+        amount: this.getSearchedFlight[0].price
       };
-      // console.log(paymentDetails);
+
+      // try {
+      //   const success = await this.$store.dispatch(
+      //     "makePayement",
+      //     paymentDetails
+      //   );
+      //   // console.log(success)
+      //   if (success) {
+      //     this.downloadTicket();
+      //   } else {
+      //     console.log("payement failed") ;
+      //   }
+      // } catch (err) {
+      //   console.log(err)
+      // }
+
       this.$store.dispatch("makePayement", paymentDetails);
-
-      // let amount = { nbrTicket: 3, amount: this.amount };
-      // this.$store.dispatch("storePayment", amount);
-      // this.$store.dispatch("bookTicket", ticketData);
-
       // =====================downlaod ticket :
-      // this.downloadTicket() ;
+      this.downloadTicket();
     },
+
     getUserName() {
       let data = JSON.parse(localStorage.getItem("user"));
       return data.name;
     },
-    getTicketData() {
-      let flight = JSON.parse(localStorage.getItem("ticketData"));
-      let payment = JSON.parse(localStorage.getItem("paymentId"));
-      return { flight, payment };
-    },
     downloadTicket() {
-      const savedDataUrl = localStorage.getItem("myDivImage");
-      const savedImage = document.querySelector("#saved-image");
-      savedImage.src = savedDataUrl;
       const downloadLink = document.createElement("a");
-      downloadLink.download = "saved-image.png";
-      downloadLink.href = savedDataUrl;
+      const dataUrl = localStorage.getItem("my-div-image");
+      downloadLink.download = "my-div-image.png";
+      downloadLink.href = dataUrl;
       downloadLink.click();
     }
-  },
-  mounted() {
-    // const savedDataUrl = localStorage.getItem("myDivImage");
-    // const savedImage = document.querySelector("#saved-image");
-    // savedImage.src = savedDataUrl;
   }
 };
 </script>

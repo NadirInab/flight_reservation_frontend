@@ -5,7 +5,7 @@
       <Slider />
     </div>
         
-    <h2 class="">Availabale Destinations : </h2>
+    <!-- <h2 class="">Availabale Destinations : </h2>
     <div class="container bg-white">
       <Card
         v-for="(flight, index) in this.flights"
@@ -14,7 +14,7 @@
         :price="flight.price"
         :imageUrl="flight.to_image"
       />
-    </div>
+    </div> -->
   </header>
 </template>
 

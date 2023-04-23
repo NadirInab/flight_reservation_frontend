@@ -1,36 +1,24 @@
 <template>
   <div class="container bg-white">
     <Stats />
-    <!-- <h1>Passengers Tickets :</h1> -->
-    <!-- <div class="d-flex justify-content-between">
-      <h3>Users</h3>
-      <input
-        @change="filteredUsers"
-        type="search"
-        placeholder="Search..."
-        v-model="searchQuery"
-        class="search-input mx-2"
-      />
-    </div>-->
     <table>
       <thead>
         <tr>
-          <th>ID</th>
+          <th></th>
           <th>User Name</th>
           <th>Flight Name</th>
           <th>Payement_id</th>
-          <th>amount </th>
+          <th>amount</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(ticket, index) in this.tickets" :key="index">
           <td>{{index+1}}</td>
-          <!-- <td>{{ ticket.id }}</td> -->
           <td>{{ ticket.user.name }}</td>
           <td>{{ ticket.flight.flight_name }}</td>
-          <td>{{ ticket.payment.id }}</td>
-          <td>{{ ticket.payment.amount }} DH</td>
+          <!-- <td>{{ ticket.payment.id }}</td> -->
+          <!-- <td>{{ ticket.payment.amount }} DH</td> -->
           <td>
             <i @click="deleteTicket(ticket.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>
           </td>
@@ -52,7 +40,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getTickets");
-    console.log(this.tickets);
+    console.log(this.tickets) ;
   },
   components: {
     Stats

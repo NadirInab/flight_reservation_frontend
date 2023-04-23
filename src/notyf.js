@@ -32,6 +32,12 @@ const notyf = new Notyf({
             background: '#FF7F50',
             duration : 4000,
             dismissible: true
+        }, 
+        {
+            type: 'user',
+            background: '#8FBC8F',
+            duration : 4000,
+            dismissible: true
         }
     ]
 });

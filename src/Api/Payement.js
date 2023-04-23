@@ -6,6 +6,6 @@ export default {
         return Api.post(END_POINT, payementDetails) ;
     }, 
     send(amount){
-        return Api.post(`${END_POINT}/store`, amount) ;
+        return Api.post(`${END_POINT}/store`,{amount}) ;
     }
 }

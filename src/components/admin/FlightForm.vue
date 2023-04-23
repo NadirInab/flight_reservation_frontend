@@ -90,8 +90,7 @@ export default {
   },
   methods: {
     ...mapActions(["addFlight"]),
-     ...mapMutations(["setAdmin"])
-    ,
+    ...mapMutations(["setAdmin"]),
     onFileSelected(event) {
       this.from_image = event.target.files[0];
     },
@@ -116,21 +115,21 @@ export default {
     },
     submitForm() {
       this.addFlight(this.toFormData());
-      this.EmptyForm() ;
+      this.EmptyForm();
     },
-    EmptyForm(){
-      this.flight_name= "",
-      this.from_city = "",
-      this.to_city= "",
-      this.from_airport= "",
-      this.to_airport= "",
-     this.from_image= "",
-      this.to_image= "",
-      this.date= "",
-      this.airline= "",
-      this.aircraft= "",
-      this.price= "",
-      this.seats= ""
+    EmptyForm() {
+      (this.flight_name = ""),
+        (this.from_city = ""),
+        (this.to_city = ""),
+        (this.from_airport = ""),
+        (this.to_airport = ""),
+        (this.from_image = ""),
+        (this.to_image = ""),
+        (this.date = ""),
+        (this.airline = ""),
+        (this.aircraft = ""),
+        (this.price = ""),
+        (this.seats = "");
     }
   },
   computed: {
@@ -138,15 +137,15 @@ export default {
       const now = new Date();
       return now.toISOString().slice(0, 10);
     },
-    ...mapState(["editedFlight"]), 
+    ...mapState(["editedFlight"]),
     ...mapGetters(["isAdmin"])
   },
   mounted() {
     let data = JSON.parse(localStorage.getItem("user"));
     if (!data) return;
-    if(data.roles.length === 0 ) return;
+    if (data.roles.length === 0) return;
     this.setAdmin(data.roles[0].name === "admin");
-  },
+  }
 };
 </script>
 <style scoped>

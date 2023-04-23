@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     scrollDown() {
-      window.scrollBy(0, 300);
+      window.scrollBy(0, 450);
     }
   },
   components: {}
@@ -45,7 +45,7 @@ h1 {
 
 .hero-content {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -53,7 +53,7 @@ h1 {
 }
 
 .hero-title {
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-weight: bold;
   color: #fff;
 }
@@ -61,8 +61,8 @@ h1 {
 .hero-subtitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #fff;
-  margin-bottom: 2rem;
+  color: #f3f3f3;
+  margin-bottom: 1rem;
 }
 
 .hero-button {
@@ -74,8 +74,6 @@ h1 {
   border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-    rgba(241, 183, 75, 0.661) 0px 6px 6px;
 }
 .hero-button:hover {
   background-color: #0056b3;

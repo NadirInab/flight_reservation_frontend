@@ -96,7 +96,7 @@ export default {
       };
       // console.log(data) ;
       this.getFlightDataFromTo(data);
-      // this.EmtyFields()
+      this.EmtyFields()
     },
     EmtyFields() {
       (this.from_city = ""),
@@ -142,6 +142,7 @@ export default {
 }
 .flight-reservation h1 {
   margin: 15px 0 0 20px;
+  font-size: 3rem;
   font-family: "Petrona", serif;
 }
 .myForm {

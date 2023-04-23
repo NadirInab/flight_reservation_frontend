@@ -2,7 +2,7 @@
   <section class="container bg-white">
     <div class="container bg-white">
       <div class="image-container">
-        <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />
+        <!-- <img v-for="(flight, index ) in getFlightImage.reverse()" :key="index" :src="flight" alt="Image 1" /> -->
       </div>
 
       <div class="container bg-white image-container2">
@@ -27,7 +27,7 @@ export default {
       console.log(randomIndex);
       return this.getFlightImage[randomIndex];
     }
-  }
+  }, 
 };
 </script>
 
@@ -56,11 +56,6 @@ export default {
 }
 
 .image-container2 img:hover {
-  width: 30%;
-  height: auto;
-  object-fit: cover;
-  margin: 20px 5px;
-  border-radius: 10px;
   transform: scale(1.05);
 }
 

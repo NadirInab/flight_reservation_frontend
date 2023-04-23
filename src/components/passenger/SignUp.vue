@@ -10,7 +10,6 @@
             <i class="fa-sharp fa-solid fa-user"></i> Full Name :
           </label>
           <input type="text" class id="name" placeholder="John Doe" v-model.trim="name" />
-          <span v-if="nameError" class="invalid-feedback">{{ nameError }}</span>
         </div>
 
         <div>
@@ -24,7 +23,6 @@
             placeholder="**********"
             v-model.trim="password"
           />
-          <span v-if="passwordError" class="invalid-feedback">{{ passwordError }}</span>
         </div>
       </div>
       <div>
@@ -45,14 +43,14 @@
             placeholder="**********"
             v-model.trim="password_confirmation"
           />
-          <span
-            v-if="passwordConfirmationError"
-            class="invalid-feedback"
-          >{{ passwordConfirmationError }}</span>
         </div>
       </div>
 
-      <button :disabled="!email && !isValidEmail && !password" type="submit" class="btn btn-primary w-50">Register</button>
+      <button
+        :disabled="!email && !isValidEmail && !password"
+        type="submit"
+        class="btn btn-primary w-50"
+      >Register</button>
       <span class="text-muted">
         Already Have an account
         <span @click="handleClick" class="text-primary">Sign In</span>
@@ -70,10 +68,6 @@ export default {
       password: "",
       password_confirmation: "",
       data: {},
-      nameError: "",
-      emailError: "",
-      passwordError: "",
-      passwordConfirmationError: ""
     };
   },
   computed: {
@@ -94,8 +88,14 @@ export default {
         password_confirmation: this.password_confirmation
       };
       this.$store.dispatch("SignUp", this.data);
+      this.EmtyFields() ;
       // this.$router.push("/");
-      // console.log(first)
+    }, 
+    EmtyFields(){
+        this.name = "",
+        this.email = "",
+        this.password ="",
+        this.password_confirmation= ""
     }
   }
 };

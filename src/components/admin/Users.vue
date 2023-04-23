@@ -1,7 +1,7 @@
 <template>
   <div class="container bg-white">
-     <Stats />
-    <div class="d-flex ">
+    <Stats />
+    <!-- <div class="d-flex ">
       <input
         @change="filteredUsers"
         type="search"
@@ -9,11 +9,24 @@
         v-model="searchQuery"
         class="search-input mx-2 mb-3"
       />
+    </div>-->
+    <div class="container bg-white text-center">
+      <div class="input-group w-50 p-3 m-auto">
+        <input
+          name="query"
+          type="search"
+          class="form-control"
+          placeholder="Search for user"
+          v-model="searchQuery"
+        />
+        <button @click="searchForUser" type="button" class="btn btn-primary mx-2">Search</button>
+      </div>
     </div>
+
     <table>
       <thead>
         <tr>
-          <th>ID  </th>
+          <th>ID</th>
           <th>Name</th>
           <th>Email</th>
           <th>Tickets</th>
@@ -40,8 +53,8 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import Avatar from "../Cards/Avatar.vue" ;
-import Stats from "./Statistics.vue" ;
+import Avatar from "../Cards/Avatar.vue";
+import Stats from "./Statistics.vue";
 
 export default {
   data() {
@@ -49,8 +62,8 @@ export default {
       searchQuery: ""
     };
   },
-  components : {
-    Avatar, 
+  components: {
+    Avatar,
     Stats
   },
   computed: {
@@ -64,9 +77,13 @@ export default {
     filteredUsers() {
       console.log(this.searchQuery);
     },
-    
     deleteUser(id) {
-      this.$store.dispatch("removeUserFromDb", id) ;
+      this.$store.dispatch("removeUserFromDb", id);
+    },
+    searchForUser() {
+      // console.log(this.searchQuery);
+      this.$store.dispatch("search", this.searchQuery) ;
+
     }
   }
 };

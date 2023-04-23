@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav  class="navbar" :class="{ 'navbar--open': isNavOpen, 'fixed-navbar': isFixed  }">
+    <nav class="navbar" :class="{ 'navbar--open': isNavOpen, 'fixed-navbar': isFixed  }">
       <div class="navbar__brand">
         <a href="#">Flights</a>
       </div>
@@ -22,7 +22,9 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/About"><i class="fa-solid fa-earth-asia"></i> Destinations</router-link>
+          <router-link to="/About">
+            <i class="fa-solid fa-earth-asia"></i> Destinations
+          </router-link>
         </li>
         <li v-if="!isLoggedIn">
           <router-link to="/Sign">
@@ -85,7 +87,6 @@ export default {
 <style scoped>
 .out:hover {
   content: "SignOut";
-  border: 2px solid red;
 }
 header {
   padding: 0;
@@ -102,10 +103,10 @@ header {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(0.5px);
   -webkit-backdrop-filter: blur(0.5px);
-  border-radius: 10px;
+  /* border-radius: 10px; */
   border: 1px solid rgba(255, 255, 255, 0.18);
   z-index: 1;
-  border-bottom: 1px solid lightblue;
+  /* border-bottom: 1px solid lightblue; */
 }
 .fixed-navbar {
   background: rgba(255, 255, 255, 0.25);

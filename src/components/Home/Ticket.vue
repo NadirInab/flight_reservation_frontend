@@ -3,7 +3,9 @@
     <h1>Your Flights</h1>
     <div class="row mt-4" v-if="getSearchedFlight">
       <article :key="ticket" v-for="ticket in getSearchedFlight" id="Ticket" class="card fl-left">
-        <h4 class="text-center text-primary border-2 border-bottom w-100">{{authUser && authUser.name}}</h4>
+        <h4
+          class="text-center text-primary border-2 border-bottom w-100"
+        >{{authUser && authUser.name}}</h4>
         <h4 class="text-center">{{ticket.flight_name}}</h4>
         <section class="date">
           <time>
@@ -58,7 +60,7 @@
               <i class="fa-sharp fa-solid fa-plane-circle-check fa-bounce"></i>
             </h3>
             <span>{{ticket.from}}</span>
-          </div >
+          </div>
         </section>
       </article>
     </div>
@@ -69,6 +71,8 @@
 <script>
 import { RouterLink } from "vue-router";
 import { mapActions, mapGetters, mapState } from "vuex";
+import html2canvas from "html2canvas";
+import notyf from "../../notyf";
 
 export default {
   data() {
@@ -83,12 +87,23 @@ export default {
   },
   methods: {
     bookTheTicket(id) {
+      // if (!localStorage.getItem("user")) {
+      //   notyf.open({
+      //     type: "error",
+      //     message: "You don't have an account !"
+      //   });
+      //   return;
+      // }
+      const ticketDiv = document.getElementById("Ticket");
+      html2canvas(ticketDiv).then(canvas => {
+        const dataUrl = canvas.toDataURL("image/png");
+        localStorage.setItem("my-div-image", dataUrl);
+      });
       let ticketData = {
-        flight_id: id,
+        flight_id: this.getSearchedFlight[0].id,
         user_id: this.authUser.id
       };
       localStorage.setItem("ticketData", JSON.stringify(ticketData));
-      // this.$store.dispatch("bookTicket", ticketData);
     }
   },
   components: {

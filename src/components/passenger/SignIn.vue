@@ -46,6 +46,7 @@ export default {
         password: this.password
       };
       this.$store.dispatch("SignIn", this.data);
+      
     }
   }
 };

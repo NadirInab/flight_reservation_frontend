@@ -36,7 +36,7 @@
             type="text"
             class="form-control w-75"
             id="password"
-            placeholder=""
+            placeholder
             :value="getRole().name"
           />
         </div>
@@ -47,31 +47,26 @@
 
 <script>
 export default {
-  data(){
+  data() {
     return {
-      text : "test"
-    }
-  }, 
-  components : {
-  }, 
-  methods : {
-    getRole(){
-     let admin = {
-        "name" : JSON.parse(localStorage.getItem("user")).roles[0].name,
-      }
-      return admin ;
-    }, 
-    getAdminData(){
+      text: "test"
+    };
+  },
+  components: {},
+  methods: {
+    getRole() {
       let admin = {
-        "name" : JSON.parse(localStorage.getItem("user")).name,
-        "email" : JSON.parse(localStorage.getItem("user")).email
-      }
-      return admin ;
+        name: JSON.parse(localStorage.getItem("user")).roles[0].name
+      };
+      return admin;
+    },
+    getAdminData() {
+      let admin = {
+        name: JSON.parse(localStorage.getItem("user")).name,
+        email: JSON.parse(localStorage.getItem("user")).email
+      };
+      return admin;
     }
-  }, 
-  mounted(){
-    console.log(this.getAdminData()) ;
-    console.log(this.getRole()) ;
   }
 };
 </script>

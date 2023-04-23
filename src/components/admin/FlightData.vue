@@ -1,14 +1,17 @@
 <template>
   <div class="tableContainer pt-4 mb-5">
-    <!-- <div class="container bg-white">
-      <h3>
-        Where do you want to go?
-        <i class="fa-solid fa-earth-americas fa-bounce"></i>
-      </h3>
+    <div class="container bg-white text-center">
+      <div class="input-group w-50 p-3 m-auto">
+        <input
+          name="query"
+          type="date"
+          class="form-control"
+          placeholder="Search for flight"
+          v-model="searchQuery"
+        />
+        <button @click="searchForUser" type="button" class="btn btn-primary mx-2">Search</button>
+      </div>
     </div>
-    <div>
-      <button @click="showForm" class="btn btn-success mx-4 mb-3">Add Flight</button>
-    </div> -->
     <table>
       <thead>
         <tr>
@@ -48,7 +51,7 @@
           <td class="airport">{{ flight.from_airport }}</td>
           <td class="airline">{{ flight.airline }}</td>
           <td class="price">
-            <b>{{flight.price}}</b>
+            <b class="text-success">{{flight.price}}</b>
           </td>
           <td class="seats">{{flight.number_of_seats}}</td>
           <td v-if="isAdmin" class="seats">
@@ -67,7 +70,7 @@ import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      name: "airline"
+      searchQuery: ""
     };
   },
   methods: {
@@ -83,6 +86,10 @@ export default {
     },
     showForm() {
       this.showForm = !this.showForm;
+    },
+    searchForUser() {
+      // console.log(this.searchQuery);
+      this.$store.dispatch("searchForFlight", this.searchQuery);
     }
   },
   computed: {

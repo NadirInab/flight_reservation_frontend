@@ -19,5 +19,8 @@ export default {
     },
     remove(id){
         return Api.delete(`${END_POINT}/${id}`)
+    }, 
+    search(date){
+        return Api.get(`${END_POINT}/date/${date}`)
     }
 }

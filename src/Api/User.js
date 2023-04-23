@@ -13,5 +13,8 @@ export default {
     },
     remove(id) {
         return Api.delete(`${END_POINT}/${id}`)
+    }, 
+    search(name){
+        return Api.get(`${END_POINT}/search/${name}`)
     }
 }
