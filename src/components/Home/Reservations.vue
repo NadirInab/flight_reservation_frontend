@@ -94,9 +94,13 @@ export default {
         date: this.date,
         seats: this.seats
       };
-      // console.log(data) ;
       this.getFlightDataFromTo(data);
-      this.EmtyFields()
+      let seatData = {
+        flight_id: this.searchedFlights[0]?.id ?? 1,
+        numberOfSeats: data.seats
+      }
+      this.$store.dispatch("removeSeat", seatData);
+      this.EmtyFields();
     },
     EmtyFields() {
       (this.from_city = ""),

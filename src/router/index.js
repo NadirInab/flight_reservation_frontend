@@ -35,7 +35,15 @@ const routes = [
     meta: {
       needsAuth: true
     },
-    children: adminRoutes
+    children: adminRoutes,
+    beforeEnter: (to, from, next) => {
+      let role =JSON.parse( localStorage.getItem("user")) ;
+      if (role.roles[0].name === "admin") {
+        next();
+      } else {
+        router.push('/'); 
+      }
+    }
   },
   {
     path: '/Payement',
@@ -60,3 +68,5 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
+
+

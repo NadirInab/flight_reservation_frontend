@@ -45,10 +45,7 @@ const store = createStore({
         },
 
         getFlightImage(state) {
-            // let images = state.flights.slice((state.flights.length - 1), state.flights.length).map(flight => `http://localhost:8000/images/${flight.from_image}`);
-            // let images = state.flights.map(flight => `http://localhost:8000/images/${flight.from_image}`);
             let images = [...new Set(state.flights.map(flight => `http://localhost:8000/images/${flight.from_image}`))];
-
             return images;
         }
     },
@@ -274,10 +271,16 @@ const store = createStore({
                 })
         },
 
+        removeSeat({ commit }, seatData) {
+            // console.log(seatData);
+            Flights.removeSeat(seatData)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+        },
         // Make Payements : 
-        makePayement({ commit, dispatch }, payementDetails) {
+        async makePayement({ commit, dispatch }, payementDetails) {
             dispatch("storePayment", payementDetails);
-            Payement.add(payementDetails).then(res => {
+            return await Payement.add(payementDetails).then(res => {
                 if (res.data.response === 'succeeded') {
                     dispatch("storePayment", payementDetails.amount);
                     let data = JSON.parse(localStorage.getItem('ticketData'));
@@ -293,9 +296,11 @@ const store = createStore({
                         type: 'error',
                         message: 'Please Recheck Payment Details.'
                     });
+                    return false ;
                 }
             }).catch(err => {
                 console.log(err);
+                return false
             })
         },
         // send payament details to db .
@@ -305,7 +310,7 @@ const store = createStore({
                     localStorage.setItem('payementId', res.data.payment.id)
                 })
                 .catch(err => {
-                    console.log(err)
+                    // console.log(err)
                 })
         },
         // Sign Up :
@@ -331,11 +336,11 @@ const store = createStore({
                     if (response.data.role === "admin") {
                         router.push("/admin");
                     } else {
-                        router.push("/home");
+                        router.push("/");
                         // this.$router.go();
                     }
                 }).catch(err => {
-                    notyf.error(err)
+                    notyf.error("Login details are not correct")
                 }
                 )
         },

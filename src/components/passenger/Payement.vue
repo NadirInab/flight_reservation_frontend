@@ -59,11 +59,12 @@
 
 <script>
 import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   data() {
     return {
       personName: this.getUserName(),
-      cardNumber: "",
+      cardNumber: "4242424242424242",
       expirationDate: "",
       cvc: "",
       amount: this.getSearchedFlight ? this.getSearchedFlight[0].price : ""
@@ -79,26 +80,24 @@ export default {
         cardNumber: this.cardNumber,
         expiry: this.expirationDate,
         cvc: this.cvc,
-        amount: this.getSearchedFlight[0].price
+        amount: this.getSearchedFlight[0]?.price ?? 100
       };
-
       // try {
       //   const success = await this.$store.dispatch(
       //     "makePayement",
       //     paymentDetails
       //   );
-      //   // console.log(success)
+      //   console.log(success);
       //   if (success) {
       //     this.downloadTicket();
       //   } else {
-      //     console.log("payement failed") ;
+      //     console.log("payement failed");
+      //     console.log(success);
       //   }
       // } catch (err) {
-      //   console.log(err)
+      //   console.log(err);
       // }
 
-      this.$store.dispatch("makePayement", paymentDetails);
-      // =====================downlaod ticket :
       this.downloadTicket();
     },
 
@@ -106,12 +105,53 @@ export default {
       let data = JSON.parse(localStorage.getItem("user"));
       return data.name;
     },
-    downloadTicket() {
+    async downloadTicket() {
       const downloadLink = document.createElement("a");
       const dataUrl = localStorage.getItem("my-div-image");
       downloadLink.download = "my-div-image.png";
       downloadLink.href = dataUrl;
       downloadLink.click();
+
+      // function urltoFile(url, filename, mimeType) {
+      //   return fetch(url)
+      //     .then(function(res) {
+      //       return res.arrayBuffer();
+      //     })
+      //     .then(function(buf) {
+      //       return new File([buf], filename, { type: mimeType });
+      //     });
+      // }
+
+      // axios
+      //   .post(
+      //     "http://127.0.0.1:8000/api/sendImage",
+      //     { image: await urltoFile(dataUrl, 'ticket.png','image/png' ) },
+      //     { header: {"Content-Type": "multipart/form-data"}}
+      //   )
+      //   .then(res => console.log(res));
+
+      function urltoFile(url, filename, mimeType) {
+        return fetch(url)
+          .then(function(res) {
+            return res.arrayBuffer();
+          })
+          .then(function(buf) {
+            return new File([buf], filename, { type: mimeType });
+          });
+      }
+
+      const formData = new FormData();
+      const imageFile = await urltoFile(dataUrl, "ticket.png", "image/png");
+      formData.append("image", imageFile, imageFile.name);
+
+      axios
+        .post("http://127.0.0.1:8000/api/sendImage", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
     }
   }
 };

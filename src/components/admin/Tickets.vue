@@ -17,7 +17,7 @@
           <td>{{index+1}}</td>
           <td>{{ ticket.user.name }}</td>
           <td>{{ ticket.flight.flight_name }}</td>
-          <!-- <td>{{ ticket.payment.id }}</td> -->
+          <!-- <td>{{ ticket.payment.id  }}</td> -->
           <!-- <td>{{ ticket.payment.amount }} DH</td> -->
           <td>
             <i @click="deleteTicket(ticket.id)" class="fa-sharp fa-solid fa-trash mx-1 text-danger"></i>

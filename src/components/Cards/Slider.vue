@@ -1,9 +1,9 @@
 <template>
   <section class="container bg-white">
     <div class="container bg-white">
-      <div class="image-container">
+      <!-- <div class="image-container"> -->
         <!-- <img v-for="(flight, index ) in getFlightImage.reverse()" :key="index" :src="flight" alt="Image 1" /> -->
-      </div>
+      <!-- </div> -->
 
       <div class="container bg-white image-container2">
         <img v-for="(flight, index ) in getFlightImage" :key="index" :src="flight" alt="Image 1" />

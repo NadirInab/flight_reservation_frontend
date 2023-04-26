@@ -26,12 +26,14 @@
     </div>
 
     <Cards />
+    <MiniCard />
   </header>
 </template>
 
 <script>
 import Cards from "../components/Cards/Cards.vue";
 import Hero from "../components/Home/Hero.vue";
+import MiniCard from "../components/Cards/MiniCard.vue";
 
 export default {
   data() {
@@ -39,7 +41,8 @@ export default {
   },
   components: {
     Cards,
-    Hero
+    Hero,
+    MiniCard
   }
 };
 </script>

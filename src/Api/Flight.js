@@ -22,5 +22,8 @@ export default {
     }, 
     search(date){
         return Api.get(`${END_POINT}/date/${date}`)
+    }, 
+    removeSeat(seatData){
+        return Api.post('removeSeat', seatData)
     }
 }
